@@ -692,6 +692,101 @@ function animateBars() {
 </script>
 
 
+
+<!-- VIDEO WIDGET BOTTOM RIGHT -->
+<style>
+.vid-widget {
+  position: fixed; bottom: 100px; right: 24px; z-index: 490;
+  width: 200px;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+.vid-widget:hover {
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.55);
+}
+.vid-widget-label {
+  background: rgba(0,0,0,0.75);
+  color: #fff; font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 7px 12px; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.vid-widget-label::before {
+  content: "▶";
+  width: 18px; height: 18px; background: #f0d022; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.5rem; flex-shrink: 0;
+}
+
+/* Full screen overlay */
+.vid-full-overlay {
+  display: none; position: fixed; inset: 0; z-index: 600;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.vid-full-overlay.open { display: flex; animation: vidOverIn 0.25s ease; }
+@keyframes vidOverIn { from{opacity:0} to{opacity:1} }
+.vid-full-modal {
+  background: #111; border-radius: 16px; overflow: hidden;
+  width: min(860px, 94vw);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+  animation: vidModIn 0.3s cubic-bezier(.4,0,.2,1);
+  position: relative;
+}
+@keyframes vidModIn { from{transform:scale(0.92);opacity:0} to{transform:scale(1);opacity:1} }
+.vid-full-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.vid-full-title { font-size: 0.9rem; font-weight: 700; color: #fff; }
+.vid-full-title span { color: #f0d022; letter-spacing:2px; }
+.vid-full-close {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: none; color: #fff;
+  font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.vid-full-close:hover { background: #f0d022; }
+.vid-full-body { padding: 20px; }
+</style>
+
+<!-- Wistia scripts -->
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/gkbxd4dvys.js" async type="module"></script>
+<style>wistia-player[media-id="gkbxd4dvys"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/gkbxd4dvys/swatch");display:block;filter:blur(5px);padding-top:56.25%;}</style>
+
+<!-- Mini widget -->
+<div class="vid-widget" onclick="openVidFull()" title="Voir la vidéo en plein écran">
+  <wistia-player media-id="gkbxd4dvys" aspect="1.7777777777777777" style="pointer-events:none"></wistia-player>
+  <div class="vid-widget-label">Voir en plein écran</div>
+</div>
+
+<!-- Full screen modal -->
+<div class="vid-full-overlay" id="vidFullOverlay" onclick="closeVidFullOutside(event)">
+  <div class="vid-full-modal">
+    <div class="vid-full-header">
+      <div class="vid-full-title">CV en <span>vidéo</span></div>
+      <button class="vid-full-close" onclick="closeVidFull()">✕</button>
+    </div>
+    <div class="vid-full-body">
+      <wistia-player media-id="gkbxd4dvys" aspect="1.7777777777777777"></wistia-player>
+    </div>
+  </div>
+</div>
+
+<script>
+function openVidFull() { document.getElementById('vidFullOverlay').classList.add('open'); }
+function closeVidFull() { document.getElementById('vidFullOverlay').classList.remove('open'); }
+function closeVidFullOutside(e) { if(e.target===document.getElementById('vidFullOverlay')) closeVidFull(); }
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeVidFull(); });
+</script>
+
+
 <!-- STRIPE SALES POPUP -->
 <style>
 .sales-fab {
