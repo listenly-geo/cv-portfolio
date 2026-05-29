@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mélina Rodriguez Masse — Business Developer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --navy: #0d1f3c;
+  --navy2: #132848;
+  --coral: #e8503a;
+  --coral-dim: rgba(232,80,58,0.1);
+  --gold: #c9943a;
+  --cream: #faf8f5;
+  --cream2: #f3efe9;
+  --text: #1a1a2e;
+  --text-light: #5a6070;
+  --white: #ffffff;
+  --nav-h: 68px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* SCROLL PROGRESS */
+.scroll-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--gold));
+  z-index: 9999; width: 0%; transition: width 0.1s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h); z-index: 200;
+  background: rgba(250,248,245,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(13,31,60,0.08);
+  display: flex; align-items: center;
+  padding: 0 clamp(16px, 5vw, 56px);
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 700; color: var(--navy);
+  letter-spacing: 0.5px; cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-logo span { color: var(--coral); }
+.nav-links {
+  display: flex; gap: clamp(4px, 2vw, 28px);
+  align-items: center;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: clamp(0.68rem, 1.5vw, 0.8rem);
+  font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--text-light);
+  transition: color 0.2s; padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--coral);
+  border-bottom-color: var(--coral);
+}
+/* HAMBURGER */
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.nav-burger span {
+  width: 24px; height: 2px; background: var(--navy);
+  border-radius: 2px; transition: all 0.3s;
+}
+.mobile-menu {
+  display: none; position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: var(--white); z-index: 199;
+  border-bottom: 1px solid rgba(13,31,60,0.1);
+  padding: 16px 24px; flex-direction: column; gap: 4px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  text-decoration: none; font-size: 1rem; font-weight: 600;
+  color: var(--text); padding: 12px 0;
+  border-bottom: 1px solid rgba(13,31,60,0.06);
+  letter-spacing: 0.5px;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--coral); }
+
+/* SECTIONS */
+section {
+  scroll-margin-top: var(--nav-h);
+}
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: var(--nav-h);
+}
+.hero-left {
+  background: var(--navy);
+  padding: clamp(48px,7vw,88px) clamp(24px,5vw,64px);
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-left::after {
+  content: '';
+  position: absolute; bottom: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(232,80,58,0.15) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: clamp(0.7rem, 1.5vw, 0.78rem);
+  font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 28px; height: 2px; background: var(--coral);
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 700; line-height: 0.92;
+  letter-spacing: -1px; color: var(--white);
+}
+.hero-name em {
+  font-style: italic; color: var(--coral);
+  display: block;
+}
+.hero-role {
+  margin-top: clamp(20px, 3vw, 28px);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 300; color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+}
+.hero-role strong { color: var(--white); font-weight: 600; }
+.hero-bio {
+  margin-top: clamp(20px, 3vw, 28px);
+  font-size: clamp(0.9rem, 1.8vw, 1rem);
+  color: rgba(255,255,255,0.6);
+  line-height: 1.75; max-width: 480px;
+}
+.hero-ctas {
+  margin-top: clamp(28px, 4vw, 44px);
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.btn-coral {
+  background: var(--coral); color: var(--white);
+  border: none; padding: clamp(12px,2vw,14px) clamp(22px,3vw,32px);
+  border-radius: 6px; font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.82rem, 1.8vw, 0.92rem); font-weight: 700;
+  letter-spacing: 0.5px; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 48px;
+}
+.btn-coral:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,80,58,0.4); }
+.btn-ghost {
+  background: transparent; color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  padding: clamp(11px,2vw,13px) clamp(20px,3vw,30px);
+  border-radius: 6px; font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.82rem, 1.8vw, 0.92rem); font-weight: 600;
+  cursor: pointer; transition: all 0.2s; min-height: 48px;
+}
+.btn-ghost:hover { border-color: var(--coral); color: var(--coral); }
+
+.hero-right {
+  background: var(--cream2);
+  display: flex; flex-direction: column;
+  padding: clamp(48px,7vw,80px) clamp(24px,5vw,56px);
+  justify-content: center; gap: clamp(24px,4vw,40px);
+}
+.hero-contact-block {}
+.hero-contact-title {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 16px;
+}
+.hero-contact-items { display: flex; flex-direction: column; gap: 10px; }
+.hero-contact-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
+  color: var(--text); line-height: 1.4;
+}
+.hero-contact-icon {
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+  background: var(--navy); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.hero-badge-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.hero-badge {
+  background: var(--white); border-radius: 12px;
+  padding: clamp(14px,2vw,18px) clamp(14px,2vw,20px);
+  border: 1px solid rgba(13,31,60,0.08);
+  transition: all 0.2s;
+}
+.hero-badge:hover { border-color: var(--coral); transform: translateY(-2px); }
+.hero-badge-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 700;
+  color: var(--navy); line-height: 1;
+}
+.hero-badge-label {
+  font-size: clamp(0.68rem, 1.3vw, 0.75rem); font-weight: 500;
+  color: var(--text-light); margin-top: 4px; line-height: 1.3;
+}
+
+/* ===== SHARED ===== */
+.section-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: clamp(72px,10vw,112px) clamp(20px,5vw,56px);
+}
+.section-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--coral);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px;
+}
+.section-label::after {
+  content: ''; flex: 1; max-width: 48px; height: 2px; background: var(--coral);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 700;
+  color: var(--navy); line-height: 1; margin-bottom: clamp(40px,6vw,64px);
+  letter-spacing: -0.5px;
+}
+.section-title em { font-style: italic; color: var(--coral); }
+
+/* ===== COMPETENCES ===== */
+#competences { background: var(--white); }
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+}
+.comp-card {
+  background: var(--cream); border-radius: 14px;
+  padding: clamp(20px,3vw,28px);
+  border: 1px solid rgba(13,31,60,0.07);
+  transition: all 0.25s; position: relative; overflow: hidden;
+}
+.comp-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--gold));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.comp-card:hover::before { transform: scaleX(1); }
+.comp-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(13,31,60,0.1); }
+.comp-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.comp-title {
+  font-size: clamp(0.95rem, 2vw, 1.05rem); font-weight: 700;
+  color: var(--navy); margin-bottom: 12px;
+}
+.comp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.comp-tag {
+  background: var(--white); border: 1px solid rgba(13,31,60,0.1);
+  padding: 4px 10px; border-radius: 100px;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem); color: var(--text); font-weight: 400;
+  transition: all 0.2s;
+}
+.comp-tag:hover { border-color: var(--coral); color: var(--coral); }
+
+/* Skill bars */
+.skill-row { margin-bottom: 16px; }
+.skill-label-row {
+  display: flex; justify-content: space-between;
+  font-size: clamp(0.88rem, 1.8vw, 0.92rem); font-weight: 600;
+  color: var(--text); margin-bottom: 7px;
+}
+.skill-pct { font-size: 0.78rem; color: var(--coral); font-weight: 700; }
+.skill-track {
+  height: 5px; background: rgba(13,31,60,0.08);
+  border-radius: 3px; overflow: hidden;
+}
+.skill-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--gold));
+  width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* ===== EXPERIENCES ===== */
+#experiences { background: var(--cream2); }
+.xp-list { display: flex; flex-direction: column; gap: 4px; }
+.xp-item {
+  background: var(--white); border-radius: 14px;
+  border: 1px solid rgba(13,31,60,0.07); overflow: hidden;
+  transition: border-color 0.2s;
+}
+.xp-item:hover { border-color: rgba(232,80,58,0.25); }
+.xp-header {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 16px;
+  padding: clamp(18px,2.5vw,24px) clamp(20px,3vw,28px);
+  cursor: pointer; transition: background 0.2s;
+  min-height: 48px;
+}
+.xp-item.open .xp-header { background: var(--coral-dim); }
+.xp-date {
+  font-size: clamp(0.7rem, 1.4vw, 0.76rem); font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--coral); margin-bottom: 5px;
+}
+.xp-role {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem); font-weight: 700;
+  color: var(--navy); line-height: 1.1;
+}
+.xp-company {
+  font-size: clamp(0.82rem, 1.6vw, 0.88rem);
+  color: var(--text-light); margin-top: 4px;
+}
+.xp-toggle {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: 8px; border: 1.5px solid rgba(13,31,60,0.15);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--navy); font-size: 1.2rem;
+  transition: all 0.3s;
+}
+.xp-item.open .xp-toggle {
+  background: var(--coral); color: var(--white);
+  border-color: var(--coral); transform: rotate(45deg);
+}
+.xp-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(.4,0,.2,1); }
+.xp-item.open .xp-body { max-height: 400px; }
+.xp-desc {
+  padding: 0 clamp(20px,3vw,28px) clamp(18px,2.5vw,24px);
+  border-top: 1px solid rgba(13,31,60,0.07); padding-top: 18px;
+}
+.xp-desc ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.xp-desc li {
+  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
+  color: var(--text-light); line-height: 1.7;
+  padding-left: 20px; position: relative;
+}
+.xp-desc li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--coral); font-size: 0.75rem; top: 3px;
+}
+
+/* ===== FORMATION ===== */
+#formation { background: var(--white); }
+.form-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+}
+.form-card {
+  border-radius: 14px; padding: clamp(22px,3vw,30px);
+  border: 1px solid rgba(13,31,60,0.08);
+  background: var(--cream); position: relative; overflow: hidden;
+  transition: all 0.25s;
+}
+.form-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(13,31,60,0.1); }
+.form-accent {
+  position: absolute; top: 0; left: 0; width: 4px; bottom: 0;
+  background: linear-gradient(to bottom, var(--coral), var(--gold));
+  border-radius: 4px 0 0 4px;
+}
+.form-year {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--coral); margin-bottom: 10px;
+}
+.form-degree {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem); font-weight: 700;
+  color: var(--navy); line-height: 1.3; margin-bottom: 8px;
+}
+.form-school { font-size: clamp(0.84rem, 1.7vw, 0.9rem); color: var(--text-light); line-height: 1.5; }
+
+/* ===== ENGAGEMENT ===== */
+#engagement { background: var(--navy); }
+#engagement .section-title { color: var(--white); }
+#engagement .section-title em { color: var(--coral); }
+.eng-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(14px, 2.5vw, 20px);
+}
+.eng-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: clamp(20px,3vw,26px);
+  transition: all 0.2s;
+}
+.eng-card:hover { background: rgba(232,80,58,0.12); border-color: rgba(232,80,58,0.4); transform: translateY(-2px); }
+.eng-icon { font-size: 1.6rem; margin-bottom: 12px; }
+.eng-date {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--coral); margin-bottom: 6px;
+}
+.eng-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem); font-weight: 700;
+  color: var(--white); margin-bottom: 6px;
+}
+.eng-org { font-size: clamp(0.8rem, 1.6vw, 0.85rem); color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+.eng-desc { font-size: clamp(0.84rem, 1.7vw, 0.9rem); color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+/* ===== CONTACT ===== */
+#contact { background: var(--cream2); }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(32px,5vw,64px); align-items: start;
+}
+.contact-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 700;
+  color: var(--navy); line-height: 1; margin-bottom: 20px;
+}
+.contact-big em { font-style: italic; color: var(--coral); display: block; }
+.contact-sub {
+  font-size: clamp(0.9rem, 1.8vw, 1rem);
+  color: var(--text-light); line-height: 1.75; margin-bottom: 28px;
+}
+.lang-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+.lang-pill {
+  background: var(--white); border: 1px solid rgba(13,31,60,0.1);
+  padding: 8px 16px; border-radius: 100px;
+  font-size: clamp(0.82rem, 1.6vw, 0.88rem); font-weight: 500; color: var(--text);
+  display: flex; gap: 8px; align-items: center;
+  transition: all 0.2s;
+}
+.lang-pill:hover { border-color: var(--coral); }
+.lang-pill span { color: var(--coral); font-weight: 700; }
+.contact-cards { display: flex; flex-direction: column; gap: 12px; }
+.contact-card {
+  background: var(--white); border-radius: 14px;
+  padding: clamp(14px,2vw,18px) clamp(16px,2.5vw,22px);
+  display: flex; align-items: center; gap: 14px;
+  border: 1px solid rgba(13,31,60,0.07); transition: all 0.2s;
+  min-height: 64px;
+}
+.contact-card:hover { border-color: var(--coral); transform: translateX(4px); }
+.contact-icon {
+  width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+  background: var(--navy); display: flex;
+  align-items: center; justify-content: center; font-size: 1rem;
+}
+.contact-lbl {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-light);
+}
+.contact-val {
+  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
+  font-weight: 600; color: var(--text); margin-top: 2px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--navy);
+  padding: clamp(20px,3vw,28px) clamp(20px,5vw,56px);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 10px;
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 700;
+  color: rgba(255,255,255,0.7);
+}
+.footer-name span { color: var(--coral); }
+.footer-right {
+  font-size: clamp(0.68rem, 1.4vw, 0.75rem);
+  color: rgba(255,255,255,0.35); letter-spacing: 1px;
+}
+
+/* VIDEO WIDGET */
+@keyframes vidFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes vidGlow { 0%,100%{box-shadow:0 8px 36px rgba(220,30,30,.6),0 0 0 3px rgba(220,30,30,.25)} 50%{box-shadow:0 16px 52px rgba(220,30,30,.9),0 0 0 6px rgba(220,30,30,.1)} }
+.vid-widget {
+  position: fixed; bottom: 28px; left: 24px; z-index: 9000;
+  width: clamp(160px,22vw,220px); border-radius: 12px; overflow: hidden;
+  cursor: pointer; border: 3px solid #dc1e1e; background: #111;
+  animation: vidFloat 3s ease-in-out infinite, vidGlow 3s ease-in-out infinite;
+}
+.vid-widget:hover { animation: none; transform: scale(1.06) translateY(-4px); box-shadow: 0 20px 60px rgba(220,30,30,.8); }
+.vid-thumb { width: 100%; aspect-ratio: 16/9; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.vid-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .65; }
+.vid-play-btn { width: 48px; height: 48px; border-radius: 50%; background: #dc1e1e; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; }
+.vid-play-btn svg { width: 20px; height: 20px; fill: white; margin-left: 4px; }
+.vid-widget-bar { background: #dc1e1e; color: #fff; font-family: 'Outfit',sans-serif; font-size: clamp(.65rem,1.8vw,.78rem); font-weight: 800; padding: 8px 12px; text-align: center; }
+.vid-full-overlay { display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,.9); align-items: center; justify-content: center; padding: 20px; }
+.vid-full-overlay.open { display: flex; }
+.vid-full-modal { background: #111; border-radius: 16px; overflow: hidden; width: min(900px,96vw); }
+.vid-full-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #1a1a1a; }
+.vid-full-title { font-family: 'Outfit',sans-serif; font-size: .9rem; font-weight: 700; color: #fff; }
+.vid-full-close { width: 34px; height: 34px; border-radius: 50%; background: #dc1e1e; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.vid-full-body { padding: 16px; }
+
+/* SALES BANNER */
+.sales-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 9998; background: #0f2027; border-bottom: 3px solid #c9a84c; display: none; }
+.sales-banner-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(16px,4vw,40px); height: 64px; max-width: 1400px; margin: 0 auto; }
+.sales-banner-left { display: flex; align-items: center; gap: 10px; }
+.sales-banner-dot { width: 8px; height: 8px; border-radius: 50%; background: #c9a84c; animation: dotP 2s ease infinite; }
+@keyframes dotP { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
+.sales-banner-tagline { font-family: 'Outfit',sans-serif; font-size: clamp(.72rem,1.8vw,.82rem); font-weight: 600; color: rgba(255,255,255,.75); }
+.sales-banner-tagline span { color: #c9a84c; }
+.sales-banner-btn { background: #c9a84c; color: #0f2027; border: none; padding: clamp(8px,1.5vw,11px) clamp(16px,2.5vw,28px); border-radius: 8px; font-family: 'Outfit',sans-serif; font-size: clamp(.72rem,1.8vw,.82rem); font-weight: 800; cursor: pointer; transition: all .2s; white-space: nowrap; min-height: 42px; }
+.sales-banner-btn:hover { background: #e0b84e; transform: translateY(-1px); }
+.sales-banner-mobile { display: none; }
+@media(max-width:768px) {
+  .sales-banner-inner { display: none; }
+  .sales-banner-mobile { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; gap: 10px; }
+  .sales-banner-tagline-sm { font-family:'Outfit',sans-serif; font-size:.75rem; font-weight:600; color:rgba(255,255,255,.75); }
+  .sales-banner-tagline-sm span { color:#c9a84c; }
+  .sales-banner-btn-sm { background:#c9a84c; color:#0f2027; border:none; padding:9px 16px; border-radius:7px; font-family:'Outfit',sans-serif; font-size:.74rem; font-weight:800; cursor:pointer; white-space:nowrap; min-height:42px; }
+}
+.sales-banner-visible nav { top: 64px !important; }
+.sales-overlay { display:none; position:fixed; inset:0; z-index:10001; background:rgba(0,0,0,.78); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:20px; }
+.sales-overlay.open { display:flex; animation:sIn .3s ease; }
+@keyframes sIn{from{opacity:0}to{opacity:1}}
+.sales-modal { background:#fff; border-radius:24px; overflow:hidden; width:min(560px,96vw); box-shadow:0 40px 100px rgba(0,0,0,.5); animation:sMIn .35s cubic-bezier(.4,0,.2,1); max-height:90vh; overflow-y:auto; }
+@keyframes sMIn{from{transform:scale(.9) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.sales-header { background:linear-gradient(135deg,#0f2027,#1a3040); padding:clamp(20px,4vw,28px); text-align:center; position:relative; }
+.sales-close { position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,.1); border:none; color:#fff; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.sales-close:hover { background:#c9a84c; color:#0f2027; }
+.sales-hbadge { display:inline-block; background:#c9a84c; color:#0f2027; font-size:.65rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border-radius:6px; margin-bottom:12px; font-family:'Outfit',sans-serif; }
+.sales-htitle { font-family:'Outfit',sans-serif; font-size:clamp(1.2rem,3vw,1.45rem); font-weight:800; color:#fff; line-height:1.2; margin-bottom:8px; }
+.sales-htitle span { color:#c9a84c; }
+.sales-hsub { font-family:'Outfit',sans-serif; font-size:clamp(.75rem,2vw,.8rem); color:rgba(255,255,255,.6); line-height:1.5; }
+.sales-price-row { display:flex; align-items:center; justify-content:center; gap:14px; margin-top:16px; }
+.sales-old { font-family:'Outfit',sans-serif; font-size:1.1rem; color:rgba(255,255,255,.3); text-decoration:line-through; }
+.sales-new { font-family:'Outfit',sans-serif; font-size:2.2rem; font-weight:900; color:#c9a84c; }
+.sales-body { padding:clamp(16px,4vw,24px); }
+.sales-feats { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+.sales-feat { display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border-radius:12px; background:#f9f9f9; border:1px solid #eee; }
+.sales-feat:hover { border-color:rgba(201,168,76,.4); }
+.sales-feat-icon { width:34px; height:34px; border-radius:9px; flex-shrink:0; background:linear-gradient(135deg,#0f2027,#1a3040); display:flex; align-items:center; justify-content:center; font-size:.95rem; }
+.sales-feat-title { font-family:'Outfit',sans-serif; font-size:clamp(.82rem,2vw,.88rem); font-weight:700; color:#1a1a1a; margin-bottom:2px; }
+.sales-feat-desc { font-family:'Outfit',sans-serif; font-size:clamp(.72rem,1.8vw,.75rem); color:#888; line-height:1.4; }
+.sales-stripe { text-align:center; }
+.sales-guar { margin-top:12px; text-align:center; font-family:'Outfit',sans-serif; font-size:.7rem; color:#aaa; }
+.sales-guar span { color:#c9a84c; font-weight:600; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-left { min-height: 100vh; padding-top: clamp(40px,8vw,72px); }
+  .hero-right { padding: clamp(32px,6vw,56px) clamp(20px,5vw,40px); }
+  .hero-badge-grid { grid-template-columns: repeat(2,1fr); }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media(max-width:768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .hero-ctas { flex-direction: column; }
+  .btn-coral, .btn-ghost { width: 100%; text-align: center; justify-content: center; }
+  footer { flex-direction: column; text-align: center; }
+}
+@media(max-width:480px) {
+  .hero-badge-grid { grid-template-columns: 1fr 1fr; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .eng-grid { grid-template-columns: 1fr; }
+}
+
+/* Fade in on scroll */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="scroll-bar" id="scrollBar"></div>
+
+<nav id="mainNav">
+  <div class="nav-logo" onclick="scrollTo('hero')">Mélina <span>R.M.</span></div>
+  <div class="nav-links">
+    <a href="#hero" onclick="scrollToS(event,'hero')">Accueil</a>
+    <a href="#competences" onclick="scrollToS(event,'competences')">Compétences</a>
+    <a href="#experiences" onclick="scrollToS(event,'experiences')">Expériences</a>
+    <a href="#formation" onclick="scrollToS(event,'formation')">Formation</a>
+    <a href="#engagement" onclick="scrollToS(event,'engagement')">Engagement</a>
+    <a href="#contact" onclick="scrollToS(event,'contact')">Contact</a>
+  </div>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="mobileNav('hero')">Accueil</a>
+  <a href="#competences" onclick="mobileNav('competences')">Compétences</a>
+  <a href="#experiences" onclick="mobileNav('experiences')">Expériences</a>
+  <a href="#formation" onclick="mobileNav('formation')">Formation</a>
+  <a href="#engagement" onclick="mobileNav('engagement')">Engagement</a>
+  <a href="#contact" onclick="mobileNav('contact')">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" style="scroll-margin-top:0">
+  <div id="hero" style="display:contents">
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:var(--nav-h)" id="heroGrid">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Business Developer</div>
+      <h1 class="hero-name">
+        Mélina
+        <em>Rodriguez Masse</em>
+      </h1>
+      <p class="hero-role"><strong>Alternante</strong> — Management commercial & Développement business</p>
+      <p class="hero-bio">Forte de 3 ans d'alternance réussis dans le commerce et la relation client, je maîtrise le cycle de vente complet, de la prospection téléphonique à la fidélisation. Rigoureuse, dotée d'une excellente répartie et d'un fort esprit d'équipe.</p>
+      <div class="hero-ctas">
+        <button class="btn-coral" onclick="scrollToS(null,'experiences')">Voir mes expériences</button>
+        <button class="btn-ghost" onclick="scrollToS(null,'contact')">Me contacter</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-contact-block fade-in">
+        <div class="hero-contact-title">Coordonnées</div>
+        <div class="hero-contact-items">
+          <div class="hero-contact-item">
+            <div class="hero-contact-icon">📍</div>
+            13005 Marseille · Secteur Aix-Marseille-Aubagne
+          </div>
+          <div class="hero-contact-item">
+            <div class="hero-contact-icon">📱</div>
+            06 58 35 50 80
+          </div>
+          <div class="hero-contact-item">
+            <div class="hero-contact-icon">✉️</div>
+            melina.rodriguez.pro@gmail.com
+          </div>
+          <div class="hero-contact-item">
+            <div class="hero-contact-icon">🚗</div>
+            Permis B — Non véhiculée
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge-grid fade-in">
+        <div class="hero-badge">
+          <div class="hero-badge-val">3 ans</div>
+          <div class="hero-badge-label">d'alternance réussie</div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-val">Master</div>
+          <div class="hero-badge-label">Business Dev. — Sept. 2026</div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-val">CRM</div>
+          <div class="hero-badge-label">Axiales, Resalys</div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-val">B1/A2</div>
+          <div class="hero-badge-label">Anglais / Espagnol</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences">
+  <div class="section-inner">
+    <div class="section-label">02</div>
+    <h2 class="section-title">Mes <em>compétences</em></h2>
+    <div class="comp-grid">
+      <div class="comp-card fade-in">
+        <div class="comp-icon">🎯</div>
+        <div class="comp-title">Commercial & Vente</div>
+        <div style="margin-bottom:16px">
+          <div class="skill-row"><div class="skill-label-row"><span>Cycle de vente complet</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill" data-w="90%"></div></div></div>
+          <div class="skill-row"><div class="skill-label-row"><span>Argumentation & Upselling</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" data-w="88%"></div></div></div>
+          <div class="skill-row"><div class="skill-label-row"><span>Gestion des objections</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" data-w="85%"></div></div></div>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">🤝</div>
+        <div class="comp-title">Relation client</div>
+        <div class="comp-tags">
+          <span class="comp-tag">Écoute active</span>
+          <span class="comp-tag">Fidélisation</span>
+          <span class="comp-tag">Prospection téléphonique</span>
+          <span class="comp-tag">Gestion litiges</span>
+          <span class="comp-tag">Reporting</span>
+          <span class="comp-tag">Analyse besoins</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">💻</div>
+        <div class="comp-title">Outils & CRM</div>
+        <div class="comp-tags">
+          <span class="comp-tag">Axiales</span>
+          <span class="comp-tag">Resalys</span>
+          <span class="comp-tag">Outils CRM</span>
+          <span class="comp-tag">Contractualisation</span>
+          <span class="comp-tag">Saisie dossiers</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">⚡</div>
+        <div class="comp-title">Soft skills</div>
+        <div class="comp-tags">
+          <span class="comp-tag">Esprit d'équipe</span>
+          <span class="comp-tag">Dynamisme</span>
+          <span class="comp-tag">Rigueur</span>
+          <span class="comp-tag">Répartie</span>
+          <span class="comp-tag">Productivité</span>
+          <span class="comp-tag">Challenge</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences">
+  <div class="section-inner">
+    <div class="section-label">03</div>
+    <h2 class="section-title">Expériences <em>professionnelles</em></h2>
+    <div class="xp-list">
+      <div class="xp-item fade-in">
+        <div class="xp-header" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-date">Sept. 2022 — Sept. 2025 · Alternance</div>
+            <div class="xp-role">Agent de Réservation téléphonique</div>
+            <div class="xp-company">Hornair Vacances</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body">
+          <div class="xp-desc"><ul>
+            <li>Gestion et conversion d'un portefeuille d'appels entrants qualifiés en réservations fermes pour des séjours touristiques</li>
+            <li>Application rigoureuse des techniques d'argumentation commerciale et d'upselling (montée engamme) pour maximiser le chiffre d'affaires</li>
+            <li>Saisie, suivi et contractualisation des dossiers de réservation via les outils CRM (Resalys, Axalys)</li>
+            <li>Gestion proactive des objections et des litiges clients pour garantir la fidélisation et l'image de marque</li>
+            <li>Analyse des besoins clients et reporting sur les tendances de réservation</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="xp-item fade-in">
+        <div class="xp-header" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-date">Août 2021 — Janv. 2022 · Alternance</div>
+            <div class="xp-role">Vendeuse en Animalerie</div>
+            <div class="xp-company">Planète Animale</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body">
+          <div class="xp-desc"><ul>
+            <li>Accueil et conseil expert de la clientèle sur les produits et les soins animaliers</li>
+            <li>Vente active de produits en magasin et vente additionnelle</li>
+            <li>Mise en rayon, facing, respect des plans de merchandising</li>
+            <li>Encaissement (espèces, carte bancaire, chèques)</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="xp-item fade-in">
+        <div class="xp-header" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-date">Décembre 2019</div>
+            <div class="xp-role">Hôtesse de caisse</div>
+            <div class="xp-company">Truffaut</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body">
+          <div class="xp-desc"><ul>
+            <li>Encaissement rapide et fiable (espèces, carte bancaire, chèques)</li>
+            <li>Gestion du flux client en période de forte affluence (fin d'année)</li>
+            <li>Respect des procédures de sécurité et de vérification</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation">
+  <div class="section-inner">
+    <div class="section-label">04</div>
+    <h2 class="section-title">Ma <em>formation</em></h2>
+    <div class="form-grid">
+      <div class="form-card fade-in">
+        <div class="form-accent"></div>
+        <div class="form-year">2024 — 2026 · ESG Aix-en-Provence</div>
+        <div class="form-degree">Mastère Business Développement & Management Commercial</div>
+        <div class="form-school">Admise Septembre 2026</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-accent"></div>
+        <div class="form-year">2024 — 2025 · ESG Aix-en-Provence</div>
+        <div class="form-degree">Bachelor Responsable développement commercial Tourisme</div>
+        <div class="form-school">Septembre 2024 — Juillet 2025</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-accent"></div>
+        <div class="form-year">2022 — 2024 · ESARC Aix-en-Provence</div>
+        <div class="form-degree">BTS Tourisme</div>
+        <div class="form-school">Septembre 2022 — Juillet 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT -->
+<section id="engagement">
+  <div class="section-inner">
+    <div class="section-label" style="color:rgba(255,255,255,0.5)">05</div>
+    <h2 class="section-title">Engagement <em>& Volontariat</em></h2>
+    <div class="eng-grid">
+      <div class="eng-card fade-in">
+        <div class="eng-icon">🚒</div>
+        <div class="eng-date">Nov. 2019 — Juin 2020</div>
+        <div class="eng-title">Service Civique</div>
+        <div class="eng-org">Marins Pompiers de Marseille</div>
+        <div class="eng-desc">Soutien aux interventions de secours à victimes et participation à la vie opérationnelle de la caserne.</div>
+      </div>
+      <div class="eng-card fade-in">
+        <div class="eng-icon">🔴</div>
+        <div class="eng-date">2019 · Antenne Aubagne</div>
+        <div class="eng-title">Bénévole Croix Rouge Française</div>
+        <div class="eng-org">Croix Rouge Française</div>
+        <div class="eng-desc">Travail en équipe pluridisciplinaire sous la coordination d'un chef d'intervention.</div>
+      </div>
+      <div class="eng-card fade-in">
+        <div class="eng-icon">🪖</div>
+        <div class="eng-date">2014 — 2018 · CSP Aubagne</div>
+        <div class="eng-title">Jeune Sapeur-Pompier</div>
+        <div class="eng-org">Corps de Sapeurs-Pompiers</div>
+        <div class="eng-desc">Développement de l'esprit d'équipe, de la discipline et du respect de la hiérarchie.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">06</div>
+    <h2 class="section-title">Me <em>contacter</em></h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-big">Recrutons<br><em>ensemble</em></div>
+        <p class="contact-sub">À la recherche d'une alternance en développement business et management commercial dans la région Aix-Marseille-Aubagne. Dynamique, rigoureuse et prête à relever de nouveaux challenges.</p>
+        <div class="lang-pills">
+          <div class="lang-pill">🇫🇷 Français <span>Natif</span></div>
+          <div class="lang-pill">🇬🇧 Anglais <span>B1</span></div>
+          <div class="lang-pill">🇪🇸 Espagnol <span>A2</span></div>
+        </div>
+      </div>
+      <div class="contact-cards fade-in">
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-lbl">Localisation</div><div class="contact-val">13005 Marseille · Aix-Marseille-Aubagne</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📱</div>
+          <div><div class="contact-lbl">Téléphone</div><div class="contact-val">06 58 35 50 80</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <div><div class="contact-lbl">Email</div><div class="contact-val">melina.rodriguez.pro@gmail.com</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">🎓</div>
+          <div><div class="contact-lbl">Formation</div><div class="contact-val">Mastère Business Dev. — ESG Aix</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Mélina <span>Rodriguez Masse</span></div>
+  <div class="footer-right">Business Developer · Alternance · Fait avec Claude ✦ MarketForge</div>
+</footer>
+
+<!-- VIDEO -->
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/gkbxd4dvys.js" async type="module"></script>
+<div class="vid-widget" onclick="openVid()">
+  <div class="vid-thumb">
+    <img src="https://fast.wistia.com/embed/medias/gkbxd4dvys/swatch" alt="video" onerror="this.style.display='none'">
+    <div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+  </div>
+  <div class="vid-widget-bar">📩 J'ai un message pour toi !</div>
+</div>
+<div class="vid-full-overlay" id="vidOverlay" onclick="if(event.target===this)closeVid()">
+  <div class="vid-full-modal">
+    <div class="vid-full-header">
+      <div class="vid-full-title">📩 Mon message pour toi</div>
+      <button class="vid-full-close" onclick="closeVid()">✕</button>
+    </div>
+    <div class="vid-full-body">
+      <wistia-player media-id="gkbxd4dvys" aspect="1.7777777777777777"></wistia-player>
+    </div>
+  </div>
+</div>
+
+<!-- SALES BANNER -->
+<div class="sales-banner" id="salesBanner">
+  <div class="sales-banner-inner">
+    <div class="sales-banner-left">
+      <div class="sales-banner-dot"></div>
+      <div class="sales-banner-tagline">Transforme ton CV en <span>site web interactif</span></div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="sales-banner-btn" onclick="openSales()">✦ Découvrir mon offre</button>
+  </div>
+  <div class="sales-banner-mobile">
+    <div class="sales-banner-tagline-sm">CV web <span>interactif</span></div>
+    <button class="sales-banner-btn-sm" onclick="openSales()">✦ Découvrir mon offre</button>
+  </div>
+</div>
+<div class="sales-overlay" id="salesOverlay" onclick="if(event.target===this)closeSales()">
+  <div class="sales-modal">
+    <div class="sales-header">
+      <button class="sales-close" onclick="closeSales()">✕</button>
+      <div class="sales-hbadge">✦ Offre exclusive</div>
+      <div class="sales-htitle">Mon offre pour ton <span>CV interactif</span></div>
+      <div class="sales-hsub">Tout ce qu'il faut pour avoir un CV web qui impressionne les recruteurs</div>
+      <div class="sales-price-row">
+        <div class="sales-old">197 €</div>
+        <div class="sales-new"><sup>€</sup>97</div>
+      </div>
+    </div>
+    <div class="sales-body">
+      <div class="sales-feats">
+        <div class="sales-feat"><div class="sales-feat-icon">💻</div><div><div class="sales-feat-title">Ton CV interactif complet</div><div class="sales-feat-desc">Un site web CV sur-mesure, moderne et navigable — livré prêt à partager</div></div></div>
+        <div class="sales-feat"><div class="sales-feat-icon">🎓</div><div><div class="sales-feat-title">Formation à l'installation</div><div class="sales-feat-desc">Tutoriel pas-à-pas pour héberger et mettre à jour ton CV toi-même</div></div></div>
+        <div class="sales-feat"><div class="sales-feat-icon">💬</div><div><div class="sales-feat-title">SAV WhatsApp inclus</div><div class="sales-feat-desc">Accès direct — réponse sous 24h</div></div></div>
+      </div>
+      <div class="sales-stripe">
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <stripe-buy-button buy-button-id="buy_btn_1TcL9kEPhm1snxO0TS5KO10a" publishable-key="pk_live_51I3KPJEPhm1snxO0QETpCk4qFkVTcmWrj5he23xv4y4ReTf6gaK1Mv9GPvgSrc1G0b1ovtNsrodN7x8eMzkX9bw200jAZxtEzh"></stripe-buy-button>
+      </div>
+      <div class="sales-guar">🔒 Paiement sécurisé Stripe · <span>Satisfait ou remboursé 7 jours</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Scroll progress bar
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('scrollBar').style.width = p + '%';
+  updateActiveNav();
+});
+
+// Smooth scroll to section
+function scrollToS(e, id) {
+  if (e) e.preventDefault();
+  const el = document.getElementById(id);
+  if (!el) return;
+  const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// Mobile nav
+function mobileNav(id) {
+  scrollToS(null, id);
+}
+
+// Hamburger
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Active nav highlight
+function updateActiveNav() {
+  const sections = ['hero','competences','experiences','formation','engagement','contact'];
+  const offset = 100;
+  let current = 'hero';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= offset) current = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+
+// Accordion
+function toggleXp(h) {
+  const item = h.parentElement;
+  const was = item.classList.contains('open');
+  document.querySelectorAll('.xp-item').forEach(x => x.classList.remove('open'));
+  if (!was) item.classList.add('open');
+}
+
+// Fade in observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Animate skill bars when competences visible
+      if (e.target.closest('#competences')) {
+        e.target.querySelectorAll('.skill-fill').forEach(b => b.style.width = b.getAttribute('data-w'));
+      }
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Video
+function openVid() { document.getElementById('vidOverlay').classList.add('open'); }
+function closeVid() { document.getElementById('vidOverlay').classList.remove('open'); }
+
+// Sales
+function openSales() { document.getElementById('salesOverlay').classList.add('open'); }
+function closeSales() { document.getElementById('salesOverlay').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeVid(); closeSales(); } });
+
+// Banner after 5 min
+setTimeout(() => {
+  const b = document.getElementById('salesBanner');
+  b.style.display = 'block';
+  document.body.classList.add('sales-banner-visible');
+  document.getElementById('mainNav').style.top = '64px';
+}, 5 * 60 * 1000);
+
+// Fix hero grid responsive
+function fixHero() {
+  const g = document.getElementById('heroGrid');
+  if (!g) return;
+  g.style.gridTemplateColumns = window.innerWidth <= 900 ? '1fr' : '1fr 1fr';
+}
+window.addEventListener('resize', fixHero);
+fixHero();
+</script>
+</body>
+</html>
