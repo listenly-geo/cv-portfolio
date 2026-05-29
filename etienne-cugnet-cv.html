@@ -826,48 +826,79 @@ document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeVid
 </script>
 
 
-<!-- STRIPE SALES POPUP -->
+<!-- STRIPE SALES BANNER TOP -->
 <style>
-.sales-fab {
-  position: fixed; bottom: 32px; right: 32px; z-index: 500;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+.sales-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9998;
+  background: linear-gradient(90deg, #1a1a1a 0%, #2d1a25 50%, #1a1a1a 100%);
+  border-bottom: 2px solid #e8387a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 56px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  gap: 16px;
 }
-.sales-fab-btn {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: linear-gradient(135deg, #f0d022, #a8b800);
-  border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 28px rgba(240,208,34,0.5);
+.sales-banner-left {
+  display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+}
+.sales-banner-badge {
+  background: #e8387a;
+  color: #fff; font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px; white-space: nowrap;
+  flex-shrink: 0;
+}
+.sales-banner-text {
+  font-family: sans-serif;
+  font-size: 0.82rem; font-weight: 600; color: #fff;
+  white-space: nowrap;
+}
+.sales-banner-text span {
+  color: #f5c842;
+  text-decoration: line-through; opacity: 0.6;
+  margin-right: 4px;
+}
+.sales-banner-text strong { color: #f5c842; font-size: 1rem; }
+.sales-banner-center {
+  display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center;
+}
+.sales-banner-feature {
+  display: flex; align-items: center; gap: 6px;
+  font-family: sans-serif; font-size: 0.75rem; color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+}
+.sales-banner-feature::before { content: "✓"; color: #e8387a; font-weight: 800; }
+.sales-banner-right { flex-shrink: 0; }
+.sales-banner-btn {
+  background: #e8387a; color: #fff;
+  border: none; padding: 10px 22px; border-radius: 100px;
+  font-family: sans-serif; font-size: 0.8rem; font-weight: 800;
+  letter-spacing: 0.5px; cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  position: relative; flex-shrink: 0;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(232,56,122,0.5);
 }
-.sales-fab-btn:hover { transform: scale(1.08); box-shadow: 0 10px 36px rgba(240,208,34,0.65); }
-.sales-fab-btn svg { width: 26px; height: 26px; fill: #1a2e1e; }
-.sales-fab-pulse {
-  position: absolute; inset: -5px; border-radius: 50%;
-  border: 2px solid rgba(240,208,34,0.5);
-  animation: salesPulse 2s ease infinite;
+.sales-banner-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 24px rgba(232,56,122,0.7);
 }
-@keyframes salesPulse { 0%,100%{transform:scale(1);opacity:.7} 50%{transform:scale(1.25);opacity:0} }
-.sales-fab-label {
-  background: #1a1a1a; color: #fff;
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 1px;
-  padding: 7px 16px; border-radius: 100px;
-  white-space: nowrap; pointer-events: none;
-  opacity: 0; transform: translateX(8px);
-  transition: opacity 0.2s, transform 0.2s;
-}
-.sales-fab:hover .sales-fab-label { opacity: 1; transform: translateX(0); }
 
-/* OVERLAY */
+/* Adjust nav to go below banner */
+nav { top: 56px !important; }
+#hero { padding-top: 156px !important; }
+
+/* Sales modal (full popup) */
 .sales-overlay {
-  display: none; position: fixed; inset: 0; z-index: 600;
+  display: none; position: fixed; inset: 0; z-index: 10001;
   background: rgba(0,0,0,0.78); backdrop-filter: blur(8px);
   align-items: center; justify-content: center; padding: 20px;
 }
 .sales-overlay.open { display: flex; animation: salesOverlayIn 0.3s ease; }
 @keyframes salesOverlayIn { from{opacity:0} to{opacity:1} }
-
 .sales-modal {
   background: #fff; border-radius: 24px; overflow: hidden;
   width: min(560px, 96vw);
@@ -876,102 +907,84 @@ document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeVid
   position: relative;
 }
 @keyframes salesModalIn { from{transform:scale(0.9) translateY(20px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
-
 .sales-header {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d1a25 100%);
   padding: 32px 32px 28px; text-align: center; position: relative;
 }
 .sales-close {
-  position: absolute; top: 16px; right: 16px;
+  position: absolute; top: 14px; right: 14px;
   width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(240,208,34,0.15); border: none; color: #f0d022;
-  font-size: 1rem; cursor: pointer; display: flex;
-  align-items: center; justify-content: center; transition: background 0.2s;
+  background: rgba(255,255,255,0.12); border: none; color: #fff;
+  font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
 }
-.sales-close:hover { background: rgba(255,255,255,0.25); }
-.sales-badge {
+.sales-close:hover { background: #e8387a; }
+.sales-hbadge {
   display: inline-block;
   background: linear-gradient(90deg, #e8387a, #f5a623);
   color: white; font-size: 0.65rem; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
   padding: 5px 14px; border-radius: 100px; margin-bottom: 14px;
+  font-family: sans-serif;
 }
-.sales-title {
+.sales-htitle {
+  font-family: sans-serif;
   font-size: 1.5rem; font-weight: 800; color: #fff;
   line-height: 1.2; margin-bottom: 8px;
 }
-.sales-title span { color: #f0d022; }
-.sales-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
-
+.sales-htitle span { color: #f5c842; }
+.sales-hsub { font-family: sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
 .sales-price-row {
-  display: flex; align-items: center; justify-content: center; gap: 14px;
-  margin-top: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 20px;
 }
-.sales-old-price {
-  font-size: 1.2rem; color: rgba(255,255,255,0.35);
-  text-decoration: line-through; font-weight: 500;
-}
-.sales-new-price {
-  font-size: 2.4rem; font-weight: 900; color: #f0d022;
-  line-height: 1;
-}
+.sales-old-price { font-family: sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.35); text-decoration: line-through; font-weight: 500; }
+.sales-new-price { font-family: sans-serif; font-size: 2.4rem; font-weight: 900; color: #f5c842; line-height: 1; }
 .sales-new-price sup { font-size: 1.1rem; vertical-align: super; }
-
 .sales-body { padding: 28px 32px 32px; }
-
-.sales-features {
-  display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px;
-}
+.sales-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
 .sales-feature {
   display: flex; align-items: flex-start; gap: 14px;
   padding: 14px 16px; border-radius: 12px;
-  background: #fafafa; border: 1px solid #f0f0f0;
-  transition: border-color 0.2s;
+  background: #fafafa; border: 1px solid #f0f0f0; transition: border-color 0.2s;
 }
-.sales-feature:hover { border-color: rgba(240,208,34,0.3); }
+.sales-feature:hover { border-color: rgba(232,56,122,0.3); }
 .sales-feat-icon {
   width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
-  background: linear-gradient(135deg, #f0d022, #a8b800);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem;
+  background: linear-gradient(135deg, #e8387a, #c4006a);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
 }
-.sales-feat-title { font-size: 0.88rem; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
-.sales-feat-desc { font-size: 0.75rem; color: #888; line-height: 1.4; }
-
+.sales-feat-title { font-family: sans-serif; font-size: 0.88rem; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+.sales-feat-desc { font-family: sans-serif; font-size: 0.75rem; color: #888; line-height: 1.4; }
 .sales-stripe-wrap { text-align: center; }
-.sales-guarantee {
-  margin-top: 14px; text-align: center;
-  font-size: 0.72rem; color: #aaa; letter-spacing: 0.5px;
-}
-.sales-guarantee span { color: #f0d022; }
-
-/* TIMER banner */
-.sales-timer-bar {
-  background: linear-gradient(90deg, #e8387a, #f5a623);
-  color: white; text-align: center;
-  padding: 10px 20px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px;
-}
-#sales-countdown { font-weight: 800; font-size: 1rem; }
+.sales-guarantee { margin-top: 14px; text-align: center; font-family: sans-serif; font-size: 0.72rem; color: #aaa; }
+.sales-guarantee span { color: #e8387a; }
 </style>
 
-<div class="sales-fab" id="salesFab" style="display:none">
-  <div class="sales-fab-label">🎁 Offre spéciale</div>
-  <button class="sales-fab-btn" onclick="openSales()">
-    <div class="sales-fab-pulse"></div>
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-  </button>
+<!-- Banner top -->
+<div class="sales-banner">
+  <div class="sales-banner-left">
+    <div class="sales-banner-badge">🎁 Offre spéciale</div>
+    <div class="sales-banner-text"><span>197€</span> → <strong>97€</strong></div>
+  </div>
+  <div class="sales-banner-center">
+    <div class="sales-banner-feature">CV interactif complet</div>
+    <div class="sales-banner-feature">Formation installation</div>
+    <div class="sales-banner-feature">SAV WhatsApp</div>
+  </div>
+  <div class="sales-banner-right">
+    <button class="sales-banner-btn" onclick="openSales()">Je veux mon CV web →</button>
+  </div>
 </div>
 
-<div class="sales-overlay" id="salesOverlay" onclick="closeSalesOutside(event)">
-  <div class="sales-modal" id="salesModal">
-    <div class="sales-timer-bar">
-      ⏰ Offre limitée — expire dans <span id="sales-countdown">09:59</span>
-    </div>
+<!-- Full modal -->
+<div class="sales-overlay" id="salesOverlay" onclick="if(event.target===this)closeSales()">
+  <div class="sales-modal">
     <div class="sales-header">
       <button class="sales-close" onclick="closeSales()">✕</button>
-      <div class="sales-badge">✦ Offre exclusive</div>
-      <div class="sales-title">Mon offre pour<br>ton <span>CV interactif</span></div>
-      <div class="sales-subtitle">Tout ce qu'il faut pour avoir un CV web qui impressionne les recruteurs</div>
+      <div class="sales-hbadge">✦ Offre exclusive</div>
+      <div class="sales-htitle">Mon offre pour<br>ton <span>CV interactif</span></div>
+      <div class="sales-hsub">Tout ce qu'il faut pour avoir un CV web qui impressionne les recruteurs</div>
       <div class="sales-price-row">
         <div class="sales-old-price">197 €</div>
         <div class="sales-new-price"><sup>€</sup>97</div>
@@ -1008,45 +1021,15 @@ document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeVid
           publishable-key="pk_live_51I3KPJEPhm1snxO0QETpCk4qFkVTcmWrj5he23xv4y4ReTf6gaK1Mv9GPvgSrc1G0b1ovtNsrodN7x8eMzkX9bw200jAZxtEzh">
         </stripe-buy-button>
       </div>
-      <div class="sales-guarantee">🔒 Paiement sécurisé Stripe &nbsp;·&nbsp; <span>Satisfait ou remboursé 7 jours</span></div>
+      <div class="sales-guarantee">🔒 Paiement sécurisé Stripe · <span>Satisfait ou remboursé 7 jours</span></div>
     </div>
   </div>
 </div>
 
 <script>
-// Show FAB after 5 minutes
-setTimeout(function() {
-  document.getElementById('salesFab').style.display = 'flex';
-}, 5 * 60 * 1000);
-
-// Auto-open popup after 5 minutes
-setTimeout(function() {
-  openSales();
-}, 5 * 60 * 1000);
-
-function openSales() {
-  document.getElementById('salesFab').style.display = 'flex';
-  document.getElementById('salesOverlay').classList.add('open');
-  startCountdown();
-}
+function openSales() { document.getElementById('salesOverlay').classList.add('open'); }
 function closeSales() { document.getElementById('salesOverlay').classList.remove('open'); }
-function closeSalesOutside(e) { if(e.target===document.getElementById('salesOverlay')) closeSales(); }
 document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeSales(); });
-
-// Countdown timer 10 min
-var cdSeconds = 599;
-var cdInterval = null;
-function startCountdown() {
-  if(cdInterval) return;
-  cdInterval = setInterval(function() {
-    cdSeconds--;
-    if(cdSeconds < 0) { cdSeconds = 0; clearInterval(cdInterval); }
-    var m = Math.floor(cdSeconds/60);
-    var s = cdSeconds % 60;
-    var el = document.getElementById('sales-countdown');
-    if(el) el.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-  }, 1000);
-}
 </script>
 
 </body>
