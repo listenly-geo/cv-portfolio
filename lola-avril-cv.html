@@ -550,103 +550,228 @@ function showHero() {
 }
 </script>
 
-<!-- WISTIA VIDEO POPUP -->
+
+<!-- STRIPE SALES POPUP -->
 <style>
-.vid-fab {
+.sales-fab {
   position: fixed; bottom: 32px; right: 32px; z-index: 500;
   display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
 }
-.vid-fab-btn {
-  width: 60px; height: 60px; border-radius: 50%;
+.sales-fab-btn {
+  width: 64px; height: 64px; border-radius: 50%;
   background: linear-gradient(135deg, #e8387a, #c4006a);
   border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 24px rgba(232,56,122,0.45);
+  box-shadow: 0 6px 28px rgba(232,56,122,0.5);
   transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
+  position: relative; flex-shrink: 0;
 }
-.vid-fab-btn:hover { transform: scale(1.08); box-shadow: 0 10px 32px rgba(232,56,122,0.55); }
-.vid-fab-btn svg { width: 24px; height: 24px; fill: white; }
-.vid-fab-pulse {
-  position: absolute; inset: -4px; border-radius: 50%;
+.sales-fab-btn:hover { transform: scale(1.08); box-shadow: 0 10px 36px rgba(232,56,122,0.65); }
+.sales-fab-btn svg { width: 26px; height: 26px; fill: white; }
+.sales-fab-pulse {
+  position: absolute; inset: -5px; border-radius: 50%;
   border: 2px solid rgba(232,56,122,0.5);
-  animation: fabPulse 2s ease infinite;
+  animation: salesPulse 2s ease infinite;
 }
-@keyframes fabPulse { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.2);opacity:0} }
-.vid-fab-label {
+@keyframes salesPulse { 0%,100%{transform:scale(1);opacity:.7} 50%{transform:scale(1.25);opacity:0} }
+.sales-fab-label {
   background: #1a1a1a; color: #fff;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem; font-weight: 500; letter-spacing: 1px;
-  padding: 6px 14px; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 1px;
+  padding: 7px 16px; border-radius: 100px;
   white-space: nowrap; pointer-events: none;
   opacity: 0; transform: translateX(8px);
   transition: opacity 0.2s, transform 0.2s;
 }
-.vid-fab:hover .vid-fab-label { opacity: 1; transform: translateX(0); }
+.sales-fab:hover .sales-fab-label { opacity: 1; transform: translateX(0); }
 
-.vid-overlay {
+/* OVERLAY */
+.sales-overlay {
   display: none; position: fixed; inset: 0; z-index: 600;
-  background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
-  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.78); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 20px;
 }
-.vid-overlay.open { display: flex; animation: overlayIn 0.25s ease; }
-@keyframes overlayIn { from{opacity:0} to{opacity:1} }
-.vid-modal {
-  background: #111; border-radius: 16px; overflow: hidden;
-  width: min(860px, 92vw);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-  position: relative; animation: modalIn 0.3s cubic-bezier(.4,0,.2,1);
+.sales-overlay.open { display: flex; animation: salesOverlayIn 0.3s ease; }
+@keyframes salesOverlayIn { from{opacity:0} to{opacity:1} }
+
+.sales-modal {
+  background: #fff; border-radius: 24px; overflow: hidden;
+  width: min(560px, 96vw);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  animation: salesModalIn 0.35s cubic-bezier(.4,0,.2,1);
+  position: relative;
 }
-@keyframes modalIn { from{transform:scale(0.92);opacity:0} to{transform:scale(1);opacity:1} }
-.vid-modal-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+@keyframes salesModalIn { from{transform:scale(0.9) translateY(20px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
+
+.sales-header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d1a25 100%);
+  padding: 32px 32px 28px; text-align: center; position: relative;
 }
-.vid-modal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.95rem; color: #fff; font-weight: 700;
+.sales-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: none; color: #fff;
+  font-size: 1rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; transition: background 0.2s;
 }
-.vid-modal-title span { color: #e8387a; font-style: italic; }
-.vid-close {
-  width: 32px; height: 32px; border-radius: 50%; border: none;
-  background: rgba(255,255,255,0.1); color: #fff;
-  font-size: 1rem; cursor: pointer;
+.sales-close:hover { background: rgba(255,255,255,0.25); }
+.sales-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #e8387a, #f5a623);
+  color: white; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 14px;
+}
+.sales-title {
+  font-size: 1.5rem; font-weight: 800; color: #fff;
+  line-height: 1.2; margin-bottom: 8px;
+}
+.sales-title span { color: #f5c842; }
+.sales-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+.sales-price-row {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  margin-top: 20px;
+}
+.sales-old-price {
+  font-size: 1.2rem; color: rgba(255,255,255,0.35);
+  text-decoration: line-through; font-weight: 500;
+}
+.sales-new-price {
+  font-size: 2.4rem; font-weight: 900; color: #f5c842;
+  line-height: 1;
+}
+.sales-new-price sup { font-size: 1.1rem; vertical-align: super; }
+
+.sales-body { padding: 28px 32px 32px; }
+
+.sales-features {
+  display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px;
+}
+.sales-feature {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px; border-radius: 12px;
+  background: #fafafa; border: 1px solid #f0f0f0;
+  transition: border-color 0.2s;
+}
+.sales-feature:hover { border-color: rgba(232,56,122,0.3); }
+.sales-feat-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, #e8387a, #c4006a);
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s;
+  font-size: 1rem;
 }
-.vid-close:hover { background: #e8387a; }
-.vid-body { padding: 20px; }
+.sales-feat-title { font-size: 0.88rem; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+.sales-feat-desc { font-size: 0.75rem; color: #888; line-height: 1.4; }
+
+.sales-stripe-wrap { text-align: center; }
+.sales-guarantee {
+  margin-top: 14px; text-align: center;
+  font-size: 0.72rem; color: #aaa; letter-spacing: 0.5px;
+}
+.sales-guarantee span { color: #e8387a; }
+
+/* TIMER banner */
+.sales-timer-bar {
+  background: linear-gradient(90deg, #e8387a, #f5a623);
+  color: white; text-align: center;
+  padding: 10px 20px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px;
+}
+#sales-countdown { font-weight: 800; font-size: 1rem; }
 </style>
 
-<div class="vid-fab">
-  <div class="vid-fab-label">Voir la vidéo ✦</div>
-  <button class="vid-fab-btn" onclick="openVid()">
-    <div class="vid-fab-pulse"></div>
-    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+<div class="sales-fab" id="salesFab" style="display:none">
+  <div class="sales-fab-label">🎁 Offre spéciale</div>
+  <button class="sales-fab-btn" onclick="openSales()">
+    <div class="sales-fab-pulse"></div>
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
   </button>
 </div>
 
-<div class="vid-overlay" id="vidOverlay" onclick="closeVidOutside(event)">
-  <div class="vid-modal" id="vidModal">
-    <div class="vid-modal-header">
-      <div class="vid-modal-title">Lola <span>Avril</span> — En vidéo</div>
-      <button class="vid-close" onclick="closeVid()">✕</button>
+<div class="sales-overlay" id="salesOverlay" onclick="closeSalesOutside(event)">
+  <div class="sales-modal" id="salesModal">
+    <div class="sales-timer-bar">
+      ⏰ Offre limitée — expire dans <span id="sales-countdown">09:59</span>
     </div>
-    <div class="vid-body">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/gkbxd4dvys.js" async type="module"></script>
-      <style>wistia-player[media-id='gkbxd4dvys']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/gkbxd4dvys/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
-      <wistia-player media-id="gkbxd4dvys" aspect="1.7777777777777777"></wistia-player>
+    <div class="sales-header">
+      <button class="sales-close" onclick="closeSales()">✕</button>
+      <div class="sales-badge">✦ Offre exclusive</div>
+      <div class="sales-title">Mon offre pour<br>ton <span>CV interactif</span></div>
+      <div class="sales-subtitle">Tout ce qu'il faut pour avoir un CV web qui impressionne les recruteurs</div>
+      <div class="sales-price-row">
+        <div class="sales-old-price">197 €</div>
+        <div class="sales-new-price"><sup>€</sup>97</div>
+      </div>
+    </div>
+    <div class="sales-body">
+      <div class="sales-features">
+        <div class="sales-feature">
+          <div class="sales-feat-icon">💻</div>
+          <div>
+            <div class="sales-feat-title">Ton CV interactif complet</div>
+            <div class="sales-feat-desc">Un site web CV sur-mesure, moderne et navigable — livré prêt à partager aux recruteurs</div>
+          </div>
+        </div>
+        <div class="sales-feature">
+          <div class="sales-feat-icon">🎓</div>
+          <div>
+            <div class="sales-feat-title">Formation à l'installation</div>
+            <div class="sales-feat-desc">Tutoriel pas-à-pas pour héberger et mettre à jour ton CV toi-même, sans technique</div>
+          </div>
+        </div>
+        <div class="sales-feature">
+          <div class="sales-feat-icon">💬</div>
+          <div>
+            <div class="sales-feat-title">SAV WhatsApp inclus</div>
+            <div class="sales-feat-desc">Accès direct par message pour toute modification ou question — réponse sous 24h</div>
+          </div>
+        </div>
+      </div>
+      <div class="sales-stripe-wrap">
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <stripe-buy-button
+          buy-button-id="buy_btn_1TcL9kEPhm1snxO0TS5KO10a"
+          publishable-key="pk_live_51I3KPJEPhm1snxO0QETpCk4qFkVTcmWrj5he23xv4y4ReTf6gaK1Mv9GPvgSrc1G0b1ovtNsrodN7x8eMzkX9bw200jAZxtEzh">
+        </stripe-buy-button>
+      </div>
+      <div class="sales-guarantee">🔒 Paiement sécurisé Stripe &nbsp;·&nbsp; <span>Satisfait ou remboursé 7 jours</span></div>
     </div>
   </div>
 </div>
 
 <script>
-function openVid() { document.getElementById('vidOverlay').classList.add('open'); }
-function closeVid() { document.getElementById('vidOverlay').classList.remove('open'); }
-function closeVidOutside(e) { if(e.target===document.getElementById('vidOverlay')) closeVid(); }
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeVid(); });
+// Show FAB after 5 minutes
+setTimeout(function() {
+  document.getElementById('salesFab').style.display = 'flex';
+}, 5 * 60 * 1000);
+
+// Auto-open popup after 5 minutes
+setTimeout(function() {
+  openSales();
+}, 5 * 60 * 1000);
+
+function openSales() {
+  document.getElementById('salesFab').style.display = 'flex';
+  document.getElementById('salesOverlay').classList.add('open');
+  startCountdown();
+}
+function closeSales() { document.getElementById('salesOverlay').classList.remove('open'); }
+function closeSalesOutside(e) { if(e.target===document.getElementById('salesOverlay')) closeSales(); }
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeSales(); });
+
+// Countdown timer 10 min
+var cdSeconds = 599;
+var cdInterval = null;
+function startCountdown() {
+  if(cdInterval) return;
+  cdInterval = setInterval(function() {
+    cdSeconds--;
+    if(cdSeconds < 0) { cdSeconds = 0; clearInterval(cdInterval); }
+    var m = Math.floor(cdSeconds/60);
+    var s = cdSeconds % 60;
+    var el = document.getElementById('sales-countdown');
+    if(el) el.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }, 1000);
+}
 </script>
 
 </body>
