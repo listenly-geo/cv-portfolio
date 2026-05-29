@@ -554,122 +554,107 @@ function showHero() {
 
 <!-- VIDEO WIDGET FIXED BOTTOM LEFT -->
 <style>
-@keyframes vidFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+@keyframes vidFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+@keyframes vidGlow{0%,100%{box-shadow:0 8px 36px rgba(34,197,94,0.7),0 0 0 4px rgba(34,197,94,0.3)}50%{box-shadow:0 20px 56px rgba(34,197,94,1),0 0 0 8px rgba(34,197,94,0.12)}}
+@keyframes vidShake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-4px)}20%,40%,60%,80%{transform:translateX(4px)}}
+@keyframes textPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.85;transform:scale(1.03)}}
+.vid-widget{
+  position:fixed; bottom:24px; left:20px; z-index:9999;
+  width:clamp(200px,26vw,260px);
+  border-radius:16px; overflow:hidden; cursor:pointer;
+  border:3px solid #16a34a;
+  background:#0a1f0e;
+  animation:vidFloat 3s ease-in-out infinite, vidGlow 3s ease-in-out infinite;
 }
-@keyframes vidGlow {
-  0%, 100% { box-shadow: 0 8px 36px rgba(220,30,30,0.6), 0 0 0 3px rgba(220,30,30,0.3); }
-  50% { box-shadow: 0 16px 52px rgba(220,30,30,0.9), 0 0 0 6px rgba(220,30,30,0.15); }
+.vid-widget:hover{
+  animation:vidShake 0.5s ease;
+  box-shadow:0 24px 64px rgba(34,197,94,1), 0 0 0 6px rgba(34,197,94,0.25);
 }
-.vid-widget {
-  position: fixed;
-  bottom: 28px;
-  left: 24px;
-  z-index: 9999;
-  width: 230px;
-  border-radius: 14px;
-  overflow: hidden;
-  cursor: pointer;
-  border: 3px solid #dc1e1e;
-  background: #111;
-  animation: vidFloat 3s ease-in-out infinite, vidGlow 3s ease-in-out infinite;
-  transition: transform 0.2s;
+.vid-thumb{
+  width:100%; aspect-ratio:16/9;
+  background:#0a1f0e;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
 }
-.vid-widget:hover {
-  animation: none;
-  transform: scale(1.06) translateY(-4px);
-  box-shadow: 0 20px 60px rgba(220,30,30,0.8), 0 0 0 5px rgba(220,30,30,0.3);
+.vid-thumb img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; opacity:0.6;
 }
-.vid-thumb {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+.vid-thumb-overlay{
+  position:absolute; inset:0;
+  background:linear-gradient(160deg, rgba(22,163,74,0.25) 0%, transparent 60%);
 }
-.vid-thumb img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.65;
+.vid-play-btn{
+  width:54px; height:54px; border-radius:50%;
+  background:linear-gradient(135deg, #16a34a, #22c55e);
+  display:flex; align-items:center; justify-content:center;
+  position:relative; z-index:2;
+  box-shadow:0 4px 24px rgba(22,163,74,0.6);
+  flex-shrink:0;
 }
-.vid-play-btn {
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  background: #dc1e1e;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; z-index: 2;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
-  flex-shrink: 0;
+.vid-play-btn svg{width:22px;height:22px;fill:white;margin-left:4px;}
+.vid-widget-bar{
+  background:linear-gradient(135deg, #15803d, #16a34a);
+  padding:10px 14px; text-align:center;
 }
-.vid-play-btn svg { width: 22px; height: 22px; fill: white; margin-left: 4px; }
-.vid-widget-bar {
-  background: #dc1e1e;
-  color: #fff;
-  font-family: sans-serif;
-  font-size: 0.78rem; font-weight: 800;
-  letter-spacing: 0.5px;
-  padding: 10px 12px; text-align: center;
-  line-height: 1.3;
+.vid-widget-name{
+  font-family:sans-serif;
+  font-size:clamp(0.95rem,2.5vw,1.05rem);
+  font-weight:900; color:#fff;
+  letter-spacing:0.5px; line-height:1.2;
+  animation:textPulse 2s ease-in-out infinite;
+}
+.vid-widget-sub{
+  font-family:sans-serif;
+  font-size:clamp(0.72rem,1.8vw,0.8rem);
+  font-weight:500; color:rgba(255,255,255,0.8);
+  margin-top:3px; letter-spacing:0.3px;
+}
+.vid-badge{
+  position:absolute; top:8px; right:8px; z-index:3;
+  background:#22c55e; color:#fff;
+  font-family:sans-serif; font-size:0.6rem; font-weight:800;
+  letter-spacing:1px; text-transform:uppercase;
+  padding:3px 8px; border-radius:100px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* Plein ecran overlay */
-.vid-full-overlay {
-  display: none;
-  position: fixed; inset: 0; z-index: 10000;
-  background: rgba(0,0,0,0.9);
-  align-items: center; justify-content: center;
-  padding: 20px;
-}
-.vid-full-overlay.open { display: flex; animation: vidOverIn 0.25s ease; }
-@keyframes vidOverIn { from{opacity:0} to{opacity:1} }
-.vid-full-modal {
-  background: #111; border-radius: 16px; overflow: hidden;
-  width: min(900px, 96vw);
-  box-shadow: 0 40px 100px rgba(0,0,0,0.9);
-  animation: vidModIn 0.3s cubic-bezier(.4,0,.2,1);
-}
-@keyframes vidModIn { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
-.vid-full-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 14px 20px; background: #1a1a1a;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.vid-full-title { font-family: sans-serif; font-size: 0.95rem; font-weight: 700; color: #fff; }
-.vid-full-close {
-  width: 34px; height: 34px; border-radius: 50%;
-  background: #dc1e1e; border: none; color: #fff;
-  font-size: 1.1rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform 0.2s;
-}
-.vid-full-close:hover { transform: scale(1.1); }
-.vid-full-body { padding: 16px; }
+/* Full screen */
+.vid-full-overlay{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;padding:20px;}
+.vid-full-overlay.open{display:flex;animation:vidOverIn 0.25s ease;}
+@keyframes vidOverIn{from{opacity:0}to{opacity:1}}
+.vid-full-modal{background:#0f1a0f;border-radius:20px;overflow:hidden;width:min(900px,96vw);box-shadow:0 40px 100px rgba(0,0,0,0.9);border:1px solid rgba(34,197,94,0.2);animation:vidModIn 0.3s cubic-bezier(.4,0,.2,1);}
+@keyframes vidModIn{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
+.vid-full-header{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;background:#0a1f0e;border-bottom:1px solid rgba(34,197,94,0.15);}
+.vid-full-title{font-family:sans-serif;font-size:1rem;font-weight:800;color:#fff;}
+.vid-full-title span{color:#22c55e;}
+.vid-full-close{width:36px;height:36px;border-radius:50%;background:#16a34a;border:none;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;}
+.vid-full-close:hover{transform:scale(1.1);background:#22c55e;}
+.vid-full-body{padding:16px;}
 </style>
 
 <script src="https://fast.wistia.com/player.js" async></script>
 <script src="https://fast.wistia.com/embed/gkbxd4dvys.js" async type="module"></script>
 
-<!-- Vignette flottante bas gauche -->
 <div class="vid-widget" onclick="openVidFull()">
   <div class="vid-thumb">
     <img src="https://fast.wistia.com/embed/medias/gkbxd4dvys/swatch" alt="video" onerror="this.style.display='none'">
+    <div class="vid-thumb-overlay"></div>
+    <div class="vid-badge">▶ PLAY</div>
     <div class="vid-play-btn">
       <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
     </div>
   </div>
-  <div class="vid-widget-bar">📩 J'ai un message pour toi !</div>
+  <div class="vid-widget-bar">
+    <div class="vid-widget-name">👋 Lola, j'ai un message pour toi !</div>
+    <div class="vid-widget-sub">Clique pour regarder ▶</div>
+  </div>
 </div>
 
-<!-- Plein ecran -->
 <div class="vid-full-overlay" id="vidFullOverlay" onclick="if(event.target===this)closeVidFull()">
   <div class="vid-full-modal">
     <div class="vid-full-header">
-      <div class="vid-full-title">📩 Mon message pour toi</div>
+      <div class="vid-full-title">👋 <span>Lola</span>, j'ai un message pour toi !</div>
       <button class="vid-full-close" onclick="closeVidFull()">✕</button>
     </div>
     <div class="vid-full-body">
@@ -679,9 +664,8 @@ function showHero() {
 </div>
 
 <script>
-function openVidFull() { document.getElementById('vidFullOverlay').classList.add('open'); }
-function closeVidFull() { document.getElementById('vidFullOverlay').classList.remove('open'); }
-document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeVidFull(); });
+function openVidFull(){document.getElementById('vidFullOverlay').classList.add('open');}
+function closeVidFull(){document.getElementById('vidFullOverlay').classList.remove('open');}
 </script>
 
 
