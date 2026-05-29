@@ -7,34 +7,40 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700&display=swap");
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Syne",sans-serif;background:#0f0f0f;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px}
-h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.5rem,6vw,5rem);letter-spacing:4px;text-align:center;margin-bottom:12px}
+body{font-family:"Syne",sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px}
+h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(2rem,6vw,5rem);letter-spacing:4px;text-align:center;margin-bottom:12px}
 h1 span{color:#f0d022}
 p{color:#888;font-size:0.9rem;letter-spacing:1px;text-align:center;margin-bottom:56px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;width:100%;max-width:700px}
-.card{background:#1a1a1a;border-radius:16px;padding:36px 32px;border:1px solid rgba(255,255,255,0.08);text-decoration:none;color:#fff;transition:all 0.25s;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;width:100%;max-width:900px}
+.card{background:#1a1a1a;border-radius:16px;padding:clamp(24px,4vw,36px) clamp(20px,3vw,32px);border:1px solid rgba(255,255,255,0.08);text-decoration:none;color:#fff;transition:all 0.25s;display:block}
 .card:hover{transform:translateY(-4px);border-color:rgba(240,208,34,0.4);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
 .card-tag{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#f0d022;margin-bottom:16px}
-.card-name{font-family:"Bebas Neue",sans-serif;font-size:2.2rem;letter-spacing:2px;line-height:1;margin-bottom:8px}
-.card-role{font-size:0.8rem;color:#666;line-height:1.5}
+.card-name{font-family:"Bebas Neue",sans-serif;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:2px;line-height:1;margin-bottom:8px}
+.card-role{font-size:clamp(0.75rem,2vw,0.8rem);color:#666;line-height:1.5}
 .card-arrow{margin-top:24px;font-size:0.75rem;color:#f0d022;letter-spacing:2px}
 </style>
 </head>
 <body>
 <h1>CV <span>Portfolio</span></h1>
-<p>Modèles de CV interactifs web ✦ MarketForge</p>
+<p>Modeles de CV interactifs web — MarketForge</p>
 <div class="grid">
   <a class="card" href="lola-avril-cv.html">
-    <div class="card-tag">✦ Direction Artistique</div>
+    <div class="card-tag">Direction Artistique</div>
     <div class="card-name">Lola Avril</div>
-    <div class="card-role">Bachelor Communication & Marketing<br>Mastère DA Design Graphique — ECV Lille</div>
-    <div class="card-arrow">Voir le CV →</div>
+    <div class="card-role">Bachelor Communication & Marketing — Mastere DA Design Graphique ECV Lille</div>
+    <div class="card-arrow">Voir le CV</div>
   </a>
   <a class="card" href="etienne-cugnet-cv.html">
-    <div class="card-tag">✦ Animation · Entrepreneuriat</div>
+    <div class="card-tag">Animation Entrepreneuriat</div>
     <div class="card-name">Etienne Cugnet</div>
-    <div class="card-role">Animateur · Entrepreneur<br>Pilat Connect — PNR du Pilat</div>
-    <div class="card-arrow">Voir le CV →</div>
+    <div class="card-role">Animateur Entrepreneur — Pilat Connect PNR du Pilat</div>
+    <div class="card-arrow">Voir le CV</div>
+  </a>
+  <a class="card" href="jacques-suyat-cv.html">
+    <div class="card-tag">Electronique Embarque</div>
+    <div class="card-name">Jacques Suyat</div>
+    <div class="card-role">BUT GEII IUT Nice Cote d Azur — Recherche alternance 2024-2026</div>
+    <div class="card-arrow">Voir le CV</div>
   </a>
 </div>
 </body>
