@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernanda Bolanos Reyes — MSc Marketing Digital</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+:root{
+  --navy:#0a1628;--navy2:#112040;--navy3:#1a3360;
+  --blue:#1e5ba8;--blue-lt:#3b82f6;--blue-dim:rgba(30,91,168,0.08);
+  --gold:#b8963e;--gold-lt:#d4aa55;--gold-dim:rgba(184,150,62,0.12);
+  --cream:#f8fafc;--cream2:#eef2f8;--white:#ffffff;
+  --text:#0a1628;--text2:#3d5170;--text3:#7a90aa;
+  --nav-h:70px;--max-w:1240px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.scroll-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--gold-lt));z-index:9999;width:0;transition:width .08s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:500;background:rgba(248,250,252,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(10,22,40,0.07);display:flex;align-items:center;padding:0 clamp(20px,5vw,64px);justify-content:space-between;gap:20px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:700;font-style:italic;color:var(--navy);cursor:pointer;white-space:nowrap;}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:clamp(8px,2vw,32px);align-items:center;}
+.nav-links a{text-decoration:none;font-size:clamp(0.68rem,1.1vw,0.78rem);font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);padding:6px 0;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--navy);border-bottom-color:var(--gold);}
+.nav-cta{background:var(--navy);color:var(--white);border:none;padding:9px 20px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.68rem,1.1vw,0.78rem);font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;min-height:40px;}
+.nav-cta:hover{background:var(--blue);transform:translateY(-1px);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.nav-burger span{width:24px;height:2px;background:var(--navy);border-radius:2px;}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--white);z-index:499;border-bottom:2px solid var(--gold);flex-direction:column;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{text-decoration:none;font-size:0.92rem;font-weight:700;color:var(--text);padding:15px 24px;border-bottom:1px solid rgba(10,22,40,0.06);text-transform:uppercase;letter-spacing:.5px;}
+.mobile-menu a:hover{color:var(--blue);background:var(--blue-dim);}
+
+/* HERO */
+#hero{min-height:100vh;padding-top:var(--nav-h);display:grid;grid-template-columns:55fr 45fr;}
+.hero-left{background:var(--navy);padding:clamp(52px,7vw,96px) clamp(36px,6vw,76px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+.hero-left::before{content:'';position:absolute;top:-120px;right:-120px;width:480px;height:480px;background:radial-gradient(circle,rgba(184,150,62,0.1) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-left::after{content:'';position:absolute;bottom:-100px;left:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(30,91,168,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-photo{width:clamp(80px,10vw,118px);height:clamp(80px,10vw,118px);border-radius:50%;overflow:hidden;border:3px solid rgba(184,150,62,0.5);box-shadow:0 8px 32px rgba(0,0,0,0.4);margin-bottom:clamp(24px,3.5vw,40px);flex-shrink:0;}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:clamp(0.64rem,1vw,0.74rem);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);margin-bottom:clamp(14px,2vw,20px);}
+.hero-eyebrow::before{content:'';width:28px;height:2px;background:var(--gold-lt);flex-shrink:0;}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,6rem);font-weight:700;line-height:0.9;letter-spacing:-1px;color:var(--white);}
+.hero-name em{font-style:italic;color:var(--gold-lt);display:block;}
+.hero-pitch{margin-top:clamp(18px,2.5vw,30px);font-size:clamp(0.9rem,1.3vw,1.02rem);color:rgba(255,255,255,0.65);line-height:1.8;max-width:500px;}
+.hero-pitch strong{color:var(--white);font-weight:700;}
+.hero-langs{margin-top:clamp(16px,2vw,26px);display:flex;gap:8px;flex-wrap:wrap;}
+.lang-chip{display:flex;align-items:center;gap:7px;background:rgba(184,150,62,0.12);border:1px solid rgba(184,150,62,0.28);padding:7px 14px;border-radius:100px;font-size:clamp(0.74rem,1vw,0.82rem);color:rgba(255,255,255,0.8);font-weight:600;}
+.lang-chip span{color:var(--gold-lt);font-size:.65rem;letter-spacing:1px;text-transform:uppercase;}
+.hero-dispo{margin-top:clamp(16px,2vw,26px);display:inline-flex;align-items:center;gap:10px;background:rgba(30,91,168,0.15);border:1px solid rgba(59,130,246,0.25);padding:11px 20px;border-radius:8px;font-size:clamp(0.8rem,1.1vw,0.88rem);color:rgba(255,255,255,0.8);font-weight:600;width:fit-content;}
+.dispo-dot{width:8px;height:8px;border-radius:50%;background:#60a5fa;box-shadow:0 0 6px #60a5fa;animation:bl 2s infinite;flex-shrink:0;}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-ctas{margin-top:clamp(28px,3.5vw,48px);display:flex;gap:14px;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:var(--white);border:none;padding:clamp(13px,1.5vw,16px) clamp(24px,3vw,36px);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.84rem,1.2vw,0.92rem);font-weight:700;cursor:pointer;min-height:50px;transition:transform .2s,box-shadow .2s;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(184,150,62,0.45);}
+.btn-ghost{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.2);padding:clamp(11px,1.5vw,14px) clamp(22px,3vw,32px);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.84rem,1.2vw,0.92rem);font-weight:600;cursor:pointer;transition:all .2s;min-height:50px;}
+.btn-ghost:hover{border-color:var(--gold-lt);color:var(--gold-lt);}
+
+.hero-right{background:var(--cream2);padding:clamp(52px,7vw,96px) clamp(32px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,4vw,48px);}
+.h-label{font-size:0.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+.h-items{display:flex;flex-direction:column;gap:11px;}
+.h-item{display:flex;align-items:center;gap:13px;font-size:clamp(0.88rem,1.3vw,0.98rem);color:var(--text);line-height:1.4;font-weight:500;}
+.h-icon{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.88rem;}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.h-stat{background:var(--white);border-radius:14px;padding:clamp(15px,2vw,21px);border:1.5px solid rgba(10,22,40,0.08);transition:all .2s;}
+.h-stat:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 24px rgba(184,150,62,0.1);}
+.h-stat-val{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;color:var(--navy);line-height:1;}
+.h-stat-lbl{font-size:clamp(0.68rem,1vw,0.76rem);font-weight:600;color:var(--text3);margin-top:5px;line-height:1.3;}
+
+/* SECTIONS */
+section{scroll-margin-top:var(--nav-h);}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:clamp(80px,9vw,120px) clamp(24px,5vw,64px);}
+.s-eye{font-size:0.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.s-eye::after{content:'';width:48px;height:2px;background:var(--blue);}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:700;color:var(--text);line-height:1;margin-bottom:clamp(44px,6vw,68px);letter-spacing:-1px;}
+.s-title em{font-style:italic;color:var(--blue);}
+.bg-white{background:var(--white);}
+.bg-navy{background:var(--navy);}
+.bg-navy .s-eye{color:rgba(255,255,255,0.35);}
+.bg-navy .s-eye::after{background:rgba(255,255,255,0.15);}
+.bg-navy .s-title{color:var(--white);}
+.bg-navy .s-title em{color:var(--gold-lt);}
+
+/* COMPETENCES */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(14px,2.5vw,22px);}
+.comp-card{background:var(--cream);border-radius:16px;padding:clamp(22px,3vw,30px);border:1.5px solid rgba(10,22,40,0.07);transition:all .25s;position:relative;overflow:hidden;}
+.comp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--gold-lt));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.comp-card:hover::before{transform:scaleX(1);}
+.comp-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(10,22,40,0.1);border-color:rgba(184,150,62,0.25);}
+.comp-icon{font-size:1.7rem;margin-bottom:12px;}
+.comp-title{font-size:clamp(0.98rem,1.5vw,1.08rem);font-weight:800;color:var(--navy);margin-bottom:14px;}
+.tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:var(--white);border:1.5px solid rgba(10,22,40,0.09);padding:5px 12px;border-radius:100px;font-size:clamp(0.76rem,1.1vw,0.82rem);color:var(--text);font-weight:500;transition:all .2s;}
+.tag:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
+.s-row{margin-bottom:15px;}
+.s-lr{display:flex;justify-content:space-between;font-size:clamp(0.88rem,1.2vw,0.94rem);font-weight:600;color:var(--text);margin-bottom:7px;}
+.s-pct{font-size:0.76rem;color:var(--gold);font-weight:800;}
+.s-track{height:5px;background:rgba(10,22,40,0.08);border-radius:3px;overflow:hidden;}
+.s-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--navy),var(--blue-lt));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+
+/* EXPERIENCES */
+.xp-list{display:flex;flex-direction:column;gap:4px;}
+.xp-item{background:var(--white);border-radius:14px;border:1.5px solid rgba(10,22,40,0.07);overflow:hidden;transition:border-color .2s;}
+.xp-item:hover{border-color:rgba(184,150,62,0.25);}
+.xp-hdr{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;padding:clamp(17px,2vw,24px) clamp(20px,3vw,30px);cursor:pointer;transition:background .2s;min-height:52px;}
+.xp-item.open .xp-hdr{background:var(--gold-dim);}
+.xp-badges{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.xp-type{font-size:0.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);padding:3px 10px;border-radius:4px;}
+.xp-type.alt{background:var(--blue);}
+.xp-type.free{background:var(--gold);}
+.xp-type.stage{background:var(--navy3);}
+.xp-type.extra{background:#059669;}
+.xp-date{font-size:clamp(0.68rem,1vw,0.74rem);font-weight:600;letter-spacing:.8px;color:var(--text3);}
+.xp-role{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,1.8vw,1.28rem);font-weight:700;color:var(--navy);line-height:1.15;}
+.xp-company{font-size:clamp(0.82rem,1.2vw,0.88rem);color:var(--text2);margin-top:3px;}
+.xp-toggle{width:36px;height:36px;flex-shrink:0;border-radius:8px;border:1.5px solid rgba(10,22,40,0.15);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:1.3rem;transition:all .3s;}
+.xp-item.open .xp-toggle{background:var(--gold);color:var(--white);border-color:var(--gold);transform:rotate(45deg);}
+.xp-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);}
+.xp-item.open .xp-body{max-height:600px;}
+.xp-desc{padding:16px clamp(20px,3vw,30px) clamp(16px,2vw,24px);border-top:1px solid rgba(10,22,40,0.06);}
+.xp-desc ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.xp-desc li{font-size:clamp(0.88rem,1.2vw,0.94rem);color:var(--text2);line-height:1.75;padding-left:20px;position:relative;}
+.xp-desc li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:.72rem;top:5px;}
+.xp-section-title{font-size:0.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin:14px 0 8px;padding-left:20px;}
+
+/* FORMATION */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(13px,2vw,18px);}
+.form-card{background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:16px;padding:clamp(20px,3vw,28px);position:relative;overflow:hidden;transition:all .2s;}
+.form-card:hover{background:rgba(184,150,62,0.1);border-color:rgba(212,170,85,0.4);transform:translateY(-3px);}
+.form-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-lt),transparent);}
+.form-year{font-size:0.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold-lt);margin-bottom:9px;}
+.form-degree{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.18rem);font-weight:700;color:var(--white);line-height:1.3;margin-bottom:6px;}
+.form-school{font-size:clamp(0.8rem,1.2vw,0.86rem);color:rgba(255,255,255,0.45);line-height:1.5;}
+.form-badge{margin-top:10px;display:inline-block;background:rgba(212,170,85,0.15);border:1px solid rgba(212,170,85,0.3);padding:3px 10px;border-radius:4px;font-size:0.67rem;color:var(--gold-lt);font-weight:700;letter-spacing:1px;}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:start;}
+.c-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:700;color:var(--text);line-height:.95;margin-bottom:20px;letter-spacing:-1px;}
+.c-heading em{font-style:italic;color:var(--blue);display:block;}
+.c-sub{font-size:clamp(0.9rem,1.3vw,1rem);color:var(--text2);line-height:1.8;margin-bottom:24px;}
+.c-interests{display:flex;flex-wrap:wrap;gap:9px;}
+.c-pill{background:var(--white);border:1.5px solid rgba(10,22,40,0.09);padding:8px 16px;border-radius:100px;font-size:clamp(0.82rem,1.2vw,0.88rem);font-weight:500;color:var(--text);display:flex;align-items:center;gap:7px;transition:all .2s;}
+.c-pill:hover{border-color:var(--gold);color:var(--gold);}
+.c-cards{display:flex;flex-direction:column;gap:13px;}
+.c-card{background:var(--white);border-radius:14px;padding:clamp(15px,2vw,19px) clamp(18px,2.5vw,24px);display:flex;align-items:center;gap:15px;border:1.5px solid rgba(10,22,40,0.07);transition:all .2s;min-height:66px;}
+.c-card:hover{border-color:var(--gold);transform:translateX(5px);box-shadow:0 4px 24px rgba(184,150,62,0.1);}
+.c-icon{width:42px;height:42px;border-radius:11px;flex-shrink:0;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+.c-lbl{font-size:0.65rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);}
+.c-val{font-size:clamp(0.88rem,1.3vw,0.96rem);font-weight:600;color:var(--text);margin-top:2px;}
+
+footer{background:var(--navy);padding:clamp(22px,3vw,32px) clamp(24px,5vw,64px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.f-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.95rem,1.5vw,1.15rem);font-weight:700;color:rgba(255,255,255,0.6);}
+.f-name span{color:var(--gold-lt);}
+.f-r{font-size:clamp(0.64rem,1vw,0.72rem);color:rgba(255,255,255,0.28);letter-spacing:1px;}
+
+/* VIDEO POPUP */
+.vid-popup-ov{position:fixed;inset:0;z-index:10000;background:rgba(5,10,20,0.95);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;}
+.vid-popup-box{background:#0a1628;border-radius:20px;overflow:hidden;width:min(780px,96vw);border:1px solid rgba(184,150,62,0.2);box-shadow:0 40px 100px rgba(0,0,0,0.8);}
+.vid-popup-hdr{padding:clamp(16px,3vw,24px) clamp(20px,4vw,32px);background:linear-gradient(135deg,#0a1628,#1a3360);border-bottom:1px solid rgba(184,150,62,0.15);text-align:center;}
+.vid-popup-msg{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:700;font-style:italic;color:var(--white);line-height:1.3;margin-bottom:6px;}
+.vid-popup-msg span{color:var(--gold-lt);}
+.vid-popup-sub{font-size:clamp(0.76rem,1.3vw,0.84rem);color:rgba(255,255,255,0.45);font-weight:500;}
+.vid-popup-player{padding:0;}
+.vid-popup-footer{padding:clamp(16px,3vw,24px) clamp(20px,4vw,32px);text-align:center;background:#071020;border-top:1px solid rgba(184,150,62,0.1);}
+.vid-popup-btn{background:var(--text3);color:rgba(255,255,255,0.4);border:none;padding:clamp(13px,2vw,16px) clamp(28px,4vw,48px);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.88rem,1.5vw,1rem);font-weight:800;cursor:not-allowed;transition:all .4s;width:100%;max-width:400px;letter-spacing:.5px;}
+.vid-popup-btn.unlocked{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--navy);cursor:pointer;box-shadow:0 8px 32px rgba(184,150,62,0.4);}
+.vid-popup-btn.unlocked:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(184,150,62,0.55);}
+.vid-countdown{font-size:clamp(0.76rem,1.2vw,0.82rem);color:rgba(255,255,255,0.4);margin-top:10px;letter-spacing:.5px;min-height:20px;}
+.vid-countdown.done{color:var(--gold-lt);font-weight:700;}
+
+/* SALES BANNER */
+.s-banner{position:fixed;top:0;left:0;right:0;z-index:9998;background:#0f2027;border-bottom:3px solid #c9a84c;display:none;}
+.s-banner-in{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,48px);height:64px;max-width:1400px;margin:0 auto;}
+.s-dot{width:8px;height:8px;border-radius:50%;background:#c9a84c;animation:dP 2s ease infinite;flex-shrink:0;}
+@keyframes dP{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.5)}}
+.s-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:600;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px;}
+.s-tag span{color:#c9a84c;}
+.s-btn{background:#c9a84c;color:#0f2027;border:none;padding:11px 28px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap;min-height:44px;}
+.s-btn:hover{background:#e0b84e;transform:translateY(-1px);}
+.s-banner-mob{display:none;}
+@media(max-width:768px){
+  .s-banner-in{display:none;}
+  .s-banner-mob{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;gap:12px;}
+  .s-tag-sm{font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:600;color:rgba(255,255,255,.75);}
+  .s-tag-sm span{color:#c9a84c;}
+  .s-btn-sm{background:#c9a84c;color:#0f2027;border:none;padding:10px 18px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:800;cursor:pointer;white-space:nowrap;min-height:42px;}
+}
+.s-ov{display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
+.s-ov.open{display:flex;animation:sIn .3s ease;}
+@keyframes sIn{from{opacity:0}to{opacity:1}}
+.s-mod{background:#fff;border-radius:24px;overflow:hidden;width:min(560px,96vw);box-shadow:0 40px 100px rgba(0,0,0,.5);animation:smIn .35s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;}
+@keyframes smIn{from{transform:scale(.9) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.s-hdr{background:linear-gradient(135deg,#0f2027,#1a3040);padding:clamp(22px,4vw,30px);text-align:center;position:relative;}
+.s-cl{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.s-cl:hover{background:#c9a84c;color:#0f2027;}
+.s-badge{display:inline-block;background:#c9a84c;color:#0f2027;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:6px;margin-bottom:12px;font-family:'Plus Jakarta Sans',sans-serif;}
+.s-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.2rem,3vw,1.5rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;}
+.s-title span{color:#c9a84c;}
+.s-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.76rem,2vw,.82rem);color:rgba(255,255,255,.6);line-height:1.5;}
+.s-price{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;}
+.s-old{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;color:rgba(255,255,255,.28);text-decoration:line-through;}
+.s-new{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:900;color:#c9a84c;}
+.s-body{padding:clamp(18px,4vw,26px);}
+.s-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:22px;}
+.s-feat{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;border-radius:12px;background:#f9f9f9;border:1.5px solid #eee;transition:border-color .2s;}
+.s-feat:hover{border-color:rgba(201,168,76,.35);}
+.s-fi{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#0f2027,#1a3040);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.s-ft{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.84rem,2vw,.9rem);font-weight:700;color:#1a1a1a;margin-bottom:2px;}
+.s-fd{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.72rem,1.8vw,.76rem);color:#888;line-height:1.4;}
+.s-stripe{text-align:center;}
+.s-guar{margin-top:12px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;color:#aaa;}
+.s-guar span{color:#c9a84c;font-weight:600;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){#hero{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{min-height:calc(100vh - var(--nav-h));padding:clamp(36px,7vw,64px) clamp(24px,6vw,48px);}
+  .contact-layout{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}.nav-cta{display:none;}.nav-burger{display:flex;}
+  .hero-ctas{flex-direction:column;}
+  .btn-gold,.btn-ghost{width:100%;text-align:center;}
+  footer{flex-direction:column;text-align:center;}
+}
+@media(max-width:480px){.comp-grid,.form-grid{grid-template-columns:1fr;}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- VIDEO POPUP (non fermable) -->
+<div class="vid-popup-ov" id="vidPopup">
+  <div class="vid-popup-box">
+    <div class="vid-popup-hdr">
+      <div class="vid-popup-msg">Avant de découvrir ton nouveau CV,<br><span>j'ai un message pour toi !</span></div>
+      <div class="vid-popup-sub">Regarde cette vidéo avant d'accéder à ton CV</div>
+    </div>
+    <div class="vid-popup-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/6kjqulcgbr.js" async type="module"></script>
+      <style>wistia-player[media-id='6kjqulcgbr']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/6kjqulcgbr/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
+      <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777"></wistia-player>
+    </div>
+    <div class="vid-popup-footer">
+      <button class="vid-popup-btn" id="vidBtn" disabled onclick="unlockCV()">Découvrir mon CV sur mesure</button>
+      <div class="vid-countdown" id="vidCountdown">Disponible dans <strong id="cdTimer">4:15</strong>...</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav" style="display:none">
+  <div class="nav-logo" onclick="goTo('hero')">Fernanda <span>B.</span></div>
+  <div class="nav-links">
+    <a href="#hero" onclick="nav(event,'hero')">Accueil</a>
+    <a href="#competences" onclick="nav(event,'competences')">Compétences</a>
+    <a href="#experiences" onclick="nav(event,'experiences')">Expériences</a>
+    <a href="#formation" onclick="nav(event,'formation')">Formation</a>
+    <a href="#contact" onclick="nav(event,'contact')">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="nav(null,'contact')">Me contacter</button>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="mNav('hero')">Accueil</a>
+  <a href="#competences" onclick="mNav('competences')">Compétences</a>
+  <a href="#experiences" onclick="mNav('experiences')">Expériences</a>
+  <a href="#formation" onclick="mNav('formation')">Formation</a>
+  <a href="#contact" onclick="mNav('contact')">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" style="scroll-margin-top:0;display:none">
+  <div id="heroGrid" style="display:grid;grid-template-columns:55fr 45fr;min-height:100vh;padding-top:var(--nav-h)">
+    <div class="hero-left">
+      <div class="hero-photo"><img src="https://cv-booster.github.io/cv-portfolio/fernanda-photo.jpg" alt="Fernanda" onerror="this.parentElement.style.background='var(--navy3)';this.remove()"></div>
+      <div class="hero-eyebrow">MSc Marketing Digital · Mode & E-commerce</div>
+      <h1 class="hero-name">Fernanda<br><em>Bolanos Reyes</em></h1>
+      <p class="hero-pitch">Diplômée d'un MSc en Marketing de la Mode à Paris, j'intègre en septembre 2026 la première année du <strong>Master Marketing et Technologies Digitales</strong> à l'Université Paris Panthéon-Assas en alternance. Trilingue français, anglais, espagnol.</p>
+      <div class="hero-langs">
+        <div class="lang-chip">🇪🇸 Espagnol <span>Natif</span></div>
+        <div class="lang-chip">🇫🇷 Français <span>Bilingue</span></div>
+        <div class="lang-chip">🇬🇧 Anglais <span>Courant</span></div>
+      </div>
+      <div class="hero-dispo"><div class="dispo-dot"></div>Disponible en alternance — Septembre 2026</div>
+      <div class="hero-ctas">
+        <button class="btn-gold" onclick="nav(null,'experiences')">Voir mes expériences</button>
+        <button class="btn-ghost" onclick="nav(null,'contact')">Me contacter</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="fade-in">
+        <div class="h-label">Coordonnées</div>
+        <div class="h-items">
+          <div class="h-item"><div class="h-icon">✉️</div>ferbolre@gmail.com</div>
+          <div class="h-item"><div class="h-icon">📱</div>+33 7 80 60 64 17</div>
+          <div class="h-item"><div class="h-icon">📍</div>92310 Sèvres</div>
+        </div>
+      </div>
+      <div class="hero-stats fade-in">
+        <div class="h-stat"><div class="h-stat-val">MSc</div><div class="h-stat-lbl">Marketing de la Mode · Paris</div></div>
+        <div class="h-stat"><div class="h-stat-val">3</div><div class="h-stat-lbl">Langues maîtrisées</div></div>
+        <div class="h-stat"><div class="h-stat-val">Meta</div><div class="h-stat-lbl">Ads · Klaviyo · Shopify</div></div>
+        <div class="h-stat"><div class="h-stat-val">2026</div><div class="h-stat-lbl">Master Paris Panthéon</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences" class="bg-white" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">02</div>
+    <h2 class="s-title">Mes <em>compétences</em></h2>
+    <div class="comp-grid">
+      <div class="comp-card fade-in">
+        <div class="comp-icon">📊</div>
+        <div class="comp-title">Marketing Digital</div>
+        <div class="s-row"><div class="s-lr"><span>Meta Ads (acquisition)</span><span class="s-pct">88%</span></div><div class="s-track"><div class="s-fill" data-w="88%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>Klaviyo (email marketing)</span><span class="s-pct">85%</span></div><div class="s-track"><div class="s-fill" data-w="85%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>SEO & contenus digitaux</span><span class="s-pct">80%</span></div><div class="s-track"><div class="s-fill" data-w="80%"></div></div></div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">🛒</div>
+        <div class="comp-title">E-commerce & Outils</div>
+        <div class="tags">
+          <span class="tag">Shopify</span><span class="tag">BigBlue</span>
+          <span class="tag">Canva</span><span class="tag">Pack Office</span>
+          <span class="tag">Google Analytics</span><span class="tag">CRM</span>
+          <span class="tag">UGC creation</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">✍️</div>
+        <div class="comp-title">Création de contenu</div>
+        <div class="tags">
+          <span class="tag">Rédaction multilingue FR/EN/ES</span>
+          <span class="tag">Guides & FAQ</span>
+          <span class="tag">Supports de communication</span>
+          <span class="tag">Traduction</span>
+          <span class="tag">Veille sectorielle</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">⭐</div>
+        <div class="comp-title">Soft skills</div>
+        <div class="tags">
+          <span class="tag">Adaptabilité</span><span class="tag">Communication</span>
+          <span class="tag">Organisation</span><span class="tag">Travail en équipe</span>
+          <span class="tag">Enthousiasme</span><span class="tag">Créativité</span>
+          <span class="tag">Analyse de données</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">03</div>
+    <h2 class="s-title">Expériences <em>professionnelles</em></h2>
+    <div class="xp-list">
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type free">Freelance</span><span class="xp-date">09/2025 → 10/2025</span></div>
+            <div class="xp-role">Responsable Service Client — Mode & E-commerce</div>
+            <div class="xp-company">MoEa · Paris</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Suivi opérationnel des commandes e-commerce et gestion des demandes clients multilingues (FR/EN)</li>
+          <li>Suivi hebdomadaire des indicateurs de performance et reporting analytique</li>
+          <li>Rédaction de contenus professionnels : guides, FAQ, supports de communication interne</li>
+          <li>Coordination avec les équipes logistique et marketing pour la résolution de problématiques opérationnelles</li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type alt">Alternance</span><span class="xp-date">09/2024 → 08/2025</span></div>
+            <div class="xp-role">Alternance Marketing Digital & Growth — Mode & E-commerce</div>
+            <div class="xp-company">MoEa · Paris</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc">
+          <div class="xp-section-title">Marketing & Communication</div>
+          <ul>
+            <li>Participation au suivi de campagnes d'acquisition digitales (Meta Ads) avec reporting hebdomadaire</li>
+            <li>Réflexion et diffusion de newsletters via Klaviyo (taux d'ouverture moyen de 46%) et création de contenus multilingues</li>
+            <li>Veille sectorielle : tendances digitales, streaming, réseaux sociaux, pratiques du marché</li>
+            <li>Contribution à la création de contenus UGC et d'outils promotionnels (Canva)</li>
+          </ul>
+          <div class="xp-section-title">Gestion commerciale & développement</div>
+          <ul>
+            <li>Gestion opérationnelle de la boutique en ligne via Shopify : suivi des ventes et des commandes</li>
+            <li>Coordination avec les partenaires logistiques (BigBlue) et suivi des plannings</li>
+            <li>Reporting des performances e-commerce et analyse des données pour optimiser les processus</li>
+          </ul>
+          <div class="xp-section-title">Service client</div>
+          <ul>
+            <li>Participation au service client avec un CSAT moyen de 4.2/5 (nov. 2024 à juin 2025)</li>
+            <li>Mise en place d'un centre d'aide structuré, réduisant de 65% les demandes récurrentes</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type stage">Stage</span><span class="xp-date">04/2022 → 06/2022</span></div>
+            <div class="xp-role">Stagiaire Assistante Marketing — Équipements Électriques Industriels</div>
+            <div class="xp-company">Maltep · Herrlibuhl-près-Colmar</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Analyse du trafic et des comportements utilisateurs pour orienter les actions marketing</li>
+          <li>Élaboration d'une enquête de satisfaction client et rédaction de contenus CRM</li>
+          <li>Création de templates et traduction de supports de communication en espagnol</li>
+          <li>Contribution à l'optimisation des contenus digitaux (SEO)</li>
+        </ul></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation" class="bg-navy" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">04</div>
+    <h2 class="s-title">Ma <em>formation</em></h2>
+    <div class="form-grid">
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">2026 — En cours</div>
+        <div class="form-degree">Master Marketing et Technologies Digitales</div>
+        <div class="form-school">Université Paris Panthéon-Assas · Paris</div>
+        <div class="form-badge">1ère année · Alternance</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">09/2024 → 08/2025</div>
+        <div class="form-degree">M2 Master of Science — Marketing de la Mode, Design et Stratégies de Marque</div>
+        <div class="form-school">OMNES Education · INSEEC · Paris</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">09/2023 → 05/2024</div>
+        <div class="form-degree">Master 1 Marketing CADRE</div>
+        <div class="form-school">Commerce des affaires économiques et internationales<br>Université de Haute-Alsace · Colmar</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">10/2020 → 06/2024</div>
+        <div class="form-degree">Licence Marketing CADRE</div>
+        <div class="form-school">Université de Haute-Alsace · Colmar<br>Universidad de Sevilla · Séville (2 ans)</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">07/2020</div>
+        <div class="form-degree">Baccalauréat S-BIO</div>
+        <div class="form-school">Lycée Franco Mexicain · Mexico</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">Expériences complémentaires</div>
+        <div class="form-degree">Responsable de conférence — Forum UNICEF</div>
+        <div class="form-school">LFMUN · Lycée Franco Mexicain · Mexico (03/2019)<br>Séjour linguistique Royaume-Uni · Bellé's summer school · Dickers (2017-2018)</div>
+        <div class="form-badge">LVMH Certificate 12/2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">05</div>
+    <h2 class="s-title">Me <em>contacter</em></h2>
+    <div class="contact-layout">
+      <div>
+        <div class="c-heading">Travaillons<br><em>ensemble</em></div>
+        <p class="c-sub">À la recherche d'une alternance en marketing digital dès septembre 2026. Trilingue, créative et orientée data, je souhaite contribuer à des projets digitaux ambitieux dans la mode, le luxe ou l'e-commerce.</p>
+        <div class="c-interests">
+          <div class="c-pill">👗 Mode</div>
+          <div class="c-pill">🎵 Musique</div>
+          <div class="c-pill">🎤 Chant</div>
+          <div class="c-pill">⚽ Sport</div>
+        </div>
+      </div>
+      <div class="c-cards fade-in">
+        <div class="c-card"><div class="c-icon">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">ferbolre@gmail.com</div></div></div>
+        <div class="c-card"><div class="c-icon">📱</div><div><div class="c-lbl">Téléphone</div><div class="c-val">+33 7 80 60 64 17</div></div></div>
+        <div class="c-card"><div class="c-icon">📍</div><div><div class="c-lbl">Localisation</div><div class="c-val">92310 Sèvres · Paris</div></div></div>
+        <div class="c-card"><div class="c-icon">🎓</div><div><div class="c-lbl">Formation</div><div class="c-val">Master Marketing Digital · Paris Panthéon-Assas</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="display:none" id="mainFooter">
+  <div class="f-name">Fernanda <span>Bolanos Reyes</span></div>
+  <div class="f-r">MSc Marketing Digital · Alternance 2026 · Fait avec Claude ✦ MarketForge</div>
+</footer>
+
+<!-- SALES BANNER -->
+<div class="s-banner" id="sBanner">
+  <div class="s-banner-in">
+    <div class="s-tag"><div class="s-dot"></div>Transforme ton CV en <span>site web interactif</span></div>
+    <button class="s-btn" onclick="openSales()">✦ Découvrir mon offre</button>
+  </div>
+  <div class="s-banner-mob">
+    <div class="s-tag-sm">CV web <span>interactif</span></div>
+    <button class="s-btn-sm" onclick="openSales()">✦ Découvrir mon offre</button>
+  </div>
+</div>
+<div class="s-ov" id="sOv" onclick="if(event.target===this)closeSales()">
+  <div class="s-mod">
+    <div class="s-hdr">
+      <button class="s-cl" onclick="closeSales()">✕</button>
+      <div class="s-badge">✦ Offre exclusive</div>
+      <div class="s-title">Mon offre pour ton <span>CV interactif</span></div>
+      <div class="s-sub">Tout ce qu'il faut pour avoir un CV web qui impressionne les recruteurs</div>
+      <div class="s-price"><div class="s-old">197 €</div><div class="s-new"><sup>€</sup>97</div></div>
+    </div>
+    <div class="s-body">
+      <div class="s-feats">
+        <div class="s-feat"><div class="s-fi">💻</div><div><div class="s-ft">Ton CV interactif complet</div><div class="s-fd">Un site web CV sur-mesure, moderne et navigable — livré prêt à partager</div></div></div>
+        <div class="s-feat"><div class="s-fi">🎓</div><div><div class="s-ft">Formation à l'installation</div><div class="s-fd">Tutoriel pas-à-pas pour héberger et mettre à jour ton CV toi-même</div></div></div>
+        <div class="s-feat"><div class="s-fi">💬</div><div><div class="s-ft">SAV WhatsApp inclus</div><div class="s-fd">Accès direct — réponse sous 24h</div></div></div>
+      </div>
+      <div class="s-stripe">
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <stripe-buy-button buy-button-id="buy_btn_1TcL9kEPhm1snxO0TS5KO10a" publishable-key="pk_live_51I3KPJEPhm1snxO0QETpCk4qFkVTcmWrj5he23xv4y4ReTf6gaK1Mv9GPvgSrc1G0b1ovtNsrodN7x8eMzkX9bw200jAZxtEzh"></stripe-buy-button>
+      </div>
+      <div class="s-guar">🔒 Paiement sécurisé Stripe · <span>Satisfait ou remboursé 7 jours</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- COUNTDOWN & UNLOCK ----
+const TOTAL = 255;
+let remaining = TOTAL;
+const btn = document.getElementById('vidBtn');
+const cd = document.getElementById('vidCountdown');
+
+const timer = setInterval(() => {
+  remaining--;
+  const m = Math.floor(remaining / 60);
+  const s = remaining % 60;
+  if (remaining > 0) {
+    document.getElementById('cdTimer').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  } else {
+    clearInterval(timer);
+    btn.disabled = false;
+    btn.classList.add('unlocked');
+    cd.textContent = '✦ Clique pour découvrir ton CV !';
+    cd.classList.add('done');
+  }
+}, 1000);
+
+function unlockCV() {
+  if (!btn.classList.contains('unlocked')) return;
+  document.getElementById('vidPopup').style.display = 'none';
+  // Show all hidden elements
+  document.getElementById('mainNav').style.display = 'flex';
+  document.getElementById('hero').style.display = 'block';
+  document.querySelectorAll('section:not(#hero)').forEach(s => s.style.display = 'block');
+  document.getElementById('mainFooter').style.display = 'flex';
+  // Banner after 5 min
+  setTimeout(() => {
+    document.getElementById('sBanner').style.display = 'block';
+    document.getElementById('mainNav').style.top = '64px';
+  }, 5 * 60 * 1000);
+  fixHero();
+}
+
+// ---- NAV ----
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('scrollBar').style.width = p + '%';
+  updateNav();
+});
+function nav(e, id) {
+  if (e) e.preventDefault();
+  document.getElementById('mobileMenu').classList.remove('open');
+  if (id === 'hero') { window.scrollTo({top:0,behavior:'smooth'}); return; }
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
+}
+function goTo(id) { nav(null, id); }
+function mNav(id) { nav(null, id); }
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+function updateNav() {
+  const ids = ['hero','competences','experiences','formation','contact'];
+  let cur = 'hero';
+  ids.forEach(id => { const el=document.getElementById(id); if(el&&el.getBoundingClientRect().top<=96) cur=id; });
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
+}
+
+// ---- ACCORDION ----
+function toggleXp(h) {
+  const item = h.parentElement;
+  const was = item.classList.contains('open');
+  document.querySelectorAll('.xp-item').forEach(x => x.classList.remove('open'));
+  if (!was) item.classList.add('open');
+}
+
+// ---- FADE IN ----
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.s-fill').forEach(b => b.style.width = b.getAttribute('data-w'));
+    }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// ---- SALES ----
+function openSales() { document.getElementById('sOv').classList.add('open'); }
+function closeSales() { document.getElementById('sOv').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSales(); });
+
+// ---- RESPONSIVE HERO ----
+function fixHero() {
+  const g = document.getElementById('heroGrid');
+  if (!g) return;
+  g.style.gridTemplateColumns = window.innerWidth <= 900 ? '1fr' : window.innerWidth <= 1024 ? '1fr 1fr' : '55fr 45fr';
+}
+window.addEventListener('resize', fixHero);
+</script>
+</body>
+</html>
