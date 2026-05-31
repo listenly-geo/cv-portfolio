@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandrine Laperche — Gestionnaire de Paie RH</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+:root{
+  --lavender:#5b6bbf;--lavender2:#4a5aaf;--lavender3:#3a4a9f;
+  --lavender-dim:rgba(91,107,191,0.09);--lavender-lt:#8090d0;
+  --violet:#7c3aed;--violet-dim:rgba(124,58,237,0.08);
+  --cream:#f8f9ff;--cream2:#eef0fa;--white:#ffffff;
+  --text:#0f1535;--text2:#3a4468;--text3:#7a86b0;
+  --nav-h:68px;--max-w:1240px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.scroll-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--lavender3),var(--lavender-lt));z-index:9999;width:0;transition:width .08s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:500;background:rgba(248,249,255,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(91,107,191,0.1);display:flex;align-items:center;padding:0 clamp(20px,5vw,64px);justify-content:space-between;gap:20px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:700;font-style:italic;color:var(--lavender3);cursor:pointer;white-space:nowrap;}
+.nav-links{display:flex;gap:clamp(8px,2vw,28px);align-items:center;}
+.nav-links a{text-decoration:none;font-size:clamp(0.66rem,1.1vw,0.76rem);font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);padding:6px 0;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--lavender3);border-bottom-color:var(--lavender);}
+.nav-cta{background:var(--lavender);color:#fff;border:none;padding:9px 20px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.66rem,1.1vw,0.76rem);font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;min-height:40px;}
+.nav-cta:hover{background:var(--lavender3);transform:translateY(-1px);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.nav-burger span{width:24px;height:2px;background:var(--lavender);border-radius:2px;}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--white);z-index:499;border-bottom:2px solid var(--lavender);flex-direction:column;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{text-decoration:none;font-size:.9rem;font-weight:700;color:var(--text);padding:15px 24px;border-bottom:1px solid rgba(91,107,191,0.07);text-transform:uppercase;letter-spacing:.5px;}
+.mobile-menu a:hover{color:var(--lavender);background:var(--lavender-dim);}
+
+/* HERO */
+#hero{min-height:100vh;padding-top:var(--nav-h);display:grid;grid-template-columns:55fr 45fr;}
+.hero-left{background:linear-gradient(145deg,#2a3580,#3a4aaf 60%,#5b6bbf);padding:clamp(52px,7vw,96px) clamp(36px,6vw,76px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+.hero-left::before{content:'';position:absolute;top:-100px;right:-100px;width:450px;height:450px;background:radial-gradient(circle,rgba(255,255,255,0.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-left::after{content:'';position:absolute;bottom:-80px;left:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(124,58,237,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-initials{width:clamp(72px,9vw,108px);height:clamp(72px,9vw,108px);border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;margin-bottom:clamp(24px,3.5vw,40px);flex-shrink:0;letter-spacing:2px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:clamp(0.64rem,1vw,0.74rem);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:clamp(14px,2vw,20px);}
+.hero-eyebrow::before{content:'';width:28px;height:2px;background:rgba(255,255,255,0.5);flex-shrink:0;}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,6rem);font-weight:700;line-height:.88;letter-spacing:-1px;color:#fff;}
+.hero-name em{font-style:italic;color:rgba(255,255,255,0.75);display:block;}
+.hero-role{margin-top:clamp(16px,2.5vw,24px);font-size:clamp(0.92rem,1.4vw,1.05rem);font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:.5px;}
+.hero-pitch{margin-top:clamp(14px,2vw,22px);font-size:clamp(0.88rem,1.3vw,0.98rem);color:rgba(255,255,255,0.55);line-height:1.8;max-width:500px;}
+.hero-dispo{margin-top:clamp(16px,2vw,26px);display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:11px 20px;border-radius:8px;font-size:clamp(0.8rem,1.1vw,0.88rem);color:rgba(255,255,255,0.8);font-weight:600;width:fit-content;}
+.dispo-dot{width:8px;height:8px;border-radius:50%;background:#a5b4fc;box-shadow:0 0 6px #a5b4fc;animation:bl 2s infinite;flex-shrink:0;}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-ctas{margin-top:clamp(28px,3.5vw,48px);display:flex;gap:14px;flex-wrap:wrap;}
+.btn-lav{background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.4);padding:clamp(13px,1.5vw,16px) clamp(24px,3vw,36px);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.84rem,1.2vw,0.92rem);font-weight:700;cursor:pointer;min-height:50px;transition:all .2s;backdrop-filter:blur(4px);}
+.btn-lav:hover{background:rgba(255,255,255,0.25);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.7);border:2px solid rgba(255,255,255,0.2);padding:clamp(11px,1.5vw,14px) clamp(22px,3vw,32px);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.84rem,1.2vw,0.92rem);font-weight:600;cursor:pointer;transition:all .2s;min-height:50px;}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
+
+.hero-right{background:var(--cream2);padding:clamp(52px,7vw,96px) clamp(32px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,4vw,48px);}
+.h-label{font-size:0.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--lavender);margin-bottom:14px;}
+.h-items{display:flex;flex-direction:column;gap:11px;}
+.h-item{display:flex;align-items:center;gap:13px;font-size:clamp(0.88rem,1.3vw,0.98rem);color:var(--text);line-height:1.4;font-weight:500;}
+.h-icon{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:var(--lavender);display:flex;align-items:center;justify-content:center;font-size:.88rem;}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.h-stat{background:var(--white);border-radius:14px;padding:clamp(15px,2vw,21px);border:1.5px solid rgba(91,107,191,0.1);transition:all .2s;}
+.h-stat:hover{border-color:var(--lavender);transform:translateY(-2px);box-shadow:0 6px 24px rgba(91,107,191,0.12);}
+.h-stat-val{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:700;color:var(--lavender3);line-height:1;}
+.h-stat-lbl{font-size:clamp(0.68rem,1vw,0.76rem);font-weight:600;color:var(--text3);margin-top:5px;line-height:1.3;}
+
+/* SECTIONS */
+section{scroll-margin-top:var(--nav-h);}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:clamp(80px,9vw,120px) clamp(24px,5vw,64px);}
+.s-eye{font-size:0.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--lavender);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.s-eye::after{content:'';width:48px;height:2px;background:var(--lavender);}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:700;color:var(--text);line-height:1;margin-bottom:clamp(44px,6vw,68px);letter-spacing:-1px;}
+.s-title em{font-style:italic;color:var(--lavender);}
+.bg-white{background:var(--white);}
+.bg-lav{background:linear-gradient(145deg,#2a3580,#3a4aaf 60%,#5b6bbf);}
+.bg-lav .s-eye{color:rgba(255,255,255,0.35);}
+.bg-lav .s-eye::after{background:rgba(255,255,255,0.15);}
+.bg-lav .s-title{color:#fff;}
+.bg-lav .s-title em{color:#c7d2fe;}
+
+/* COMPETENCES */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(14px,2.5vw,22px);}
+.comp-card{background:var(--cream);border-radius:16px;padding:clamp(22px,3vw,30px);border:1.5px solid rgba(91,107,191,0.09);transition:all .25s;position:relative;overflow:hidden;}
+.comp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lavender3),var(--lavender-lt));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.comp-card:hover::before{transform:scaleX(1);}
+.comp-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(91,107,191,0.12);border-color:rgba(91,107,191,0.22);}
+.comp-icon{font-size:1.7rem;margin-bottom:12px;}
+.comp-title{font-size:clamp(0.98rem,1.5vw,1.08rem);font-weight:800;color:var(--lavender3);margin-bottom:14px;}
+.tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:var(--white);border:1.5px solid rgba(91,107,191,0.12);padding:5px 12px;border-radius:100px;font-size:clamp(0.76rem,1.1vw,0.82rem);color:var(--text);font-weight:500;transition:all .2s;}
+.tag:hover{border-color:var(--lavender);color:var(--lavender);background:var(--lavender-dim);}
+.s-row{margin-bottom:15px;}
+.s-lr{display:flex;justify-content:space-between;font-size:clamp(0.88rem,1.2vw,0.94rem);font-weight:600;color:var(--text);margin-bottom:7px;}
+.s-pct{font-size:0.76rem;color:var(--lavender);font-weight:800;}
+.s-track{height:5px;background:rgba(91,107,191,0.1);border-radius:3px;overflow:hidden;}
+.s-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--lavender3),var(--lavender-lt));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+
+/* EXPERIENCES */
+.xp-list{display:flex;flex-direction:column;gap:4px;}
+.xp-item{background:var(--white);border-radius:14px;border:1.5px solid rgba(91,107,191,0.09);overflow:hidden;transition:border-color .2s;}
+.xp-item:hover{border-color:rgba(91,107,191,0.25);}
+.xp-hdr{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;padding:clamp(17px,2vw,24px) clamp(20px,3vw,30px);cursor:pointer;transition:background .2s;min-height:52px;}
+.xp-item.open .xp-hdr{background:var(--lavender-dim);}
+.xp-badges{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.xp-type{font-size:0.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;padding:3px 10px;border-radius:4px;}
+.xp-type.cdi{background:var(--lavender3);}
+.xp-type.cdd{background:var(--lavender);}
+.xp-type.inter{background:#7c3aed;}
+.xp-type.ben{background:#059669;}
+.xp-date{font-size:clamp(0.68rem,1vw,0.74rem);font-weight:600;letter-spacing:.8px;color:var(--text3);}
+.xp-role{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,1.8vw,1.28rem);font-weight:700;color:var(--lavender3);line-height:1.15;}
+.xp-company{font-size:clamp(0.82rem,1.2vw,0.88rem);color:var(--text2);margin-top:3px;}
+.xp-toggle{width:36px;height:36px;flex-shrink:0;border-radius:8px;border:1.5px solid rgba(91,107,191,0.15);display:flex;align-items:center;justify-content:center;color:var(--lavender3);font-size:1.3rem;transition:all .3s;}
+.xp-item.open .xp-toggle{background:var(--lavender);color:#fff;border-color:var(--lavender);transform:rotate(45deg);}
+.xp-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);}
+.xp-item.open .xp-body{max-height:600px;}
+.xp-desc{padding:16px clamp(20px,3vw,30px) clamp(16px,2vw,24px);border-top:1px solid rgba(91,107,191,0.07);}
+.xp-desc ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.xp-desc li{font-size:clamp(0.88rem,1.2vw,0.94rem);color:var(--text2);line-height:1.75;padding-left:20px;position:relative;}
+.xp-desc li::before{content:'→';position:absolute;left:0;color:var(--lavender);font-size:.72rem;top:5px;}
+
+/* FORMATION */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(13px,2vw,18px);}
+.form-card{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:16px;padding:clamp(20px,3vw,28px);position:relative;overflow:hidden;transition:all .2s;}
+.form-card:hover{background:rgba(255,255,255,0.12);border-color:rgba(199,210,254,0.4);transform:translateY(-3px);}
+.form-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#c7d2fe,transparent);}
+.form-year{font-size:0.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#c7d2fe;margin-bottom:9px;}
+.form-degree{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.15rem);font-weight:700;color:#fff;line-height:1.3;margin-bottom:6px;}
+.form-school{font-size:clamp(0.8rem,1.2vw,0.86rem);color:rgba(255,255,255,0.45);line-height:1.5;}
+.form-badge{margin-top:10px;display:inline-block;background:rgba(199,210,254,0.12);border:1px solid rgba(199,210,254,0.3);padding:3px 10px;border-radius:4px;font-size:0.67rem;color:#c7d2fe;font-weight:700;letter-spacing:1px;}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:start;}
+.c-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:700;color:var(--text);line-height:.95;margin-bottom:20px;letter-spacing:-1px;}
+.c-heading em{font-style:italic;color:var(--lavender);display:block;}
+.c-sub{font-size:clamp(0.9rem,1.3vw,1rem);color:var(--text2);line-height:1.8;margin-bottom:24px;}
+.c-interests{display:flex;flex-wrap:wrap;gap:9px;}
+.c-pill{background:var(--white);border:1.5px solid rgba(91,107,191,0.1);padding:8px 16px;border-radius:100px;font-size:clamp(0.82rem,1.2vw,0.88rem);font-weight:500;color:var(--text);display:flex;align-items:center;gap:7px;transition:all .2s;}
+.c-pill:hover{border-color:var(--lavender);color:var(--lavender);}
+.c-cards{display:flex;flex-direction:column;gap:13px;}
+.c-card{background:var(--white);border-radius:14px;padding:clamp(15px,2vw,19px) clamp(18px,2.5vw,24px);display:flex;align-items:center;gap:15px;border:1.5px solid rgba(91,107,191,0.09);transition:all .2s;min-height:66px;}
+.c-card:hover{border-color:var(--lavender);transform:translateX(5px);box-shadow:0 4px 24px rgba(91,107,191,0.12);}
+.c-icon{width:42px;height:42px;border-radius:11px;flex-shrink:0;background:var(--lavender);display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+.c-lbl{font-size:0.65rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);}
+.c-val{font-size:clamp(0.88rem,1.3vw,0.96rem);font-weight:600;color:var(--text);margin-top:2px;}
+
+footer{background:linear-gradient(135deg,#2a3580,#3a4aaf);padding:clamp(22px,3vw,32px) clamp(24px,5vw,64px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.f-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.95rem,1.5vw,1.15rem);font-weight:700;color:rgba(255,255,255,0.65);}
+.f-name span{color:#c7d2fe;}
+.f-r{font-size:clamp(0.64rem,1vw,0.72rem);color:rgba(255,255,255,0.28);letter-spacing:1px;}
+
+/* VIDEO POPUP */
+.vid-popup-ov{position:fixed;inset:0;z-index:10000;background:rgba(5,8,30,0.96);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:20px;}
+.vid-popup-box{background:#0d1035;border-radius:20px;overflow:hidden;width:min(780px,96vw);border:1px solid rgba(165,180,252,0.2);box-shadow:0 40px 100px rgba(0,0,0,0.85);}
+.vid-popup-hdr{padding:clamp(16px,3vw,24px) clamp(20px,4vw,32px);background:linear-gradient(135deg,#0d1035,#2a3580);border-bottom:1px solid rgba(165,180,252,0.12);text-align:center;}
+.vid-popup-msg{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1rem,2.5vw,1.35rem);font-weight:800;color:#fff;line-height:1.4;margin-bottom:6px;}
+.vid-popup-msg span{color:#c7d2fe;}
+.vid-popup-sub{font-size:clamp(0.74rem,1.3vw,0.82rem);color:rgba(255,255,255,0.38);font-weight:500;}
+.vid-popup-footer{padding:clamp(16px,3vw,24px) clamp(20px,4vw,32px);text-align:center;background:#07091f;border-top:1px solid rgba(165,180,252,0.1);}
+.vid-popup-btn{background:#1e2a60;color:rgba(255,255,255,0.32);border:none;padding:clamp(13px,2vw,16px) clamp(28px,4vw,48px);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.88rem,1.5vw,1rem);font-weight:800;cursor:not-allowed;transition:all .4s;width:100%;max-width:400px;letter-spacing:.5px;}
+.vid-popup-btn.unlocked{background:linear-gradient(135deg,var(--lavender3),var(--lavender-lt));color:#fff;cursor:pointer;box-shadow:0 8px 32px rgba(91,107,191,0.5);}
+.vid-popup-btn.unlocked:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(91,107,191,0.65);}
+.vid-countdown{font-size:clamp(0.74rem,1.2vw,0.8rem);color:rgba(255,255,255,0.3);margin-top:10px;letter-spacing:.5px;min-height:20px;}
+.vid-countdown.done{color:#c7d2fe;font-weight:700;}
+
+/* SALES BANNER */
+.s-banner{position:fixed;top:0;left:0;right:0;z-index:9998;background:#0f2027;border-bottom:3px solid #c9a84c;display:none;}
+.s-banner-in{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,48px);height:64px;max-width:1400px;margin:0 auto;}
+.s-dot{width:8px;height:8px;border-radius:50%;background:#c9a84c;animation:dP 2s ease infinite;flex-shrink:0;}
+@keyframes dP{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.5)}}
+.s-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:600;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px;}
+.s-tag span{color:#c9a84c;}
+.s-btn{background:#c9a84c;color:#0f2027;border:none;padding:11px 28px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap;min-height:44px;}
+.s-btn:hover{background:#e0b84e;transform:translateY(-1px);}
+.s-banner-mob{display:none;}
+@media(max-width:768px){.s-banner-in{display:none;}.s-banner-mob{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;gap:12px;}.s-tag-sm{font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:600;color:rgba(255,255,255,.75);}.s-tag-sm span{color:#c9a84c;}.s-btn-sm{background:#c9a84c;color:#0f2027;border:none;padding:10px 18px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:800;cursor:pointer;white-space:nowrap;min-height:42px;}}
+.s-ov{display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
+.s-ov.open{display:flex;animation:sIn .3s ease;}
+@keyframes sIn{from{opacity:0}to{opacity:1}}
+.s-mod{background:#fff;border-radius:24px;overflow:hidden;width:min(560px,96vw);box-shadow:0 40px 100px rgba(0,0,0,.5);animation:smIn .35s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;}
+@keyframes smIn{from{transform:scale(.9) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.s-hdr{background:linear-gradient(135deg,#0f2027,#1a3040);padding:clamp(22px,4vw,30px);text-align:center;position:relative;}
+.s-cl{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.s-cl:hover{background:#c9a84c;color:#0f2027;}
+.s-badge{display:inline-block;background:#c9a84c;color:#0f2027;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:6px;margin-bottom:12px;font-family:'Plus Jakarta Sans',sans-serif;}
+.s-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.2rem,3vw,1.5rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;}
+.s-title span{color:#c9a84c;}
+.s-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.76rem,2vw,.82rem);color:rgba(255,255,255,.6);line-height:1.5;}
+.s-price{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;}
+.s-old{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;color:rgba(255,255,255,.28);text-decoration:line-through;}
+.s-new{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:900;color:#c9a84c;}
+.s-body{padding:clamp(18px,4vw,26px);}
+.s-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:22px;}
+.s-feat{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;border-radius:12px;background:#f9f9f9;border:1.5px solid #eee;}
+.s-feat:hover{border-color:rgba(201,168,76,.35);}
+.s-fi{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#0f2027,#1a3040);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.s-ft{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.84rem,2vw,.9rem);font-weight:700;color:#1a1a1a;margin-bottom:2px;}
+.s-fd{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.72rem,1.8vw,.76rem);color:#888;line-height:1.4;}
+.s-stripe{text-align:center;}
+.s-guar{margin-top:12px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;color:#aaa;}
+.s-guar span{color:#c9a84c;font-weight:600;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){#hero{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){#hero{grid-template-columns:1fr;}.hero-right{display:none;}.hero-left{min-height:calc(100vh - var(--nav-h));padding:clamp(36px,7vw,64px) clamp(24px,6vw,48px);}.contact-layout{grid-template-columns:1fr;}}
+@media(max-width:768px){.nav-links{display:none;}.nav-cta{display:none;}.nav-burger{display:flex;}.hero-ctas{flex-direction:column;}.btn-lav,.btn-ghost{width:100%;text-align:center;}footer{flex-direction:column;text-align:center;}}
+@media(max-width:480px){.comp-grid,.form-grid{grid-template-columns:1fr;}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- VIDEO POPUP -->
+<div class="vid-popup-ov" id="vidPopup">
+  <div class="vid-popup-box">
+    <div class="vid-popup-hdr">
+      <div class="vid-popup-msg">👋 Salut <span>Sandrine</span> !<br>Avant de découvrir ton nouveau CV, j'ai un message pour toi !</div>
+      <div class="vid-popup-sub">Regarde cette vidéo avant d'accéder à ton CV</div>
+    </div>
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/6kjqulcgbr.js" async type="module"></script>
+    <style>wistia-player[media-id='6kjqulcgbr']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/6kjqulcgbr/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
+    <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777"></wistia-player>
+    <div class="vid-popup-footer">
+      <button class="vid-popup-btn" id="vidBtn" disabled onclick="unlockCV()">Découvrir mon CV sur mesure</button>
+      <div class="vid-countdown" id="vidCountdown">Disponible dans <strong id="cdTimer">4:15</strong>...</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav" style="display:none">
+  <div class="nav-logo" onclick="goTo('hero')">Sandrine <span>L.</span></div>
+  <div class="nav-links">
+    <a href="#hero" onclick="nav(event,'hero')">Accueil</a>
+    <a href="#competences" onclick="nav(event,'competences')">Compétences</a>
+    <a href="#experiences" onclick="nav(event,'experiences')">Expériences</a>
+    <a href="#formation" onclick="nav(event,'formation')">Formation</a>
+    <a href="#contact" onclick="nav(event,'contact')">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="nav(null,'contact')">Me contacter</button>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="mNav('hero')">Accueil</a>
+  <a href="#competences" onclick="mNav('competences')">Compétences</a>
+  <a href="#experiences" onclick="mNav('experiences')">Expériences</a>
+  <a href="#formation" onclick="mNav('formation')">Formation</a>
+  <a href="#contact" onclick="mNav('contact')">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" style="scroll-margin-top:0;display:none">
+  <div id="heroGrid" style="display:grid;grid-template-columns:55fr 45fr;min-height:100vh;padding-top:var(--nav-h)">
+    <div class="hero-left">
+      <div class="hero-initials">SL</div>
+      <div class="hero-eyebrow">Gestionnaire de Paie · Ressources Humaines</div>
+      <h1 class="hero-name">Sandrine<br><em>Laperche</em></h1>
+      <div class="hero-role">Gestionnaire de paie ressources humaines</div>
+      <p class="hero-pitch">Professionnelle organisée et rigoureuse, je possède une bonne maîtrise des processus administratifs et sociaux, notamment dans la gestion des appels d'offres et la paie. Mon sens du détail et ma capacité à gérer plusieurs tâches simultanément me permettent d'apporter un soutien efficace.</p>
+      <div class="hero-dispo"><div class="dispo-dot"></div>Disponible · Titre Pro Gestionnaire de Paie Niv. V en cours</div>
+      <div class="hero-ctas">
+        <button class="btn-lav" onclick="nav(null,'experiences')">Voir mes expériences</button>
+        <button class="btn-ghost" onclick="nav(null,'contact')">Me contacter</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="fade-in">
+        <div class="h-label">Coordonnées</div>
+        <div class="h-items">
+          <div class="h-item"><div class="h-icon">✉️</div>sandrinelaperche28@gmail.com</div>
+          <div class="h-item"><div class="h-icon">📱</div>06 11 82 33 16</div>
+          <div class="h-item"><div class="h-icon">📍</div>1 Rue Allée Gérard Philipe · Saint-Germain-du-Puy (18390)</div>
+          <div class="h-item"><div class="h-icon">💼</div>linkedin.com/in/sandrine-laperche-4755</div>
+        </div>
+      </div>
+      <div class="hero-stats fade-in">
+        <div class="h-stat"><div class="h-stat-val">20+</div><div class="h-stat-lbl">ans d'expérience pro</div></div>
+        <div class="h-stat"><div class="h-stat-val">Paie</div><div class="h-stat-lbl">CI Gest · API Soft</div></div>
+        <div class="h-stat"><div class="h-stat-val">Niv.V</div><div class="h-stat-lbl">Titre Pro Gestionnaire Paie</div></div>
+        <div class="h-stat"><div class="h-stat-val">BTA</div><div class="h-stat-lbl">Services en Milieu Rural</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences" class="bg-white" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">02</div>
+    <h2 class="s-title">Mes <em>compétences</em></h2>
+    <div class="comp-grid">
+      <div class="comp-card fade-in">
+        <div class="comp-icon">💰</div>
+        <div class="comp-title">Gestion de la paie</div>
+        <div class="tags">
+          <span class="tag">Calcul des salaires</span>
+          <span class="tag">Éléments variables</span>
+          <span class="tag">Cotisations sociales</span>
+          <span class="tag">Bulletins de paie</span>
+          <span class="tag">Absences & congés</span>
+          <span class="tag">Primes</span>
+          <span class="tag">Heures travaillées</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">👥</div>
+        <div class="comp-title">Ressources Humaines</div>
+        <div class="tags">
+          <span class="tag">Dossiers salariés</span>
+          <span class="tag">Confidentialité</span>
+          <span class="tag">Procédures d'embauche</span>
+          <span class="tag">Variables de paie</span>
+          <span class="tag">Fin de carrière</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">💻</div>
+        <div class="comp-title">Informatique & Outils</div>
+        <div class="s-row"><div class="s-lr"><span>Pack Office (Word, Excel, PowerPoint)</span><span class="s-pct">90%</span></div><div class="s-track"><div class="s-fill" data-w="90%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>CI Gest (logiciel paie)</span><span class="s-pct">85%</span></div><div class="s-track"><div class="s-fill" data-w="85%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>API Soft</span><span class="s-pct">80%</span></div><div class="s-track"><div class="s-fill" data-w="80%"></div></div></div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">⭐</div>
+        <div class="comp-title">Atouts personnels</div>
+        <div class="tags">
+          <span class="tag">Rigueur</span>
+          <span class="tag">Adaptabilité</span>
+          <span class="tag">Discrétion</span>
+          <span class="tag">Organisation</span>
+          <span class="tag">Gestion multi-tâches</span>
+          <span class="tag">Sens du contact</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">03</div>
+    <h2 class="s-title">Expériences <em>professionnelles</em></h2>
+    <div class="xp-list">
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type cdd">CDD</span><span class="xp-date">Oct. 2025 → Mars 2026</span></div>
+            <div class="xp-role">Agent administratif</div>
+            <div class="xp-company">Lecomte SAS · Saint-Florent-sur-Cher</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Dossier d'appels d'offre : DC1, DC2, mémoire technique, mémoire environnemental, DOE, DC4, PPSPS</li>
+          <li>Saisie des heures</li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type cdd">CDD</span><span class="xp-date">Fév. 2025 → Mars 2025</span></div>
+            <div class="xp-role">Auditeur social</div>
+            <div class="xp-company">Cabinet CGR expertises · Saint-Doulchard</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Vérification des process d'embauche et bulletin de salaire</li>
+          <li>Traitement des variables de paie</li>
+          <li>Bases de calcul et indemnité de fin de carrière</li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type inter">Intérimaire</span><span class="xp-date">De 2022 à 2024</span></div>
+            <div class="xp-role">Veilleuse de nuit / Agent de service</div>
+            <div class="xp-company">Adapt · Bourges</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Surveillance nocturne et accompagnement des résidents</li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type inter">Intérimaire</span><span class="xp-date">De 2019 à 2022</span></div>
+            <div class="xp-role">Intérimaire polyvalente</div>
+            <div class="xp-company">Artus · Bourges — Missions inventoriste, veilleuse, auxiliaire de vie</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Missions d'inventaire en grande distribution</li>
+          <li>Veilleuse de nuit en établissement</li>
+          <li>Auxiliaire de vie auprès de personnes dépendantes</li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type cdi">CDI</span><span class="xp-date">De 2009 à 2012</span></div>
+            <div class="xp-role">Secrétaire polyvalente</div>
+            <div class="xp-company">Assistance Services · Bourges, Centre-Val de Loire</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Facturation et saisie des règlements</li>
+          <li>Suivi clients, gestion des contrats et prise de rendez-vous</li>
+          <li>Accueil téléphonique, commande, réception des marchandises</li>
+          <li>Relance clients et fournisseurs, gestion des litiges</li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type ben">Aide à domicile</span><span class="xp-date">2004–2005 · 2002–2004</span></div>
+            <div class="xp-role">Aide à domicile</div>
+            <div class="xp-company">ASSAD · Tours (2004-2005) · Entraide berruyère · Plaimpied-Givaudins (2002-2004)</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Aide à la personne, entretien du domicile, accompagnement</li>
+        </ul></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation" class="bg-lav" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">04</div>
+    <h2 class="s-title">Diplômes & <em>formation</em></h2>
+    <div class="form-grid">
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">Oct. 2024 → Mai 2025 · En cours</div>
+        <div class="form-degree">Titre Professionnel Gestionnaire de Paie Niveau V</div>
+        <div class="form-school">OSENGO · Bourges, Centre-Val de Loire</div>
+        <div class="form-badge">En cours</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">1999 → 2001</div>
+        <div class="form-degree">BTA Services en Milieu Rural (Niveau IV)</div>
+        <div class="form-school">LEPPA · Bengy-sur-Craon</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">1997 → 1999</div>
+        <div class="form-degree">BEPA Services aux Personnes</div>
+        <div class="form-school">LEPPA · Lignières</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="display:none">
+  <div class="wrap">
+    <div class="s-eye">05</div>
+    <h2 class="s-title">Me <em>contacter</em></h2>
+    <div class="contact-layout">
+      <div>
+        <div class="c-heading">Travaillons<br><em>ensemble</em></div>
+        <p class="c-sub">Professionnelle rigoureuse et discrète, je maîtrise les processus de paie et les outils RH. Disponible pour tout poste de gestionnaire de paie ou assistant(e) RH.</p>
+        <div class="c-interests">
+          <div class="c-pill">🧶 Crochet · Tricot · Broderie diamant · Perles</div>
+          <div class="c-pill">📚 Romans · Essais · Poésie · Théâtre</div>
+        </div>
+      </div>
+      <div class="c-cards fade-in">
+        <div class="c-card"><div class="c-icon">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">sandrinelaperche28@gmail.com</div></div></div>
+        <div class="c-card"><div class="c-icon">📱</div><div><div class="c-lbl">Téléphone</div><div class="c-val">06 11 82 33 16</div></div></div>
+        <div class="c-card"><div class="c-icon">📍</div><div><div class="c-lbl">Localisation</div><div class="c-val">Saint-Germain-du-Puy (18390)</div></div></div>
+        <div class="c-card"><div class="c-icon">💼</div><div><div class="c-lbl">LinkedIn</div><div class="c-val">linkedin.com/in/sandrine-laperche-4755</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="display:none" id="mainFooter">
+  <div class="f-name">Sandrine <span>Laperche</span></div>
+  <div class="f-r">Gestionnaire de Paie RH · Fait avec Claude ✦ MarketForge</div>
+</footer>
+
+<!-- SALES BANNER -->
+<div class="s-banner" id="sBanner">
+  <div class="s-banner-in">
+    <div class="s-tag"><div class="s-dot"></div>Transforme ton CV en <span>site web interactif</span></div>
+    <button class="s-btn" onclick="openSales()">✦ Découvrir mon offre</button>
+  </div>
+  <div class="s-banner-mob">
+    <div class="s-tag-sm">CV web <span>interactif</span></div>
+    <button class="s-btn-sm" onclick="openSales()">✦ Découvrir mon offre</button>
+  </div>
+</div>
+<div class="s-ov" id="sOv" onclick="if(event.target===this)closeSales()">
+  <div class="s-mod">
+    <div class="s-hdr">
+      <button class="s-cl" onclick="closeSales()">✕</button>
+      <div class="s-badge">✦ Offre exclusive</div>
+      <div class="s-title">Mon offre pour ton <span>CV interactif</span></div>
+      <div class="s-sub">Tout ce qu'il faut pour avoir un CV web qui impressionne les recruteurs</div>
+      <div class="s-price"><div class="s-old">197 €</div><div class="s-new"><sup>€</sup>97</div></div>
+    </div>
+    <div class="s-body">
+      <div class="s-feats">
+        <div class="s-feat"><div class="s-fi">💻</div><div><div class="s-ft">Ton CV interactif complet</div><div class="s-fd">Un site web CV sur-mesure, moderne et navigable</div></div></div>
+        <div class="s-feat"><div class="s-fi">🎓</div><div><div class="s-ft">Formation à l'installation</div><div class="s-fd">Tutoriel pas-à-pas pour héberger ton CV toi-même</div></div></div>
+        <div class="s-feat"><div class="s-fi">💬</div><div><div class="s-ft">SAV WhatsApp inclus</div><div class="s-fd">Accès direct — réponse sous 24h</div></div></div>
+      </div>
+      <div class="s-stripe">
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <stripe-buy-button buy-button-id="buy_btn_1TcL9kEPhm1snxO0TS5KO10a" publishable-key="pk_live_51I3KPJEPhm1snxO0QETpCk4qFkVTcmWrj5he23xv4y4ReTf6gaK1Mv9GPvgSrc1G0b1ovtNsrodN7x8eMzkX9bw200jAZxtEzh"></stripe-buy-button>
+      </div>
+      <div class="s-guar">🔒 Paiement sécurisé Stripe · <span>Satisfait ou remboursé 7 jours</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const TOTAL=255;let rem=TOTAL;
+  const btn=document.getElementById('vidBtn');
+  const cd=document.getElementById('vidCountdown');
+  const t=setInterval(()=>{rem--;const m=Math.floor(rem/60),s=rem%60;if(rem>0){document.getElementById('cdTimer').textContent=m+':'+(s<10?'0':'')+s;}else{clearInterval(t);btn.disabled=false;btn.classList.add('unlocked');cd.textContent='✦ Clique pour découvrir ton CV !';cd.classList.add('done');}},1000);
+})();
+function unlockCV(){
+  if(!document.getElementById('vidBtn').classList.contains('unlocked'))return;
+  document.getElementById('vidPopup').style.display='none';
+  document.getElementById('mainNav').style.display='flex';
+  document.getElementById('hero').style.display='block';
+  document.querySelectorAll('section:not(#hero)').forEach(s=>s.style.display='block');
+  document.getElementById('mainFooter').style.display='flex';
+  setTimeout(()=>{document.getElementById('sBanner').style.display='block';document.getElementById('mainNav').style.top='64px';},5*60*1000);
+  fixHero();
+}
+window.addEventListener('scroll',()=>{const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;document.getElementById('scrollBar').style.width=p+'%';updateNav();});
+function nav(e,id){if(e)e.preventDefault();document.getElementById('mobileMenu').classList.remove('open');if(id==='hero'){window.scrollTo({top:0,behavior:'smooth'});return;}const el=document.getElementById(id);if(!el)return;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-68,behavior:'smooth'});}
+function goTo(id){nav(null,id);}function mNav(id){nav(null,id);}
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+function updateNav(){const ids=['hero','competences','experiences','formation','contact'];let cur='hero';ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=96)cur=id;});document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));}
+function toggleXp(h){const item=h.parentElement;const was=item.classList.contains('open');document.querySelectorAll('.xp-item').forEach(x=>x.classList.remove('open'));if(!was)item.classList.add('open');}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.s-fill').forEach(b=>b.style.width=b.getAttribute('data-w'));}});},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+function openSales(){document.getElementById('sOv').classList.add('open');}
+function closeSales(){document.getElementById('sOv').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSales();});
+function fixHero(){const g=document.getElementById('heroGrid');if(!g)return;g.style.gridTemplateColumns=window.innerWidth<=900?'1fr':window.innerWidth<=1024?'1fr 1fr':'55fr 45fr';}
+window.addEventListener('resize',fixHero);
+</script>
+</body>
+</html>
