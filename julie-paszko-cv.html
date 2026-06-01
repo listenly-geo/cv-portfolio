@@ -279,28 +279,8 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="scroll-bar" id="scrollBar"></div>
 
-<!-- VIDEO POPUP -->
-<div class="vid-popup-ov" id="vidPopup">
-  <div class="vid-popup-box">
-    <div class="vid-popup-hdr">
-      <div class="vid-popup-msg">👋 Salut <span>Julie</span> !<br>Avant de découvrir ton nouveau CV, j'ai un message pour toi !</div>
-      <div class="vid-popup-sub">Regarde cette vidéo avant d'accéder à ton CV</div>
-    </div>
-    <script src="https://fast.wistia.com/player.js" async></script>
-    <script src="https://fast.wistia.com/embed/6kjqulcgbr.js" async type="module"></script>
-    <style>wistia-player[media-id='6kjqulcgbr']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/6kjqulcgbr/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
-    <div class="vid-popup-player-wrap">
-      <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777"></wistia-player>
-    </div>
-    <div class="vid-popup-footer">
-      <button class="vid-popup-btn" id="vidBtn" disabled onclick="unlockCV()">Découvrir mon CV sur mesure</button>
-      <div class="vid-countdown" id="vidCountdown">Disponible dans <strong id="cdTimer">4:15</strong>...</div>
-    </div>
-  </div>
-</div>
-
 <!-- NAV -->
-<nav id="mainNav" style="display:none">
+<nav id="mainNav">
   <div class="nav-logo" onclick="goTo('hero')">Julie <span>P.</span></div>
   <div class="nav-links">
     <a href="#hero" onclick="nav(event,'hero')">Accueil</a>
@@ -321,7 +301,7 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
 </div>
 
 <!-- HERO -->
-<section id="hero" style="scroll-margin-top:0;display:none">
+<section id="hero" style="scroll-margin-top:0">
   <div id="heroGrid" style="display:grid;grid-template-columns:55fr 45fr;min-height:100vh;padding-top:var(--nav-h)">
     <div class="hero-left">
       <div class="hero-photo">
@@ -356,7 +336,7 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
 </section>
 
 <!-- COMPETENCES -->
-<section id="competences" class="bg-white" style="display:none">
+<section id="competences" class="bg-white">
   <div class="wrap">
     <div class="s-eye reveal">02</div>
     <h2 class="s-title reveal">Mes <em>compétences</em></h2>
@@ -412,7 +392,7 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
 </section>
 
 <!-- EXPERIENCES -->
-<section id="experiences" style="display:none">
+<section id="experiences">
   <div class="wrap">
     <div class="s-eye reveal">03</div>
     <h2 class="s-title reveal">Expériences <em>professionnelles</em></h2>
@@ -558,7 +538,7 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
 </section>
 
 <!-- FORMATION -->
-<section id="formation" class="bg-warm" style="display:none">
+<section id="formation" class="bg-warm">
   <div class="wrap">
     <div class="s-eye reveal">04</div>
     <h2 class="s-title reveal">Ma <em>formation</em></h2>
@@ -586,7 +566,7 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
 </section>
 
 <!-- CONTACT -->
-<section id="contact" style="display:none">
+<section id="contact">
   <div class="wrap">
     <div class="s-eye reveal">05</div>
     <h2 class="s-title reveal">Me <em>contacter</em></h2>
@@ -612,7 +592,7 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
   </div>
 </section>
 
-<footer style="display:none" id="mainFooter">
+<footer id="mainFooter">
   <div class="f-name">Julie <span>Paszko</span></div>
   <div class="f-r">Game Master · Service Client · Fait avec Claude ✦ MarketForge</div>
 </footer>
@@ -648,20 +628,7 @@ footer{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:cl
   },1000);
 })();
 
-function unlockCV(){
-  if(!document.getElementById('vidBtn').classList.contains('unlocked'))return;
-  document.getElementById('vidPopup').style.display='none';
-  document.getElementById('mainNav').style.display='flex';
-  document.getElementById('hero').style.display='block';
-  document.querySelectorAll('section:not(#hero)').forEach(s=>s.style.display='block');
-  document.getElementById('mainFooter').style.display='flex';
-  initPage();
-  setTimeout(()=>{
-    document.getElementById('sBanner').style.display='block';
-    document.getElementById('mainNav').style.top='64px';
-  },5*60*1000);
-  fixHero();
-}
+function unlockCV(){}
 
 function initPage(){
   // LOADER
@@ -740,6 +707,67 @@ function fixHero(){
   g.style.gridTemplateColumns=window.innerWidth<=900?'1fr':window.innerWidth<=1024?'1fr 1fr':'55fr 45fr';
 }
 window.addEventListener('resize',fixHero);
+window.addEventListener('DOMContentLoaded',()=>{initPage();fixHero();setTimeout(()=>{document.getElementById('sBanner').style.display='block';},5*60*1000);});
 </script>
+
+<!-- FLOATING VIDEO BUBBLE -->
+<style>
+@keyframes bubbleFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.01)}}
+@keyframes bubbleGlow{0%,100%{box-shadow:0 8px 36px rgba(181,150,122,0.6),0 0 0 3px rgba(181,150,122,0.2)}50%{box-shadow:0 16px 52px rgba(181,150,122,0.9),0 0 0 6px rgba(181,150,122,0.1)}}
+@keyframes bubblePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.85;transform:scale(1.02)}}
+.vid-bubble{position:fixed;bottom:24px;left:20px;z-index:9000;width:clamp(180px,20vw,240px);border-radius:20px;overflow:hidden;cursor:pointer;border:2px solid rgba(181,150,122,0.5);background:var(--cream2);animation:bubbleFloat 3.5s ease-in-out infinite,bubbleGlow 3.5s ease-in-out infinite;transition:transform .2s;}
+.vid-bubble:hover{animation:none;transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(181,150,122,0.8);}
+.vid-bubble-video{width:100%;aspect-ratio:16/9;background:#2e1e0e;position:relative;overflow:hidden;}
+.vid-bubble-bar{background:linear-gradient(135deg,var(--taupe3),var(--taupe2));padding:10px 14px;text-align:center;}
+.vid-bubble-txt{font-family:'Playfair Display',serif;font-size:clamp(0.82rem,1.8vw,0.92rem);font-weight:700;font-style:italic;color:#fff;line-height:1.3;animation:bubblePulse 2.5s ease-in-out infinite;}
+.vid-bubble-sub{font-size:clamp(0.64rem,1.2vw,0.7rem);color:rgba(255,255,255,0.65);margin-top:3px;}
+.vid-bubble-close{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,0.4);border:none;color:#fff;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;opacity:0;transition:opacity .2s;}
+.vid-bubble:hover .vid-bubble-close{opacity:1;}
+/* Full video overlay */
+.vid-full-ov{display:none;position:fixed;inset:0;z-index:10000;background:rgba(20,12,6,0.94);backdrop-filter:blur(14px);align-items:center;justify-content:center;padding:20px;}
+.vid-full-ov.open{display:flex;animation:vIn .25s ease;}
+@keyframes vIn{from{opacity:0}to{opacity:1}}
+.vid-full-mod{background:#1a1008;border-radius:20px;overflow:hidden;width:min(820px,96vw);border:1px solid rgba(181,150,122,0.2);}
+.vid-full-hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;background:linear-gradient(135deg,#1a1008,#2e1e0e);border-bottom:1px solid rgba(181,150,122,0.1);}
+.vid-full-ttl{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;font-style:italic;color:#fff;}
+.vid-full-ttl span{color:var(--taupe-lt);}
+.vid-full-cl{width:34px;height:34px;border-radius:50%;background:rgba(181,150,122,0.2);border:none;color:#fff;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.vid-full-cl:hover{background:var(--taupe3);}
+.vid-full-body{padding:14px;}
+</style>
+
+<div class="vid-bubble" id="vidBubble" onclick="openVid()">
+  <button class="vid-bubble-close" onclick="event.stopPropagation();closeBubble()">✕</button>
+  <div class="vid-bubble-video">
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/6kjqulcgbr.js" async type="module"></script>
+    <style>wistia-player[media-id='6kjqulcgbr']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/6kjqulcgbr/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
+    <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777" playback-rate-control="false" play-bar="false" volume-control="false" fullscreen-button="false" playsinline muted></wistia-player>
+  </div>
+  <div class="vid-bubble-bar">
+    <div class="vid-bubble-txt">👋 Julie, j'ai un message pour toi !</div>
+    <div class="vid-bubble-sub">Clique pour regarder ▶</div>
+  </div>
+</div>
+
+<div class="vid-full-ov" id="vidFullOv" onclick="if(event.target===this)closeVid()">
+  <div class="vid-full-mod">
+    <div class="vid-full-hdr">
+      <div class="vid-full-ttl">👋 <span>Julie</span>, j'ai un message pour toi !</div>
+      <button class="vid-full-cl" onclick="closeVid()">✕</button>
+    </div>
+    <div class="vid-full-body">
+      <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777"></wistia-player>
+    </div>
+  </div>
+</div>
+
+<script>
+function openVid(){document.getElementById('vidFullOv').classList.add('open');}
+function closeVid(){document.getElementById('vidFullOv').classList.remove('open');}
+function closeBubble(){document.getElementById('vidBubble').style.display='none';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVid();});
+</script>
+
 </body>
 </html>
