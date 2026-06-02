@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jorinda Palmiste — Bachelor Marketing Digital & E-commerce · Alternance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --terra:#c0552a;--terra2:#a8461e;--terra3:#8a3515;
+  --terra-dim:rgba(192,85,42,0.09);--terra-lt:#d4734f;
+  --dark:#1a1210;--dark2:#2e201a;
+  --cream:#fdf9f7;--cream2:#f7f0eb;--cream3:#f0e6de;--white:#ffffff;
+  --text:#1a1210;--text2:#4a3028;--text3:#9a7868;
+  --nav-h:68px;--max-w:1200px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--terra3),var(--terra-lt));z-index:9999;width:0;transition:width .08s;}
+
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:500;background:rgba(253,249,247,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(192,85,42,0.1);display:flex;align-items:center;padding:0 clamp(20px,5vw,64px);justify-content:space-between;gap:20px;transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 24px rgba(138,53,21,0.08);}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:clamp(1.2rem,2.5vw,1.6rem);color:var(--terra3);cursor:pointer;white-space:nowrap;}
+.nav-links{display:flex;gap:clamp(8px,2vw,28px);align-items:center;}
+.nav-links a{text-decoration:none;font-size:clamp(0.64rem,1.1vw,0.74rem);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);padding:6px 0;position:relative;transition:color .25s;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--terra);transition:width .3s ease;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a:hover,.nav-links a.active{color:var(--terra3);}
+.nav-cta{background:var(--terra);color:#fff;border:none;padding:9px 22px;border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.64rem,1.1vw,0.74rem);font-weight:700;cursor:pointer;white-space:nowrap;transition:all .25s;min-height:40px;}
+.nav-cta:hover{background:var(--terra2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(192,85,42,0.25);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.nav-burger span{width:22px;height:1.5px;background:var(--terra);border-radius:2px;}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--white);z-index:499;border-bottom:2px solid var(--terra);flex-direction:column;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{text-decoration:none;font-size:.88rem;font-weight:700;color:var(--text);padding:14px 24px;border-bottom:1px solid rgba(192,85,42,0.08);text-transform:uppercase;letter-spacing:.5px;}
+.mobile-menu a:hover{color:var(--terra);background:var(--terra-dim);}
+
+/* HERO */
+#hero{min-height:100vh;padding-top:var(--nav-h);display:grid;grid-template-columns:55fr 45fr;}
+.hero-left{background:linear-gradient(155deg,var(--terra3) 0%,var(--terra2) 55%,var(--terra) 100%);padding:clamp(52px,7vw,96px) clamp(36px,6vw,76px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+.hero-left::before{content:'';position:absolute;top:-100px;right:-100px;width:440px;height:440px;background:radial-gradient(circle,rgba(255,255,255,0.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-left::after{content:'';position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+
+.hero-script{font-family:'Dancing Script',cursive;font-size:clamp(2.6rem,5vw,5.5rem);color:#fff;line-height:1;margin-bottom:4px;position:relative;z-index:1;}
+.hero-script em{color:rgba(255,255,255,0.75);}
+.hero-eyebrow{font-size:clamp(0.62rem,1vw,0.72rem);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:clamp(20px,3vw,32px);position:relative;z-index:1;}
+.hero-pitch{font-size:clamp(0.88rem,1.3vw,1rem);color:rgba(255,255,255,0.6);line-height:1.8;max-width:480px;position:relative;z-index:1;border-left:2px solid rgba(255,255,255,0.2);padding-left:18px;font-style:italic;}
+.hero-pitch strong{color:#fff;font-style:normal;font-weight:700;}
+.hero-dispo{margin-top:clamp(16px,2vw,26px);display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);padding:10px 18px;border-radius:100px;font-size:clamp(0.76rem,1.1vw,0.84rem);color:rgba(255,255,255,0.85);font-weight:600;width:fit-content;position:relative;z-index:1;backdrop-filter:blur(8px);}
+.dispo-dot{width:6px;height:6px;border-radius:50%;background:#ffd4b8;box-shadow:0 0 6px #ffd4b8;animation:bl 2s infinite;flex-shrink:0;}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-ctas{margin-top:clamp(26px,3.5vw,42px);display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-white{background:#fff;color:var(--terra3);border:none;padding:clamp(12px,1.5vw,15px) clamp(24px,3vw,36px);border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.82rem,1.2vw,0.9rem);font-weight:700;cursor:pointer;min-height:48px;transition:all .3s;box-shadow:0 4px 20px rgba(0,0,0,0.12);}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.18);}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.35);padding:clamp(10px,1.5vw,13px) clamp(22px,3vw,32px);border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.82rem,1.2vw,0.9rem);font-weight:600;cursor:pointer;transition:all .3s;min-height:48px;}
+.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.6);}
+
+.hero-right{background:var(--cream2);padding:clamp(52px,7vw,96px) clamp(32px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,4vw,44px);}
+.h-label{font-size:0.66rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--terra);margin-bottom:14px;}
+.h-items{display:flex;flex-direction:column;gap:11px;}
+.h-item{display:flex;align-items:center;gap:13px;font-size:clamp(0.86rem,1.3vw,0.96rem);color:var(--text);line-height:1.4;font-weight:500;transition:transform .2s;}
+.h-item:hover{transform:translateX(3px);}
+.h-icon{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:var(--terra3);display:flex;align-items:center;justify-content:center;font-size:.84rem;}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.h-stat{background:var(--white);border-radius:14px;padding:clamp(14px,2vw,20px);border:1.5px solid rgba(192,85,42,0.1);transition:all .3s;}
+.h-stat:hover{border-color:var(--terra);transform:translateY(-3px);box-shadow:0 8px 24px rgba(192,85,42,0.1);}
+.h-stat-val{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;font-style:italic;color:var(--terra3);line-height:1;}
+.h-stat-lbl{font-size:clamp(0.66rem,1vw,0.72rem);font-weight:600;color:var(--text3);margin-top:4px;line-height:1.3;}
+
+/* SECTIONS */
+section{scroll-margin-top:var(--nav-h);}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:clamp(80px,9vw,120px) clamp(24px,5vw,64px);}
+.s-eye{font-size:0.64rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--terra);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.s-eye::after{content:'';width:44px;height:1px;background:var(--terra);}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;font-style:italic;color:var(--text);line-height:1;margin-bottom:clamp(40px,6vw,64px);}
+.bg-white{background:var(--white);}
+.bg-terra{background:linear-gradient(155deg,var(--terra3) 0%,var(--terra2) 100%);}
+.bg-terra .s-eye{color:rgba(255,255,255,0.4);}
+.bg-terra .s-eye::after{background:rgba(255,255,255,0.18);}
+.bg-terra .s-title{color:#fff;}
+
+/* COMPETENCES */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(13px,2.5vw,20px);}
+.comp-card{background:var(--cream2);border-radius:18px;padding:clamp(20px,3vw,28px);border:1.5px solid rgba(192,85,42,0.09);transition:all .3s;position:relative;overflow:hidden;}
+.comp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--terra3),var(--terra-lt));transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+.comp-card:hover::before{transform:scaleX(1);}
+.comp-card:hover{transform:translateY(-4px);box-shadow:0 18px 52px rgba(192,85,42,0.1);border-color:rgba(192,85,42,0.22);}
+.comp-icon{font-size:1.7rem;margin-bottom:12px;}
+.comp-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.6vw,1.12rem);font-weight:700;font-style:italic;color:var(--terra3);margin-bottom:14px;}
+.tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:var(--white);border:1.5px solid rgba(192,85,42,0.12);padding:5px 12px;border-radius:100px;font-size:clamp(0.74rem,1.1vw,0.8rem);color:var(--text);font-weight:500;transition:all .2s;}
+.tag:hover{border-color:var(--terra);color:var(--terra3);background:var(--terra-dim);transform:translateY(-1px);}
+.s-row{margin-bottom:14px;}
+.s-lr{display:flex;justify-content:space-between;font-size:clamp(0.86rem,1.2vw,0.92rem);font-weight:600;color:var(--text);margin-bottom:6px;}
+.s-pct{font-size:0.72rem;color:var(--terra);font-weight:800;}
+.s-track{height:3px;background:rgba(192,85,42,0.1);border-radius:2px;overflow:hidden;}
+.s-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--terra3),var(--terra-lt));width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
+
+/* EXPERIENCES — timeline */
+.xp-timeline{display:flex;flex-direction:column;position:relative;}
+.xp-timeline::before{content:'';position:absolute;left:18px;top:8px;bottom:8px;width:1.5px;background:linear-gradient(to bottom,var(--terra),rgba(192,85,42,0.1));z-index:0;}
+.xp-item{background:var(--white);border-radius:14px;border:1.5px solid rgba(192,85,42,0.09);overflow:hidden;transition:all .3s;margin-bottom:10px;margin-left:48px;position:relative;}
+.xp-item::before{content:'';position:absolute;left:-38px;top:24px;width:10px;height:10px;border-radius:50%;background:var(--terra);border:2px solid var(--cream);box-shadow:0 0 0 3px rgba(192,85,42,0.2);z-index:1;transition:all .3s;}
+.xp-item:hover{border-color:rgba(192,85,42,0.25);transform:translateX(4px);box-shadow:0 8px 28px rgba(192,85,42,0.08);}
+.xp-item:hover::before{transform:scale(1.4);background:var(--terra3);}
+.xp-hdr{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:clamp(15px,2vw,20px) clamp(18px,3vw,26px);cursor:pointer;transition:background .2s;}
+.xp-item.open .xp-hdr{background:var(--terra-dim);}
+.xp-badges{display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap;}
+.xp-type{font-size:0.58rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;padding:2px 9px;border-radius:100px;background:var(--terra3);}
+.xp-type.stage{background:var(--terra);}
+.xp-type.admin{background:var(--dark2);}
+.xp-date{font-size:clamp(0.64rem,1vw,0.7rem);font-weight:600;letter-spacing:.8px;color:var(--text3);}
+.xp-role{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.18rem);font-weight:700;font-style:italic;color:var(--terra3);line-height:1.2;}
+.xp-company{font-size:clamp(0.78rem,1.2vw,0.84rem);color:var(--text2);margin-top:2px;}
+.xp-toggle{width:32px;height:32px;flex-shrink:0;border-radius:50%;border:1.5px solid rgba(192,85,42,0.2);display:flex;align-items:center;justify-content:center;color:var(--terra3);font-size:1.1rem;transition:all .3s;}
+.xp-item.open .xp-toggle{background:var(--terra);color:#fff;border-color:var(--terra);transform:rotate(45deg);}
+.xp-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
+.xp-item.open .xp-body{max-height:600px;}
+.xp-desc{padding:12px clamp(18px,3vw,26px) clamp(12px,2vw,20px);border-top:1px solid rgba(192,85,42,0.07);}
+.xp-desc ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.xp-desc li{font-size:clamp(0.86rem,1.2vw,0.92rem);color:var(--text2);line-height:1.75;padding-left:18px;position:relative;}
+.xp-desc li::before{content:'→';position:absolute;left:0;color:var(--terra);font-size:.68rem;top:5px;}
+.xp-kpi{display:inline-flex;align-items:center;gap:6px;background:rgba(192,85,42,0.08);border:1px solid rgba(192,85,42,0.2);padding:2px 10px;border-radius:100px;font-size:.72rem;color:var(--terra3);font-weight:700;margin-left:6px;}
+
+/* FORMATION */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(12px,2vw,16px);}
+.form-card{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:16px;padding:clamp(18px,3vw,26px);position:relative;overflow:hidden;transition:all .3s;}
+.form-card:hover{background:rgba(255,255,255,0.13);border-color:rgba(255,255,255,0.26);transform:translateY(-3px);}
+.form-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,200,170,0.8),transparent);}
+.form-year{font-size:0.66rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,200,170,0.8);margin-bottom:8px;}
+.form-degree{font-family:'Cormorant Garamond',serif;font-size:clamp(0.98rem,1.8vw,1.12rem);font-weight:700;font-style:italic;color:#fff;line-height:1.3;margin-bottom:5px;}
+.form-school{font-size:clamp(0.76rem,1.2vw,0.82rem);color:rgba(255,255,255,0.48);line-height:1.5;}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:start;}
+.c-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:700;font-style:italic;color:var(--text);line-height:.95;margin-bottom:20px;}
+.c-sub{font-size:clamp(0.88rem,1.3vw,0.98rem);color:var(--text2);line-height:1.8;margin-bottom:22px;}
+.c-interests{display:flex;flex-wrap:wrap;gap:8px;}
+.c-pill{background:var(--white);border:1.5px solid rgba(192,85,42,0.12);padding:7px 15px;border-radius:100px;font-size:clamp(0.8rem,1.2vw,0.86rem);font-weight:500;color:var(--text);transition:all .22s;}
+.c-pill:hover{border-color:var(--terra);color:var(--terra3);transform:translateY(-1px);}
+.c-cards{display:flex;flex-direction:column;gap:11px;}
+.c-card{background:var(--white);border-radius:14px;padding:clamp(13px,2vw,17px) clamp(15px,2.5vw,21px);display:flex;align-items:center;gap:13px;border:1.5px solid rgba(192,85,42,0.09);transition:all .3s;min-height:62px;}
+.c-card:hover{border-color:var(--terra);transform:translateX(5px);box-shadow:0 6px 24px rgba(192,85,42,0.09);}
+.c-icon{width:38px;height:38px;border-radius:11px;flex-shrink:0;background:var(--terra3);display:flex;align-items:center;justify-content:center;font-size:.86rem;}
+.c-lbl{font-size:0.62rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);}
+.c-val{font-size:clamp(0.84rem,1.3vw,0.92rem);font-weight:600;color:var(--text);margin-top:2px;}
+
+footer{background:linear-gradient(135deg,var(--terra3),var(--terra2));padding:clamp(20px,3vw,28px) clamp(24px,5vw,64px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.f-name{font-family:'Dancing Script',cursive;font-size:clamp(1rem,2vw,1.3rem);color:rgba(255,255,255,0.7);}
+.f-r{font-size:clamp(0.6rem,1vw,0.68rem);color:rgba(255,255,255,0.3);letter-spacing:1px;}
+
+/* VIDEO BUBBLE */
+@keyframes bFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes bGlow{0%,100%{box-shadow:0 8px 32px rgba(192,85,42,0.5),0 0 0 2px rgba(192,85,42,0.2)}50%{box-shadow:0 16px 48px rgba(192,85,42,0.75),0 0 0 4px rgba(192,85,42,0.1)}}
+.vid-bubble{position:fixed;bottom:24px;left:20px;z-index:9000;width:clamp(176px,19vw,232px);border-radius:18px;overflow:hidden;cursor:pointer;border:2px solid rgba(192,85,42,0.4);background:var(--cream2);animation:bFloat 3.5s ease-in-out infinite,bGlow 3.5s ease-in-out infinite;}
+.vid-bubble:hover{animation:none;transform:translateY(-5px) scale(1.02);box-shadow:0 24px 56px rgba(192,85,42,0.65);}
+.vid-bubble-video{width:100%;aspect-ratio:16/9;background:#2e1208;overflow:hidden;}
+.vid-bubble-bar{background:linear-gradient(135deg,var(--terra3),var(--terra2));padding:10px 13px;text-align:center;}
+.vid-bubble-txt{font-family:'Dancing Script',cursive;font-size:clamp(0.9rem,1.8vw,1rem);color:#fff;line-height:1.3;}
+.vid-bubble-sub{font-size:clamp(0.62rem,1.2vw,0.68rem);color:rgba(255,255,255,0.6);margin-top:2px;}
+.vid-bubble-close{position:absolute;top:7px;right:7px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.35);border:none;color:#fff;font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;opacity:0;transition:opacity .2s;}
+.vid-bubble:hover .vid-bubble-close{opacity:1;}
+.vid-full-ov{display:none;position:fixed;inset:0;z-index:10000;background:rgba(20,8,4,0.94);backdrop-filter:blur(14px);align-items:center;justify-content:center;padding:20px;}
+.vid-full-ov.open{display:flex;animation:vIn .25s ease;}
+@keyframes vIn{from{opacity:0}to{opacity:1}}
+.vid-full-mod{background:#1a0804;border-radius:20px;overflow:hidden;width:min(820px,96vw);border:1px solid rgba(192,85,42,0.2);}
+.vid-full-hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;background:linear-gradient(135deg,#1a0804,#2e1208);border-bottom:1px solid rgba(192,85,42,0.1);}
+.vid-full-ttl{font-family:'Dancing Script',cursive;font-size:1.2rem;color:#fff;}
+.vid-full-ttl span{color:var(--terra-lt);}
+.vid-full-cl{width:32px;height:32px;border-radius:50%;background:rgba(192,85,42,0.2);border:none;color:#fff;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.vid-full-cl:hover{background:var(--terra);}
+.vid-full-body{padding:14px;}
+
+/* SALES */
+.s-banner{position:fixed;top:0;left:0;right:0;z-index:9998;background:#0f2027;border-bottom:3px solid #c9a84c;display:none;}
+.s-banner-in{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,48px);height:64px;max-width:1400px;margin:0 auto;}
+.s-dot{width:8px;height:8px;border-radius:50%;background:#c9a84c;animation:dP 2s ease infinite;flex-shrink:0;}
+@keyframes dP{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.5)}}
+.s-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:600;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px;}
+.s-tag span{color:#c9a84c;}
+.s-btn{background:#c9a84c;color:#0f2027;border:none;padding:11px 28px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap;min-height:44px;}
+.s-btn:hover{background:#e0b84e;transform:translateY(-1px);}
+.s-banner-mob{display:none;}
+@media(max-width:768px){.s-banner-in{display:none;}.s-banner-mob{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;gap:12px;}.s-tag-sm{font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:600;color:rgba(255,255,255,.75);}.s-tag-sm span{color:#c9a84c;}.s-btn-sm{background:#c9a84c;color:#0f2027;border:none;padding:10px 18px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:800;cursor:pointer;white-space:nowrap;min-height:42px;}}
+.s-ov{display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
+.s-ov.open{display:flex;animation:sIn .3s ease;}
+@keyframes sIn{from{opacity:0}to{opacity:1}}
+.s-mod{background:#fff;border-radius:24px;overflow:hidden;width:min(560px,96vw);box-shadow:0 40px 100px rgba(0,0,0,.5);animation:smIn .35s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;}
+@keyframes smIn{from{transform:scale(.9) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.s-hdr{background:linear-gradient(135deg,#0f2027,#1a3040);padding:clamp(22px,4vw,30px);text-align:center;position:relative;}
+.s-cl{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.s-cl:hover{background:#c9a84c;color:#0f2027;}
+.s-badge{display:inline-block;background:#c9a84c;color:#0f2027;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:6px;margin-bottom:12px;font-family:'Plus Jakarta Sans',sans-serif;}
+.s-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.2rem,3vw,1.5rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;}
+.s-title span{color:#c9a84c;}
+.s-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.76rem,2vw,.82rem);color:rgba(255,255,255,.6);line-height:1.5;}
+.s-price{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;}
+.s-old{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;color:rgba(255,255,255,.28);text-decoration:line-through;}
+.s-new{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:900;color:#c9a84c;}
+.s-body{padding:clamp(18px,4vw,26px);}
+.s-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:22px;}
+.s-feat{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;border-radius:12px;background:#f9f9f9;border:1.5px solid #eee;}
+.s-feat:hover{border-color:rgba(201,168,76,.35);}
+.s-fi{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#0f2027,#1a3040);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.s-ft{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.84rem,2vw,.9rem);font-weight:700;color:#1a1a1a;margin-bottom:2px;}
+.s-fd{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.72rem,1.8vw,.76rem);color:#888;line-height:1.4;}
+.s-stripe{text-align:center;}
+.s-guar{margin-top:12px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;color:#aaa;}
+.s-guar span{color:#c9a84c;font-weight:600;}
+
+@media(max-width:1024px){#hero{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{min-height:calc(100vh - var(--nav-h));padding:clamp(36px,7vw,64px) clamp(24px,6vw,48px);}
+  .contact-layout{grid-template-columns:1fr;}
+  .xp-timeline::before,.xp-item::before{display:none;}
+  .xp-item{margin-left:0;}
+}
+@media(max-width:768px){.nav-links,.nav-cta{display:none;}.nav-burger{display:flex;}.hero-ctas{flex-direction:column;}.btn-white,.btn-outline{width:100%;text-align:center;}footer{flex-direction:column;text-align:center;}}
+@media(max-width:480px){.comp-grid,.form-grid{grid-template-columns:1fr;}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<nav id="mainNav">
+  <div class="nav-logo" onclick="goTo('hero')">Jorinda Palmiste</div>
+  <div class="nav-links">
+    <a href="#hero" onclick="nav(event,'hero')">Accueil</a>
+    <a href="#competences" onclick="nav(event,'competences')">Compétences</a>
+    <a href="#experiences" onclick="nav(event,'experiences')">Expériences</a>
+    <a href="#formation" onclick="nav(event,'formation')">Formation</a>
+    <a href="#contact" onclick="nav(event,'contact')">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="nav(null,'contact')">Me contacter</button>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="mNav('hero')">Accueil</a>
+  <a href="#competences" onclick="mNav('competences')">Compétences</a>
+  <a href="#experiences" onclick="mNav('experiences')">Expériences</a>
+  <a href="#formation" onclick="mNav('formation')">Formation</a>
+  <a href="#contact" onclick="mNav('contact')">Contact</a>
+</div>
+
+<section id="hero" style="scroll-margin-top:0">
+  <div id="heroGrid" style="display:grid;grid-template-columns:55fr 45fr;min-height:100vh;padding-top:var(--nav-h)">
+    <div class="hero-left">
+      <div class="hero-script">Jorinda<em>Palmiste</em></div>
+      <div class="hero-eyebrow">Bachelor Marketing Digital & E-commerce · Alternance</div>
+      <p class="hero-pitch">"Passionnée par les enjeux du Marketing Digital et de l'E-commerce, je recherche une alternance dynamique pour mon Bachelor. <strong>Motivée et rigoureuse</strong>, j'aspire à mettre à profit mes compétences en analyse de données et en développement commercial pour générer un impact concret au sein de votre équipe."</p>
+      <div class="hero-dispo"><div class="dispo-dot"></div>Recherche alternance · Normandie</div>
+      <div class="hero-ctas">
+        <button class="btn-white" onclick="nav(null,'experiences')">Voir mes expériences</button>
+        <button class="btn-outline" onclick="nav(null,'contact')">Me contacter</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="fade-in">
+        <div class="h-label">Coordonnées</div>
+        <div class="h-items">
+          <div class="h-item"><div class="h-icon">📍</div>Normandie</div>
+          <div class="h-item"><div class="h-icon">✉️</div>palmistejorinda0@gmail.com</div>
+          <div class="h-item"><div class="h-icon">📱</div>0769061726</div>
+          <div class="h-item"><div class="h-icon">💼</div>linkedin.com/in/jorinda-palmiste-84779a261</div>
+        </div>
+      </div>
+      <div class="hero-stats fade-in">
+        <div class="h-stat"><div class="h-stat-val">Bach.</div><div class="h-stat-lbl">Marketing Digital & E-commerce</div></div>
+        <div class="h-stat"><div class="h-stat-val">+17%</div><div class="h-stat-lbl">Ventes e-commerce optimisées</div></div>
+        <div class="h-stat"><div class="h-stat-val">BTS</div><div class="h-stat-lbl">Gestion de la PME</div></div>
+        <div class="h-stat"><div class="h-stat-val">95%</div><div class="h-stat-lbl">Objectif vente atteint</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competences" class="bg-white">
+  <div class="wrap">
+    <div class="s-eye fade-in">02</div>
+    <h2 class="s-title fade-in">Mes <em>compétences</em></h2>
+    <div class="comp-grid">
+      <div class="comp-card fade-in">
+        <div class="comp-icon">📊</div>
+        <div class="comp-title">Marketing Digital & E-commerce</div>
+        <div class="s-row"><div class="s-lr"><span>Optimisation E-commerce</span><span class="s-pct">88%</span></div><div class="s-track"><div class="s-fill" data-w="88%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>Analyse de performance (KPI, trafic)</span><span class="s-pct">85%</span></div><div class="s-track"><div class="s-fill" data-w="85%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>CRM & veille concurrentielle</span><span class="s-pct">80%</span></div><div class="s-track"><div class="s-fill" data-w="80%"></div></div></div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">🤝</div>
+        <div class="comp-title">Vente & Relation Client</div>
+        <div class="tags">
+          <span class="tag">Conseil & vente active</span>
+          <span class="tag">Négociation</span>
+          <span class="tag">GRC (accueil & encaissement)</span>
+          <span class="tag">50 clients/jour</span>
+          <span class="tag">Démarchage téléphonique & physique</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">💻</div>
+        <div class="comp-title">Outils & Logiciels</div>
+        <div class="tags">
+          <span class="tag">Excel / XLS</span>
+          <span class="tag">Canva</span>
+          <span class="tag">Word</span>
+          <span class="tag">CRM</span>
+          <span class="tag">Gestion bases de données</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">⭐</div>
+        <div class="comp-title">Langues & Soft skills</div>
+        <div class="tags">
+          <span class="tag">🇫🇷 Français natif</span>
+          <span class="tag">🇬🇧 Anglais A2</span>
+          <span class="tag">🇪🇸 Espagnol A2</span>
+          <span class="tag">Esprit d'équipe</span>
+          <span class="tag">Bon rationné</span>
+          <span class="tag">Organisation</span>
+          <span class="tag">Polyvalence</span>
+          <span class="tag">Adaptation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiences">
+  <div class="wrap">
+    <div class="s-eye fade-in">03</div>
+    <h2 class="s-title fade-in">Expériences <em>professionnelles</em></h2>
+    <div class="xp-timeline">
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type">Employée</span><span class="xp-date">Juin — Septembre 2025</span></div>
+            <div class="xp-role">Employée Polyvalente</div>
+            <div class="xp-company">Action · Caudebec-lès-Elbeuf</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Optimisation E-commerce et Ventes : analyse de rapports quotidiens, visibilité des produits en ligne <span class="xp-kpi">+17% ventes</span></li>
+          <li>Gestion de la Relation Client (G.R.C.) : accueil, conseil personnalisé et encaissement de 50 clients par jour</li>
+          <li>Logistique et Réduction des Coûts : réorganisation méthodique de l'espace de vente <span class="xp-kpi">−25% erreurs</span></li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type">CDI</span><span class="xp-date">Octobre 2024 — Février 2025</span></div>
+            <div class="xp-role">Vendeuse Reconditionnée</div>
+            <div class="xp-company">IKEA · Tourville-la-Rivière</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Vente Conseil et Négociation : conseil actif et vente de produits reconditionnés, atteinte des objectifs commerciaux</li>
+          <li>Analyse et Amélioration de la Performance : suivi des indicateurs (taux de rotation, marges), ajustements stratégiques</li>
+          <li>Gestion des Stocks et Qualité : vérification et valorisation des produits reconditionnés <span class="xp-kpi">+10% niveau stock</span></li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type stage">Stage</span><span class="xp-date">Mai — Juin 2024</span></div>
+            <div class="xp-role">Stagiaire Marketing & Vente</div>
+            <div class="xp-company">V&B · Saint-Pierre-lès-Elbeuf</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Vente de produits et services par démarchage actif (téléphonique et physique) <span class="xp-kpi">95% objectif</span></li>
+          <li>Analyse des performances (KPI, trafic, équipements) et veille concurrentielle, rapports précis à la direction</li>
+          <li>Utilisation et enrichissement du CRM pour mieux cibler les clients, solutions personnalisées</li>
+        </ul></div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type admin">Stage</span><span class="xp-date">Janvier — Février 2023</span></div>
+            <div class="xp-role">Stagiaire Administrative</div>
+            <div class="xp-company">Cabinet Géomètre Expert Caldea · Elbeuf</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Prise en charge du cycle de vie de plus de 30 dossiers clients, accueil téléphonique</li>
+          <li>Actualisation des bases de données et des méthodes de classement <span class="xp-kpi">−20% temps de recherche</span></li>
+          <li>Rédaction de courriers officiels et coordination entre l'équipe technique, clients et organismes externes</li>
+        </ul></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="formation" class="bg-terra">
+  <div class="wrap">
+    <div class="s-eye fade-in">04</div>
+    <h2 class="s-title fade-in">Ma <em>formation</em></h2>
+    <div class="form-grid">
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">2025 — 2026</div>
+        <div class="form-degree">Bachelor 3 Marketing Digital & E-commerce</div>
+        <div class="form-school">EM Créteil</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">2022 — 2024</div>
+        <div class="form-degree">BTS Gestion de la PME</div>
+        <div class="form-school">Lycée Jeanne d'Arc · Rouen 76</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">2019 — 2022</div>
+        <div class="form-degree">Baccalauréat Professionnel Commerce Option A</div>
+        <div class="form-school">Lycée Ferdinand Buisson · Elbeuf 76</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="s-eye fade-in">05</div>
+    <h2 class="s-title fade-in">Me <em>contacter</em></h2>
+    <div class="contact-layout">
+      <div>
+        <div class="c-heading fade-in">Travaillons<br><em>ensemble</em></div>
+        <p class="c-sub fade-in">Disponible en alternance pour mon Bachelor Marketing Digital & E-commerce à l'EM Créteil. Motivée, rigoureuse et orientée résultats, je suis prête à générer un impact concret au sein de votre équipe.</p>
+        <div class="c-interests fade-in">
+          <div class="c-pill">🍳 Cuisine exotique</div>
+          <div class="c-pill">👗 Mode Tendance</div>
+          <div class="c-pill">📚 Lecture</div>
+          <div class="c-pill">🎵 R&B · Trap</div>
+        </div>
+      </div>
+      <div class="c-cards fade-in">
+        <div class="c-card"><div class="c-icon">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">palmistejorinda0@gmail.com</div></div></div>
+        <div class="c-card"><div class="c-icon">📱</div><div><div class="c-lbl">Téléphone</div><div class="c-val">0769061726</div></div></div>
+        <div class="c-card"><div class="c-icon">📍</div><div><div class="c-lbl">Localisation</div><div class="c-val">Normandie</div></div></div>
+        <div class="c-card"><div class="c-icon">💼</div><div><div class="c-lbl">LinkedIn</div><div class="c-val">jorinda-palmiste-84779a261</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-name">Jorinda Palmiste</div>
+  <div class="f-r">Bachelor Marketing Digital · E-commerce · Fait avec Claude ✦ MarketForge</div>
+</footer>
+
+<!-- VIDEO BUBBLE -->
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/6kjqulcgbr.js" async type="module"></script>
+<style>wistia-player[media-id='6kjqulcgbr']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/6kjqulcgbr/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
+
+<div class="vid-bubble" id="vidBubble" onclick="openVid()">
+  <button class="vid-bubble-close" onclick="event.stopPropagation();document.getElementById('vidBubble').style.display='none'">✕</button>
+  <div class="vid-bubble-video">
+    <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777" muted playsinline></wistia-player>
+  </div>
+  <div class="vid-bubble-bar">
+    <div class="vid-bubble-txt">👋 Jorinda, j'ai un message pour toi !</div>
+    <div class="vid-bubble-sub">Clique pour regarder ▶</div>
+  </div>
+</div>
+
+<div class="vid-full-ov" id="vidFullOv" onclick="if(event.target===this)closeVid()">
+  <div class="vid-full-mod">
+    <div class="vid-full-hdr">
+      <div class="vid-full-ttl">👋 <span>Jorinda</span>, j'ai un message pour toi !</div>
+      <button class="vid-full-cl" onclick="closeVid()">✕</button>
+    </div>
+    <div class="vid-full-body">
+      <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777"></wistia-player>
+    </div>
+  </div>
+</div>
+
+<div class="s-banner" id="sBanner">
+  <div class="s-banner-in"><div class="s-tag"><div class="s-dot"></div>Transforme ton CV en <span>site web interactif</span></div><button class="s-btn" onclick="openSales()">✦ Découvrir mon offre</button></div>
+  <div class="s-banner-mob"><div class="s-tag-sm">CV web <span>interactif</span></div><button class="s-btn-sm" onclick="openSales()">✦ Découvrir mon offre</button></div>
+</div>
+<div class="s-ov" id="sOv" onclick="if(event.target===this)closeSales()">
+  <div class="s-mod">
+    <div class="s-hdr"><button class="s-cl" onclick="closeSales()">✕</button><div class="s-badge">✦ Offre exclusive</div><div class="s-title">Mon offre pour ton <span>CV interactif</span></div><div class="s-sub">Tout ce qu'il faut pour avoir un CV web qui impressionne</div><div class="s-price"><div class="s-old">197 €</div><div class="s-new"><sup>€</sup>97</div></div></div>
+    <div class="s-body">
+      <div class="s-feats">
+        <div class="s-feat"><div class="s-fi">💻</div><div><div class="s-ft">Ton CV interactif complet</div><div class="s-fd">Un site web CV sur-mesure, livré prêt à partager</div></div></div>
+        <div class="s-feat"><div class="s-fi">🎓</div><div><div class="s-ft">Formation à l'installation</div><div class="s-fd">Tutoriel pas-à-pas pour héberger ton CV toi-même</div></div></div>
+        <div class="s-feat"><div class="s-fi">💬</div><div><div class="s-ft">SAV WhatsApp inclus</div><div class="s-fd">Accès direct — réponse sous 24h</div></div></div>
+      </div>
+      <div class="s-stripe"><script async src="https://js.stripe.com/v3/buy-button.js"></script><stripe-buy-button buy-button-id="buy_btn_1TcL9kEPhm1snxO0TS5KO10a" publishable-key="pk_live_51I3KPJEPhm1snxO0QETpCk4qFkVTcmWrj5he23xv4y4ReTf6gaK1Mv9GPvgSrc1G0b1ovtNsrodN7x8eMzkX9bw200jAZxtEzh"></stripe-buy-button></div>
+      <div class="s-guar">🔒 Paiement sécurisé Stripe · <span>Satisfait ou remboursé 7 jours</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  document.getElementById('scrollBar').style.width=p+'%';
+  updateNav();
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20);
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.s-fill').forEach(b=>b.style.width=b.getAttribute('data-w'));
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+function nav(e,id){if(e)e.preventDefault();document.getElementById('mobileMenu').classList.remove('open');if(id==='hero'){window.scrollTo({top:0,behavior:'smooth'});return;}const el=document.getElementById(id);if(!el)return;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-68,behavior:'smooth'});}
+function goTo(id){nav(null,id);}function mNav(id){nav(null,id);}
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+function updateNav(){const ids=['hero','competences','experiences','formation','contact'];let cur='hero';ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=96)cur=id;});document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));}
+function toggleXp(h){const item=h.parentElement;const was=item.classList.contains('open');document.querySelectorAll('.xp-item').forEach(x=>x.classList.remove('open'));if(!was)item.classList.add('open');}
+function openVid(){document.getElementById('vidFullOv').classList.add('open');}
+function closeVid(){document.getElementById('vidFullOv').classList.remove('open');}
+function openSales(){document.getElementById('sOv').classList.add('open');}
+function closeSales(){document.getElementById('sOv').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeVid();closeSales();}});
+function fixHero(){const g=document.getElementById('heroGrid');if(!g)return;g.style.gridTemplateColumns=window.innerWidth<=900?'1fr':window.innerWidth<=1024?'1fr 1fr':'55fr 45fr';}
+window.addEventListener('resize',fixHero);fixHero();
+setTimeout(()=>{document.getElementById('sBanner').style.display='block';},5*60*1000);
+</script>
+</body>
+</html>
