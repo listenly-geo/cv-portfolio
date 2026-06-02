@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thémis Bayart — Marketing & Événementiel · EM Normandie · Alternance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#c4a0a0;--rose2:#a88080;--rose3:#7a5555;
+  --rose-dim:rgba(196,160,160,0.1);--rose-lt:#d4b8b8;
+  --beige:#f5ede8;--beige2:#ede3dc;--beige3:#e4d6cc;
+  --dark:#1a1210;--dark2:#2e201a;
+  --cream:#faf7f5;--white:#ffffff;
+  --text:#1a1210;--text2:#4a3530;--text3:#9a8070;
+  --nav-h:68px;--max-w:1200px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rose3),var(--rose-lt));z-index:9999;width:0;transition:width .08s;}
+
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:500;background:rgba(250,247,245,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(196,160,160,0.15);display:flex;align-items:center;padding:0 clamp(20px,5vw,64px);justify-content:space-between;gap:20px;transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 24px rgba(122,85,85,0.08);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:700;font-style:italic;color:var(--rose3);cursor:pointer;white-space:nowrap;}
+.nav-links{display:flex;gap:clamp(8px,2vw,28px);align-items:center;}
+.nav-links a{text-decoration:none;font-size:clamp(0.64rem,1.1vw,0.74rem);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);padding:6px 0;position:relative;transition:color .25s;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--rose);transition:width .3s ease;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a:hover,.nav-links a.active{color:var(--rose3);}
+.nav-cta{background:var(--rose3);color:#fff;border:none;padding:9px 22px;border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.64rem,1.1vw,0.74rem);font-weight:700;cursor:pointer;white-space:nowrap;transition:all .25s;min-height:40px;}
+.nav-cta:hover{background:var(--rose2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(122,85,85,0.2);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.nav-burger span{width:22px;height:1.5px;background:var(--rose3);border-radius:2px;}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--white);z-index:499;border-bottom:2px solid var(--rose);flex-direction:column;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{text-decoration:none;font-size:.88rem;font-weight:700;color:var(--text);padding:14px 24px;border-bottom:1px solid rgba(196,160,160,0.1);text-transform:uppercase;letter-spacing:.5px;}
+.mobile-menu a:hover{color:var(--rose3);background:var(--rose-dim);}
+
+/* HERO */
+#hero{min-height:100vh;padding-top:var(--nav-h);display:grid;grid-template-columns:55fr 45fr;}
+.hero-left{background:linear-gradient(155deg,var(--rose3) 0%,var(--rose2) 55%,var(--rose) 100%);padding:clamp(52px,7vw,96px) clamp(36px,6vw,76px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+.hero-left::before{content:'';position:absolute;top:-100px;right:-100px;width:440px;height:440px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-left::after{content:'';position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+
+.hero-photo{width:clamp(80px,10vw,118px);height:clamp(80px,10vw,118px);border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.4);box-shadow:0 8px 32px rgba(0,0,0,0.2);margin-bottom:clamp(24px,3.5vw,40px);flex-shrink:0;position:relative;z-index:1;transition:transform .4s ease;}
+.hero-photo:hover{transform:scale(1.04);}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top;}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:clamp(0.62rem,1vw,0.72rem);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:clamp(12px,2vw,18px);position:relative;z-index:1;}
+.hero-eyebrow::before{content:'';width:22px;height:1.5px;background:rgba(255,255,255,0.5);flex-shrink:0;}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,6rem);font-weight:700;line-height:.88;color:#fff;position:relative;z-index:1;letter-spacing:-0.5px;}
+.hero-name em{font-style:italic;color:rgba(255,255,255,0.75);display:block;}
+.hero-role{margin-top:clamp(14px,2.5vw,22px);font-size:clamp(0.88rem,1.3vw,1rem);color:rgba(255,255,255,0.6);line-height:1.7;max-width:480px;position:relative;z-index:1;border-left:2px solid rgba(255,255,255,0.2);padding-left:16px;}
+.hero-role strong{color:#fff;font-weight:700;}
+.hero-dispo{margin-top:clamp(14px,2vw,22px);display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);padding:10px 18px;border-radius:100px;font-size:clamp(0.76rem,1.1vw,0.84rem);color:rgba(255,255,255,0.85);font-weight:600;width:fit-content;position:relative;z-index:1;}
+.dispo-dot{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 6px rgba(255,255,255,0.8);animation:bl 2s infinite;flex-shrink:0;}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-ctas{margin-top:clamp(24px,3.5vw,40px);display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-white{background:#fff;color:var(--rose3);border:none;padding:clamp(12px,1.5vw,15px) clamp(24px,3vw,36px);border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.82rem,1.2vw,0.9rem);font-weight:800;cursor:pointer;min-height:48px;transition:all .3s;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.15);}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.35);padding:clamp(10px,1.5vw,13px) clamp(22px,3vw,32px);border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.82rem,1.2vw,0.9rem);font-weight:600;cursor:pointer;transition:all .3s;min-height:48px;}
+.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.6);}
+
+/* HERO RIGHT */
+.hero-right{background:var(--beige2);padding:clamp(52px,7vw,96px) clamp(32px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,4vw,44px);}
+.h-label{font-size:0.66rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--rose2);margin-bottom:14px;}
+.h-items{display:flex;flex-direction:column;gap:11px;}
+.h-item{display:flex;align-items:center;gap:13px;font-size:clamp(0.86rem,1.3vw,0.96rem);color:var(--text);line-height:1.4;font-weight:500;transition:transform .2s;}
+.h-item:hover{transform:translateX(3px);}
+.h-icon{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:var(--rose3);display:flex;align-items:center;justify-content:center;font-size:.84rem;}
+
+/* WOW : Compteurs animés */
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.h-stat{background:var(--white);border-radius:16px;padding:clamp(15px,2vw,22px);border:1.5px solid rgba(196,160,160,0.12);transition:all .3s;cursor:default;}
+.h-stat:hover{border-color:var(--rose);transform:translateY(-3px);box-shadow:0 8px 24px rgba(196,160,160,0.15);}
+.h-stat-val{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;color:var(--rose3);line-height:1;font-style:italic;}
+.h-stat-val .counter{display:inline-block;}
+.h-stat-lbl{font-size:clamp(0.66rem,1vw,0.72rem);font-weight:600;color:var(--text3);margin-top:4px;line-height:1.3;}
+
+/* SECTIONS */
+section{scroll-margin-top:var(--nav-h);}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:clamp(80px,9vw,120px) clamp(24px,5vw,64px);}
+.s-eye{font-size:0.64rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--rose2);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.s-eye::after{content:'';width:44px;height:1px;background:var(--rose);}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;font-style:italic;color:var(--text);line-height:1;margin-bottom:clamp(40px,6vw,64px);}
+.bg-white{background:var(--white);}
+.bg-rose{background:linear-gradient(155deg,var(--rose3) 0%,var(--rose2) 100%);}
+.bg-rose .s-eye{color:rgba(255,255,255,0.4);}
+.bg-rose .s-eye::after{background:rgba(255,255,255,0.2);}
+.bg-rose .s-title{color:#fff;}
+
+/* COMPETENCES */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(13px,2.5vw,20px);}
+.comp-card{background:var(--beige);border-radius:18px;padding:clamp(20px,3vw,28px);border:1.5px solid rgba(196,160,160,0.12);transition:all .3s;position:relative;overflow:hidden;}
+.comp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--rose3),var(--rose-lt));transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+.comp-card:hover::before{transform:scaleX(1);}
+.comp-card:hover{transform:translateY(-4px);box-shadow:0 18px 52px rgba(196,160,160,0.14);border-color:rgba(196,160,160,0.28);}
+.comp-icon{font-size:1.7rem;margin-bottom:12px;}
+.comp-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.6vw,1.12rem);font-weight:700;font-style:italic;color:var(--rose3);margin-bottom:14px;}
+.tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:var(--white);border:1.5px solid rgba(196,160,160,0.14);padding:5px 12px;border-radius:100px;font-size:clamp(0.74rem,1.1vw,0.8rem);color:var(--text);font-weight:500;transition:all .2s;}
+.tag:hover{border-color:var(--rose);color:var(--rose3);background:var(--rose-dim);transform:translateY(-1px);}
+.s-row{margin-bottom:14px;}
+.s-lr{display:flex;justify-content:space-between;font-size:clamp(0.86rem,1.2vw,0.92rem);font-weight:600;color:var(--text);margin-bottom:6px;}
+.s-pct{font-size:0.72rem;color:var(--rose2);font-weight:800;}
+.s-track{height:3px;background:rgba(196,160,160,0.15);border-radius:2px;overflow:hidden;}
+.s-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--rose3),var(--rose-lt));width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
+
+/* EXPERIENCES — timeline */
+.xp-timeline{display:flex;flex-direction:column;position:relative;}
+.xp-timeline::before{content:'';position:absolute;left:18px;top:8px;bottom:8px;width:1.5px;background:linear-gradient(to bottom,var(--rose),rgba(196,160,160,0.1));z-index:0;}
+.xp-item{background:var(--white);border-radius:14px;border:1.5px solid rgba(196,160,160,0.1);overflow:hidden;transition:all .3s;margin-bottom:10px;margin-left:48px;position:relative;}
+.xp-item::before{content:'';position:absolute;left:-38px;top:24px;width:10px;height:10px;border-radius:50%;background:var(--rose);border:2px solid var(--cream);box-shadow:0 0 0 3px rgba(196,160,160,0.2);z-index:1;transition:all .3s;}
+.xp-item:hover{border-color:rgba(196,160,160,0.28);transform:translateX(4px);box-shadow:0 8px 28px rgba(196,160,160,0.1);}
+.xp-item:hover::before{transform:scale(1.4);background:var(--rose3);}
+.xp-hdr{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:clamp(15px,2vw,20px) clamp(18px,3vw,26px);cursor:pointer;transition:background .2s;}
+.xp-item.open .xp-hdr{background:var(--rose-dim);}
+.xp-badges{display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap;}
+.xp-type{font-size:0.58rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;padding:2px 9px;border-radius:100px;background:var(--rose3);}
+.xp-type.stage{background:var(--rose2);}
+.xp-type.asso{background:#6b8a6b;}
+.xp-type.job{background:var(--dark2);}
+.xp-date{font-size:clamp(0.64rem,1vw,0.7rem);font-weight:600;letter-spacing:.8px;color:var(--text3);}
+.xp-role{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.18rem);font-weight:700;font-style:italic;color:var(--rose3);line-height:1.2;}
+.xp-company{font-size:clamp(0.78rem,1.2vw,0.84rem);color:var(--text2);margin-top:2px;}
+.xp-toggle{width:32px;height:32px;flex-shrink:0;border-radius:50%;border:1.5px solid rgba(196,160,160,0.2);display:flex;align-items:center;justify-content:center;color:var(--rose3);font-size:1.1rem;transition:all .3s;}
+.xp-item.open .xp-toggle{background:var(--rose3);color:#fff;border-color:var(--rose3);transform:rotate(45deg);}
+.xp-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
+.xp-item.open .xp-body{max-height:600px;}
+.xp-desc{padding:12px clamp(18px,3vw,26px) clamp(12px,2vw,20px);border-top:1px solid rgba(196,160,160,0.08);}
+.xp-desc ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.xp-desc li{font-size:clamp(0.86rem,1.2vw,0.92rem);color:var(--text2);line-height:1.75;padding-left:18px;position:relative;}
+.xp-desc li::before{content:'→';position:absolute;left:0;color:var(--rose);font-size:.68rem;top:5px;}
+.xp-kpi{display:inline-block;background:rgba(196,160,160,0.1);border:1px solid rgba(196,160,160,0.25);padding:2px 9px;border-radius:100px;font-size:.72rem;color:var(--rose3);font-weight:700;margin-top:8px;margin-right:6px;}
+
+/* FORMATION */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(12px,2vw,16px);}
+.form-card{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:16px;padding:clamp(18px,3vw,26px);position:relative;overflow:hidden;transition:all .3s;}
+.form-card:hover{background:rgba(255,255,255,0.13);border-color:rgba(255,255,255,0.26);transform:translateY(-3px);}
+.form-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,210,210,0.8),transparent);}
+.form-year{font-size:0.66rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,210,210,0.8);margin-bottom:8px;}
+.form-degree{font-family:'Cormorant Garamond',serif;font-size:clamp(0.98rem,1.8vw,1.12rem);font-weight:700;font-style:italic;color:#fff;line-height:1.3;margin-bottom:5px;}
+.form-school{font-size:clamp(0.76rem,1.2vw,0.82rem);color:rgba(255,255,255,0.48);line-height:1.5;}
+.form-badge{margin-top:9px;display:inline-block;background:rgba(255,210,210,0.12);border:1px solid rgba(255,210,210,0.28);padding:2px 9px;border-radius:4px;font-size:0.64rem;color:rgba(255,210,210,0.9);font-weight:700;letter-spacing:1px;}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:start;}
+.c-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:700;font-style:italic;color:var(--text);line-height:.95;margin-bottom:20px;}
+.c-sub{font-size:clamp(0.88rem,1.3vw,0.98rem);color:var(--text2);line-height:1.8;margin-bottom:22px;}
+.c-interests{display:flex;flex-wrap:wrap;gap:8px;}
+.c-pill{background:var(--white);border:1.5px solid rgba(196,160,160,0.14);padding:7px 15px;border-radius:100px;font-size:clamp(0.8rem,1.2vw,0.86rem);font-weight:500;color:var(--text);transition:all .22s;}
+.c-pill:hover{border-color:var(--rose);color:var(--rose3);transform:translateY(-1px);}
+.c-cards{display:flex;flex-direction:column;gap:11px;}
+.c-card{background:var(--white);border-radius:14px;padding:clamp(13px,2vw,17px) clamp(15px,2.5vw,21px);display:flex;align-items:center;gap:13px;border:1.5px solid rgba(196,160,160,0.1);transition:all .3s;min-height:62px;}
+.c-card:hover{border-color:var(--rose);transform:translateX(5px);box-shadow:0 6px 24px rgba(196,160,160,0.12);}
+.c-icon{width:38px;height:38px;border-radius:11px;flex-shrink:0;background:var(--rose3);display:flex;align-items:center;justify-content:center;font-size:.86rem;}
+.c-lbl{font-size:0.62rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);}
+.c-val{font-size:clamp(0.84rem,1.3vw,0.92rem);font-weight:600;color:var(--text);margin-top:2px;}
+
+footer{background:linear-gradient(135deg,var(--rose3),var(--rose2));padding:clamp(20px,3vw,28px) clamp(24px,5vw,64px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.f-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.9rem,1.5vw,1.1rem);font-weight:700;color:rgba(255,255,255,0.65);}
+.f-name span{color:rgba(255,255,255,0.9);}
+.f-r{font-size:clamp(0.6rem,1vw,0.68rem);color:rgba(255,255,255,0.3);letter-spacing:1px;}
+
+/* VIDEO POPUP */
+.vid-popup-ov{position:fixed;inset:0;z-index:10000;background:rgba(20,10,10,0.97);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:clamp(10px,3vw,20px);}
+.vid-popup-box{background:#1a0d0d;border-radius:20px;overflow:hidden;width:min(780px,96vw);border:1px solid rgba(196,160,160,0.2);box-shadow:0 40px 100px rgba(0,0,0,0.88);}
+.vid-popup-hdr{padding:clamp(14px,2.5vw,20px) clamp(20px,4vw,32px);background:linear-gradient(135deg,#1a0d0d,#2e1818);border-bottom:1px solid rgba(196,160,160,0.1);text-align:center;}
+.vid-popup-msg{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.96rem,2.2vw,1.25rem);font-weight:800;color:#fff;line-height:1.35;margin-bottom:5px;}
+.vid-popup-msg span{color:var(--rose-lt);}
+.vid-popup-sub{font-size:clamp(0.7rem,1.2vw,0.78rem);color:rgba(255,255,255,0.35);}
+.vid-popup-footer{padding:clamp(14px,2.5vw,20px) clamp(20px,4vw,32px);text-align:center;background:#100808;border-top:1px solid rgba(196,160,160,0.08);}
+.vid-popup-btn{background:#2a1515;color:rgba(212,180,180,0.3);border:1px solid rgba(196,160,160,0.15);padding:clamp(13px,1.8vw,15px) clamp(28px,4vw,48px);border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.86rem,1.4vw,0.96rem);font-weight:800;cursor:not-allowed;transition:all .4s;width:100%;max-width:400px;letter-spacing:.5px;}
+.vid-popup-btn.unlocked{background:var(--rose3);color:#fff;cursor:pointer;box-shadow:0 8px 32px rgba(196,160,160,0.3);border-color:var(--rose3);}
+.vid-popup-btn.unlocked:hover{transform:translateY(-2px);background:var(--rose2);}
+.vid-countdown{font-size:clamp(0.72rem,1.1vw,0.78rem);color:rgba(212,180,180,0.3);margin-top:9px;letter-spacing:.5px;min-height:20px;}
+.vid-countdown.done{color:var(--rose-lt);font-weight:700;}
+
+/* SALES */
+.s-banner{position:fixed;top:0;left:0;right:0;z-index:9998;background:#0f2027;border-bottom:3px solid #c9a84c;display:none;}
+.s-banner-in{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,48px);height:64px;max-width:1400px;margin:0 auto;}
+.s-dot{width:8px;height:8px;border-radius:50%;background:#c9a84c;animation:dP 2s ease infinite;flex-shrink:0;}
+@keyframes dP{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.5)}}
+.s-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:600;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px;}
+.s-tag span{color:#c9a84c;}
+.s-btn{background:#c9a84c;color:#0f2027;border:none;padding:11px 28px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.74rem,1.3vw,.84rem);font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap;min-height:44px;}
+.s-btn:hover{background:#e0b84e;transform:translateY(-1px);}
+.s-banner-mob{display:none;}
+@media(max-width:768px){.s-banner-in{display:none;}.s-banner-mob{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;gap:12px;}.s-tag-sm{font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:600;color:rgba(255,255,255,.75);}.s-tag-sm span{color:#c9a84c;}.s-btn-sm{background:#c9a84c;color:#0f2027;border:none;padding:10px 18px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:800;cursor:pointer;white-space:nowrap;min-height:42px;}}
+.s-ov{display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
+.s-ov.open{display:flex;animation:sIn .3s ease;}
+@keyframes sIn{from{opacity:0}to{opacity:1}}
+.s-mod{background:#fff;border-radius:24px;overflow:hidden;width:min(560px,96vw);box-shadow:0 40px 100px rgba(0,0,0,.5);animation:smIn .35s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;}
+@keyframes smIn{from{transform:scale(.9) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.s-hdr{background:linear-gradient(135deg,#0f2027,#1a3040);padding:clamp(22px,4vw,30px);text-align:center;position:relative;}
+.s-cl{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.s-cl:hover{background:#c9a84c;color:#0f2027;}
+.s-badge{display:inline-block;background:#c9a84c;color:#0f2027;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:6px;margin-bottom:12px;font-family:'Plus Jakarta Sans',sans-serif;}
+.s-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.2rem,3vw,1.5rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;}
+.s-title span{color:#c9a84c;}
+.s-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.76rem,2vw,.82rem);color:rgba(255,255,255,.6);line-height:1.5;}
+.s-price{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;}
+.s-old{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;color:rgba(255,255,255,.28);text-decoration:line-through;}
+.s-new{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:900;color:#c9a84c;}
+.s-body{padding:clamp(18px,4vw,26px);}
+.s-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:22px;}
+.s-feat{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;border-radius:12px;background:#f9f9f9;border:1.5px solid #eee;}
+.s-feat:hover{border-color:rgba(201,168,76,.35);}
+.s-fi{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#0f2027,#1a3040);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.s-ft{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.84rem,2vw,.9rem);font-weight:700;color:#1a1a1a;margin-bottom:2px;}
+.s-fd{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.72rem,1.8vw,.76rem);color:#888;line-height:1.4;}
+.s-stripe{text-align:center;}
+.s-guar{margin-top:12px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;color:#aaa;}
+.s-guar span{color:#c9a84c;font-weight:600;}
+
+@media(max-width:1024px){#hero{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{min-height:calc(100vh - var(--nav-h));padding:clamp(36px,7vw,64px) clamp(24px,6vw,48px);}
+  .contact-layout{grid-template-columns:1fr;}
+  .xp-timeline::before,.xp-item::before{display:none;}
+  .xp-item{margin-left:0;}
+}
+@media(max-width:768px){.nav-links,.nav-cta{display:none;}.nav-burger{display:flex;}.hero-ctas{flex-direction:column;}.btn-white,.btn-outline{width:100%;text-align:center;}footer{flex-direction:column;text-align:center;}}
+@media(max-width:480px){.comp-grid,.form-grid{grid-template-columns:1fr;}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- VIDEO POPUP -->
+<div class="vid-popup-ov" id="vidPopup">
+  <div class="vid-popup-box">
+    <div class="vid-popup-hdr">
+      <div class="vid-popup-msg">👋 Salut <span>Thémis</span> !<br>Avant de découvrir ton nouveau CV, j'ai un message pour toi !</div>
+      <div class="vid-popup-sub">Regarde cette vidéo avant d'accéder à ton CV</div>
+    </div>
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/6kjqulcgbr.js" async type="module"></script>
+    <style>wistia-player[media-id='6kjqulcgbr']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/6kjqulcgbr/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
+    <wistia-player media-id="6kjqulcgbr" aspect="1.7777777777777777"></wistia-player>
+    <div class="vid-popup-footer">
+      <button class="vid-popup-btn" id="vidBtn" disabled onclick="unlockCV()">Découvrir mon CV sur mesure</button>
+      <div class="vid-countdown" id="vidCountdown">Disponible dans <strong id="cdTimer">4:15</strong>...</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav" style="display:none">
+  <div class="nav-logo" onclick="goTo('hero')">Thémis Bayart</div>
+  <div class="nav-links">
+    <a href="#hero" onclick="nav(event,'hero')">Accueil</a>
+    <a href="#competences" onclick="nav(event,'competences')">Compétences</a>
+    <a href="#experiences" onclick="nav(event,'experiences')">Expériences</a>
+    <a href="#formation" onclick="nav(event,'formation')">Formation</a>
+    <a href="#contact" onclick="nav(event,'contact')">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="nav(null,'contact')">Me contacter</button>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="mNav('hero')">Accueil</a>
+  <a href="#competences" onclick="mNav('competences')">Compétences</a>
+  <a href="#experiences" onclick="mNav('experiences')">Expériences</a>
+  <a href="#formation" onclick="mNav('formation')">Formation</a>
+  <a href="#contact" onclick="mNav('contact')">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" style="scroll-margin-top:0;display:none">
+  <div id="heroGrid" style="display:grid;grid-template-columns:55fr 45fr;min-height:100vh;padding-top:var(--nav-h)">
+    <div class="hero-left">
+      <div class="hero-photo"><img src="https://cv-booster.github.io/cv-portfolio/themis-photo.jpg" alt="Thémis" onerror="this.parentElement.style.background='var(--rose2)';this.remove()"></div>
+      <div class="hero-eyebrow">Marketing & Événementiel · EM Normandie · Alternance</div>
+      <h1 class="hero-name">Thémis<br><em>Bayart</em></h1>
+      <p class="hero-role">Programme Grande École — EM Normandie. Recherche une <strong>alternance de 24 mois</strong> à partir de septembre 2026 en marketing et événementiel à Paris. Rythme 3 semaines entreprise / 1 semaine école.</p>
+      <div class="hero-dispo"><div class="dispo-dot"></div>Disponible sept. 2026 · Paris · 2ème arrondissement</div>
+      <div class="hero-ctas">
+        <button class="btn-white" onclick="nav(null,'experiences')">Voir mes expériences</button>
+        <button class="btn-outline" onclick="nav(null,'contact')">Me contacter</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="fade-in">
+        <div class="h-label">Coordonnées</div>
+        <div class="h-items">
+          <div class="h-item"><div class="h-icon">📱</div>+33 7 68 13 45 78</div>
+          <div class="h-item"><div class="h-icon">✉️</div>themis.bayart15@em-normandie.fr</div>
+          <div class="h-item"><div class="h-icon">📍</div>2ème arrondissement, Paris 75002</div>
+          <div class="h-item"><div class="h-icon">🚗</div>Licence B</div>
+        </div>
+      </div>
+      <!-- WOW : Compteurs KPI animés -->
+      <div class="hero-stats fade-in" id="statsBlock">
+        <div class="h-stat">
+          <div class="h-stat-val"><span class="counter" data-target="14" data-suffix="k">0</span></div>
+          <div class="h-stat-lbl">Abonnés Instagram gérés</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-val">+<span class="counter" data-target="55" data-suffix="%">0</span></div>
+          <div class="h-stat-lbl">Ventes B2B générées</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-val"><span class="counter" data-target="17" data-suffix="k€">0</span></div>
+          <div class="h-stat-lbl">Récoltés 4L Trophy</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-val"><span class="counter" data-target="500" data-suffix="k">0</span></div>
+          <div class="h-stat-lbl">Vues/semaine Instagram</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences" class="bg-white" style="display:none">
+  <div class="wrap">
+    <div class="s-eye fade-in">02</div>
+    <h2 class="s-title fade-in">Mes <em>compétences</em></h2>
+    <div class="comp-grid">
+      <div class="comp-card fade-in">
+        <div class="comp-icon">📱</div>
+        <div class="comp-title">Marketing & Communication</div>
+        <div class="s-row"><div class="s-lr"><span>Réseaux sociaux (Instagram, LinkedIn)</span><span class="s-pct">90%</span></div><div class="s-track"><div class="s-fill" data-w="90%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>Création de contenus & visuels</span><span class="s-pct">88%</span></div><div class="s-track"><div class="s-fill" data-w="88%"></div></div></div>
+        <div class="s-row"><div class="s-lr"><span>Community management</span><span class="s-pct">85%</span></div><div class="s-track"><div class="s-fill" data-w="85%"></div></div></div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">🎪</div>
+        <div class="comp-title">Événementiel</div>
+        <div class="tags">
+          <span class="tag">Organisation d'événements</span>
+          <span class="tag">Gestion de privatisations</span>
+          <span class="tag">Promotion & vernissages</span>
+          <span class="tag">Coordination logistique</span>
+          <span class="tag">Animation commerciale</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">💼</div>
+        <div class="comp-title">Business Development</div>
+        <div class="tags">
+          <span class="tag">Prospection B2B</span>
+          <span class="tag">Négociation & partenariats</span>
+          <span class="tag">Sponsoring</span>
+          <span class="tag">Analyse de données</span>
+          <span class="tag">Gestion de projet</span>
+        </div>
+      </div>
+      <div class="comp-card fade-in">
+        <div class="comp-icon">💻</div>
+        <div class="comp-title">Outils & Langues</div>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Suite Office 365</span>
+          <span class="tag">Canva · CapCut · Photoshop</span>
+          <span class="tag">IA Générative</span>
+          <span class="tag">🇫🇷 Français natif</span>
+          <span class="tag">🇬🇧 Anglais C1</span>
+          <span class="tag">🇪🇸 Espagnol B1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" style="display:none">
+  <div class="wrap">
+    <div class="s-eye fade-in">03</div>
+    <h2 class="s-title fade-in">Expériences <em>professionnelles</em></h2>
+    <div class="xp-timeline">
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type">Temps partiel</span><span class="xp-date">Depuis 2024</span></div>
+            <div class="xp-role">Marketing et Communication</div>
+            <div class="xp-company">Galerie BAYART · Paris</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Stratégie de communication avec une identité artistique forte</li>
+          <li>Organisation et promotion des vernissages, événements et expositions</li>
+          <li>Développement et fidélisation d'une relation client personnalisée et haut de gamme</li>
+        </ul>
+        <div style="margin-top:10px"><span class="xp-kpi">14k abonnés Instagram</span><span class="xp-kpi">500k vues/semaine</span></div>
+        </div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type stage">Stage</span><span class="xp-date">Mai — Août 2026</span></div>
+            <div class="xp-role">Marketing & Événementiel</div>
+            <div class="xp-company">La Belle Histoire · Paris</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Gestion des privatisations et organisation d'événements de groupes</li>
+          <li>Création et gestion de contenus pour les réseaux sociaux et supports de communication</li>
+          <li>Participation à la stratégie marketing et au développement de la visibilité des établissements</li>
+        </ul>
+        <div style="margin-top:10px"><span class="xp-kpi">Renforcement visibilité & image</span><span class="xp-kpi">Communication digitale</span></div>
+        </div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type stage">Stage</span><span class="xp-date">Avril — Juillet 2024</span></div>
+            <div class="xp-role">Business Development B2B</div>
+            <div class="xp-company">WYZ · Paris</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Développement d'une stratégie B2B pour un nouveau produit</li>
+          <li>Prospection B2B, développement d'un portefeuille de partenaires stratégiques (100 appels/jour, emailing, LinkedIn)</li>
+          <li>Négociation et signature de 4 partenariats stratégiques</li>
+        </ul>
+        <div style="margin-top:10px"><span class="xp-kpi">+55% ventes nouveau produit</span></div>
+        </div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type asso">Association</span><span class="xp-date">2025 · 4L Trophy</span></div>
+            <div class="xp-role">Créatrice d'Association</div>
+            <div class="xp-company">Jumelles en 4L · Rallye humanitaire (~1500 équipages)</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Création et gestion d'une association caritative au profit d'Enfants du Désert</li>
+          <li>Acheminement de matériel scolaire au bénéfice de près de 20 000 enfants Marocains</li>
+          <li>Développement de partenariats et sponsoring</li>
+        </ul>
+        <div style="margin-top:10px"><span class="xp-kpi">17 000€ récoltés</span><span class="xp-kpi">20 000 enfants bénéficiaires</span></div>
+        </div></div>
+      </div>
+
+      <div class="xp-item fade-in">
+        <div class="xp-hdr" onclick="toggleXp(this)">
+          <div>
+            <div class="xp-badges"><span class="xp-type job">Job</span><span class="xp-date">2023 — 2026</span></div>
+            <div class="xp-role">Cheffe de Rang</div>
+            <div class="xp-company">La Belle Histoire & O'safran · Paris</div>
+          </div>
+          <div class="xp-toggle">+</div>
+        </div>
+        <div class="xp-body"><div class="xp-desc"><ul>
+          <li>Responsable de la gestion de la caisse et des encaissements</li>
+          <li>Accueil et service des clients en veillant à leur satisfaction</li>
+          <li>Participation à la communication sur Instagram</li>
+        </ul></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation" class="bg-rose" style="display:none">
+  <div class="wrap">
+    <div class="s-eye fade-in">04</div>
+    <h2 class="s-title fade-in">Ma <em>formation</em></h2>
+    <div class="form-grid">
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">2023 — 2028</div>
+        <div class="form-degree">Programme Grande École — Master Marketing & Business Development</div>
+        <div class="form-school">EM Normandie Business School<br>Oxford (2023-25) · Santiago Chili (2025-26) · Paris (2026-28)</div>
+        <div class="form-badge">Alternance sept. 2026</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">Échange international</div>
+        <div class="form-degree">Universidad Finis Terrae — Chili</div>
+        <div class="form-school">Échange de 6 mois à Santiago</div>
+        <div class="form-badge">International</div>
+      </div>
+      <div class="form-card fade-in">
+        <div class="form-line"></div>
+        <div class="form-year">Engagements associatifs</div>
+        <div class="form-degree">Bel'EM · Extr'EM BDS · Try'thEM</div>
+        <div class="form-school">Sailing CCE Communication · Vice-Présidente BDS (14 personnes) · Visite Oxford Communication</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="display:none">
+  <div class="wrap">
+    <div class="s-eye fade-in">05</div>
+    <h2 class="s-title fade-in">Me <em>contacter</em></h2>
+    <div class="contact-layout">
+      <div>
+        <div class="c-heading fade-in">Recrutons<br><em>ensemble</em></div>
+        <p class="c-sub fade-in">À la recherche d'une alternance de 24 mois en marketing et événementiel à Paris dès septembre 2026. Internationale, créative et orientée résultats, je suis prête à apporter une énergie nouvelle à votre équipe.</p>
+        <div class="c-interests fade-in">
+          <div class="c-pill">🏄 Sports de glisse & outdoor</div>
+          <div class="c-pill">🚗 Aventures (CCE, 4L Trophy)</div>
+          <div class="c-pill">✈️ Voyages</div>
+          <div class="c-pill">📸 Photographie</div>
+        </div>
+      </div>
+      <div class="c-cards fade-in">
+        <div class="c-card"><div class="c-icon">📱</div><div><div class="c-lbl">Téléphone</div><div class="c-val">+33 7 68 13 45 78</div></div></div>
+        <div class="c-card"><div class="c-icon">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">themis.bayart15@em-normandie.fr</div></div></div>
+        <div class="c-card"><div class="c-icon">📍</div><div><div class="c-lbl">Localisation</div><div class="c-val">Paris 75002 · 2ème arrondissement</div></div></div>
+        <div class="c-card"><div class="c-icon">🎓</div><div><div class="c-lbl">Formation</div><div class="c-val">Master Marketing — EM Normandie</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="display:none" id="mainFooter">
+  <div class="f-name">Thémis <span>Bayart</span></div>
+  <div class="f-r">Marketing & Événementiel · EM Normandie · Fait avec Claude ✦ MarketForge</div>
+</footer>
+
+<div class="s-banner" id="sBanner">
+  <div class="s-banner-in"><div class="s-tag"><div class="s-dot"></div>Transforme ton CV en <span>site web interactif</span></div><button class="s-btn" onclick="openSales()">✦ Découvrir mon offre</button></div>
+  <div class="s-banner-mob"><div class="s-tag-sm">CV web <span>interactif</span></div><button class="s-btn-sm" onclick="openSales()">✦ Découvrir mon offre</button></div>
+</div>
+<div class="s-ov" id="sOv" onclick="if(event.target===this)closeSales()">
+  <div class="s-mod">
+    <div class="s-hdr"><button class="s-cl" onclick="closeSales()">✕</button><div class="s-badge">✦ Offre exclusive</div><div class="s-title">Mon offre pour ton <span>CV interactif</span></div><div class="s-sub">Tout ce qu'il faut pour avoir un CV web qui impressionne</div><div class="s-price"><div class="s-old">197 €</div><div class="s-new"><sup>€</sup>97</div></div></div>
+    <div class="s-body">
+      <div class="s-feats">
+        <div class="s-feat"><div class="s-fi">💻</div><div><div class="s-ft">Ton CV interactif complet</div><div class="s-fd">Un site web CV sur-mesure, livré prêt à partager</div></div></div>
+        <div class="s-feat"><div class="s-fi">🎓</div><div><div class="s-ft">Formation à l'installation</div><div class="s-fd">Tutoriel pas-à-pas pour héberger ton CV toi-même</div></div></div>
+        <div class="s-feat"><div class="s-fi">💬</div><div><div class="s-ft">SAV WhatsApp inclus</div><div class="s-fd">Accès direct — réponse sous 24h</div></div></div>
+      </div>
+      <div class="s-stripe"><script async src="https://js.stripe.com/v3/buy-button.js"></script><stripe-buy-button buy-button-id="buy_btn_1TcL9kEPhm1snxO0TS5KO10a" publishable-key="pk_live_51I3KPJEPhm1snxO0QETpCk4qFkVTcmWrj5he23xv4y4ReTf6gaK1Mv9GPvgSrc1G0b1ovtNsrodN7x8eMzkX9bw200jAZxtEzh"></stripe-buy-button></div>
+      <div class="s-guar">🔒 Paiement sécurisé Stripe · <span>Satisfait ou remboursé 7 jours</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// COUNTDOWN
+(function(){
+  const TOTAL=255;let rem=TOTAL;
+  const btn=document.getElementById('vidBtn');
+  const cd=document.getElementById('vidCountdown');
+  const t=setInterval(()=>{
+    rem--;const m=Math.floor(rem/60),s=rem%60;
+    if(rem>0){document.getElementById('cdTimer').textContent=m+':'+(s<10?'0':'')+s;}
+    else{clearInterval(t);btn.disabled=false;btn.classList.add('unlocked');cd.textContent='✦ Clique pour découvrir ton CV !';cd.classList.add('done');}
+  },1000);
+})();
+
+function unlockCV(){
+  if(!document.getElementById('vidBtn').classList.contains('unlocked'))return;
+  document.getElementById('vidPopup').style.display='none';
+  document.getElementById('mainNav').style.display='flex';
+  document.getElementById('hero').style.display='block';
+  document.querySelectorAll('section:not(#hero)').forEach(s=>s.style.display='block');
+  document.getElementById('mainFooter').style.display='flex';
+  setTimeout(()=>{document.getElementById('sBanner').style.display='block';document.getElementById('mainNav').style.top='64px';},5*60*1000);
+  fixHero();
+  initCounters();
+}
+
+// WOW : KPI Counters
+function initCounters(){
+  const counters=document.querySelectorAll('.counter');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !e.target.dataset.done){
+        e.target.dataset.done='1';
+        animateCounter(e.target);
+      }
+    });
+  },{threshold:0.5});
+  counters.forEach(c=>obs.observe(c));
+}
+
+function animateCounter(el){
+  const target=parseInt(el.dataset.target);
+  const suffix=el.dataset.suffix||'';
+  const duration=1800;
+  const start=performance.now();
+  function update(now){
+    const progress=Math.min((now-start)/duration,1);
+    const ease=1-Math.pow(1-progress,3);
+    const val=Math.floor(ease*target);
+    el.textContent=val+suffix;
+    if(progress<1)requestAnimationFrame(update);
+    else el.textContent=target+suffix;
+  }
+  requestAnimationFrame(update);
+}
+
+// SCROLL
+window.addEventListener('scroll',()=>{
+  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  document.getElementById('scrollBar').style.width=p+'%';
+  updateNav();
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20);
+});
+
+// REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.s-fill').forEach(b=>b.style.width=b.getAttribute('data-w'));
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+function nav(e,id){if(e)e.preventDefault();document.getElementById('mobileMenu').classList.remove('open');if(id==='hero'){window.scrollTo({top:0,behavior:'smooth'});return;}const el=document.getElementById(id);if(!el)return;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-68,behavior:'smooth'});}
+function goTo(id){nav(null,id);}function mNav(id){nav(null,id);}
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+function updateNav(){const ids=['hero','competences','experiences','formation','contact'];let cur='hero';ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=96)cur=id;});document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));}
+function toggleXp(h){const item=h.parentElement;const was=item.classList.contains('open');document.querySelectorAll('.xp-item').forEach(x=>x.classList.remove('open'));if(!was)item.classList.add('open');}
+function openSales(){document.getElementById('sOv').classList.add('open');}
+function closeSales(){document.getElementById('sOv').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSales();});
+function fixHero(){const g=document.getElementById('heroGrid');if(!g)return;g.style.gridTemplateColumns=window.innerWidth<=900?'1fr':window.innerWidth<=1024?'1fr 1fr':'55fr 45fr';}
+window.addEventListener('resize',fixHero);
+</script>
+</body>
+</html>
