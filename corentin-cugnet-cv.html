@@ -161,6 +161,35 @@ section{max-width:1240px;margin:0 auto;padding:120px 24px 60px;}
 
 footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--ink);}
 
+/* ============================================
+   CV BOOST — Widget "Propulsé par CV Boost"
+   ============================================ */
+.cvboost-section{max-width:680px;margin:60px auto;padding:36px 28px;background:linear-gradient(135deg,#1c2b3a 0%,#2e4356 100%);border-radius:18px;text-align:center;color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;box-shadow:0 12px 40px rgba(28,43,58,0.25);}
+.cvboost-eyebrow{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8fae93;margin-bottom:10px;}
+.cvboost-title{font-size:clamp(18px,3vw,22px);font-weight:700;line-height:1.5;margin:0 0 22px;color:#fff;}
+.cvboost-features{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:inline-block;}
+.cvboost-features li{font-size:14.5px;margin-bottom:10px;color:#dde4e9;display:flex;align-items:flex-start;gap:10px;}
+.cvboost-features li::before{content:'✓';color:#8fae93;font-weight:900;flex-shrink:0;}
+.cvboost-cta{display:inline-block;background:#8fae93;color:#1c2b3a;font-weight:800;font-size:15px;padding:16px 36px;border-radius:30px;border:none;cursor:pointer;min-height:48px;letter-spacing:.02em;transition:transform .2s,box-shadow .2s;}
+.cvboost-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(143,174,147,0.4);}
+.cvboost-overlay{position:fixed;inset:0;background:rgba(28,43,58,0.7);z-index:9990;display:none;align-items:center;justify-content:center;padding:20px;}
+.cvboost-overlay.open{display:flex;}
+.cvboost-modal{background:#fff;border-radius:16px;padding:32px 28px;max-width:420px;width:100%;position:relative;font-family:'Helvetica Neue',Arial,sans-serif;color:#1c2b3a;}
+.cvboost-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;min-height:48px;min-width:48px;}
+.cvboost-modal h3{font-size:20px;margin:0 0 8px;}
+.cvboost-modal p.sub{font-size:13.5px;color:#666;margin:0 0 22px;}
+.cvboost-field{margin-bottom:16px;}
+.cvboost-field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#2e4356;}
+.cvboost-field input{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;min-height:48px;box-sizing:border-box;}
+.cvboost-field input:focus{outline:none;border-color:#8fae93;box-shadow:0 0 0 3px rgba(143,174,147,0.2);}
+.cvboost-submit{width:100%;background:#1c2b3a;color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:8px;border:none;cursor:pointer;min-height:48px;margin-top:6px;}
+.cvboost-submit:hover{background:#2e4356;}
+.cvboost-submit:disabled{opacity:.6;cursor:not-allowed;}
+.cvboost-status{margin-top:14px;font-size:13.5px;text-align:center;display:none;}
+.cvboost-status.success{color:#2d6a3e;display:block;}
+.cvboost-status.error{color:#b03434;display:block;}
+@media(max-width:600px){.cvboost-section{margin:40px 16px;padding:28px 20px;}}
+
 /* fade in */
 .fade{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
 .fade.visible{opacity:1;transform:translateY(0);}
@@ -388,6 +417,99 @@ function toggleAcc(head){
   }
 }
 
+</script>
+
+<section class="cvboost-section fade">
+  <div class="cvboost-eyebrow">🎯 Propulsé par CV Boost</div>
+  <h3 class="cvboost-title">Votre CV interactif vous démarque de la concurrence<br>et recherche les nouvelles alternances à votre place.</h3>
+  <ul class="cvboost-features">
+    <li>CV interactif moderne et professionnel</li>
+    <li>Accessible 24h/24 depuis un simple lien</li>
+    <li>Partage instantané aux recruteurs</li>
+    <li>Mise en avant de votre profil et de vos projets</li>
+    <li>Radar à alternance avec alertes automatiques</li>
+  </ul>
+  <br>
+  <button class="cvboost-cta" id="cvboost-open-btn">Activer mon radar</button>
+</section>
+
+<div class="cvboost-overlay" id="cvboost-overlay">
+  <div class="cvboost-modal">
+    <button class="cvboost-modal-close" id="cvboost-close-btn">✕</button>
+    <h3>🎯 Activer mon radar à alternance</h3>
+    <p class="sub">Recevez automatiquement les nouvelles offres correspondant à votre recherche, directement par email.</p>
+    <form id="cvboost-form">
+      <div class="cvboost-field">
+        <label for="cvboost-email">Email</label>
+        <input type="email" id="cvboost-email" required placeholder="vous@exemple.com">
+      </div>
+      <div class="cvboost-field">
+        <label for="cvboost-ville">Ville</label>
+        <input type="text" id="cvboost-ville" required placeholder="Ex: Saint-Étienne, Lyon...">
+      </div>
+      <div class="cvboost-field">
+        <label for="cvboost-metier">Métier recherché</label>
+        <input type="text" id="cvboost-metier" required placeholder="Ex: design graphique, webdesign...">
+      </div>
+      <button type="submit" class="cvboost-submit" id="cvboost-submit-btn">Activer mon radar</button>
+      <div class="cvboost-status" id="cvboost-status"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+window.CVBOOST_SLUG = 'corentin-cugnet';
+window.CVBOOST_API_URL = 'https://tondomaine.fr/php/api/inscription.php'; // À remplacer une fois le backend déployé
+
+(function(){
+  const overlay=document.getElementById('cvboost-overlay');
+  const openBtn=document.getElementById('cvboost-open-btn');
+  const closeBtn=document.getElementById('cvboost-close-btn');
+  const form=document.getElementById('cvboost-form');
+  const submitBtn=document.getElementById('cvboost-submit-btn');
+  const statusEl=document.getElementById('cvboost-status');
+
+  openBtn.addEventListener('click',()=>overlay.classList.add('open'));
+  closeBtn.addEventListener('click',()=>overlay.classList.remove('open'));
+  overlay.addEventListener('click',(e)=>{if(e.target===overlay)overlay.classList.remove('open');});
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const email=document.getElementById('cvboost-email').value.trim();
+    const ville=document.getElementById('cvboost-ville').value.trim();
+    const metier=document.getElementById('cvboost-metier').value.trim();
+    if(!email||!ville||!metier)return;
+
+    submitBtn.disabled=true;
+    submitBtn.textContent='Activation en cours...';
+    statusEl.className='cvboost-status';
+    statusEl.textContent='';
+
+    try{
+      const response=await fetch(window.CVBOOST_API_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({cv_slug:window.CVBOOST_SLUG,email,ville,metier,rayon_km:30})
+      });
+      const data=await response.json();
+      if(data.success){
+        statusEl.className='cvboost-status success';
+        statusEl.textContent='✓ '+data.message;
+        form.reset();
+        setTimeout(()=>overlay.classList.remove('open'),2500);
+      }else{
+        statusEl.className='cvboost-status error';
+        statusEl.textContent='✗ '+(data.message||'Une erreur est survenue.');
+      }
+    }catch(err){
+      statusEl.className='cvboost-status error';
+      statusEl.textContent='✗ Backend pas encore déployé (test visuel uniquement).';
+    }finally{
+      submitBtn.disabled=false;
+      submitBtn.textContent='Activer mon radar';
+    }
+  });
+})();
 </script>
 
 </body>
