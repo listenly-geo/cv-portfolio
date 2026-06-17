@@ -209,7 +209,8 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
   background:#8fae93;color:#1c2b3a;font-weight:800;font-size:13px;
   padding:11px 22px;border-radius:20px;border:none;cursor:pointer;
   min-height:44px;white-space:nowrap;transition:transform .2s,box-shadow .2s;
-  flex-shrink:0;
+  flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;
 }
 .cvboost-topbar-cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(143,174,147,0.4);}
 
@@ -276,7 +277,7 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
       <span class="cvboost-tag">CV Boost</span>
       <span class="cvboost-topbar-label">Votre CV est prêt — <strong>laissez son radar trouver votre prochaine alternance</strong> pendant que vous dormez</span>
     </div>
-    <button class="cvboost-topbar-cta" id="cvboost-open-btn">Activer mon CV</button>
+    <a class="cvboost-topbar-cta" href="https://buy.stripe.com/bJebJ11p2cDE0pPaAF93y0y" target="_blank" rel="noopener">Activer mon CV</a>
   </div>
 </div>
 
@@ -491,76 +492,8 @@ function toggleAcc(head){
 </script>
 
 
-<div class="cvboost-overlay" id="cvboost-overlay">
-  <div class="cvboost-modal">
-    <button class="cvboost-modal-close" id="cvboost-close-btn">✕</button>
-    <h3>🎯 Activer mon CV</h3>
-    <p class="sub">Recevez automatiquement les nouvelles offres correspondant à votre recherche, directement par email.</p>
-    <form id="cvboost-form">
-      <div class="cvboost-field">
-        <label for="cvboost-email">Email</label>
-        <input type="email" id="cvboost-email" required placeholder="vous@exemple.com">
-      </div>
-      <div class="cvboost-field">
-        <label for="cvboost-ville">Ville</label>
-        <input type="text" id="cvboost-ville" required placeholder="Ex: Saint-Étienne, Lyon...">
-      </div>
-      <div class="cvboost-field">
-        <label for="cvboost-metier">Métier recherché</label>
-        <input type="text" id="cvboost-metier" required placeholder="Ex: design graphique, webdesign...">
-      </div>
-      <button type="submit" class="cvboost-submit" id="cvboost-submit-btn">Activer mon CV</button>
-      <div class="cvboost-status" id="cvboost-status"></div>
-    </form>
-  </div>
-</div>
-
 <script>
-window.CVBOOST_SLUG = 'corentin-cugnet';
-window.CVBOOST_API_URL = 'https://tondomaine.fr/php/api/inscription.php'; // À remplacer une fois le backend déployé
-
-(function(){
-  const overlay=document.getElementById('cvboost-overlay');
-  const openBtn=document.getElementById('cvboost-open-btn');
-  const closeBtn=document.getElementById('cvboost-close-btn');
-  const form=document.getElementById('cvboost-form');
-  const submitBtn=document.getElementById('cvboost-submit-btn');
-  const statusEl=document.getElementById('cvboost-status');
-
-  openBtn.addEventListener('click',()=>overlay.classList.add('open'));
-  closeBtn.addEventListener('click',()=>overlay.classList.remove('open'));
-  overlay.addEventListener('click',(e)=>{if(e.target===overlay)overlay.classList.remove('open');});
-
-  const STRIPE_URL = 'https://buy.stripe.com/bJebJ11p2cDE0pPaAF93y0y';
-
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    const email=document.getElementById('cvboost-email').value.trim();
-    const ville=document.getElementById('cvboost-ville').value.trim();
-    const metier=document.getElementById('cvboost-metier').value.trim();
-    if(!email||!ville||!metier)return;
-
-    submitBtn.disabled=true;
-    submitBtn.textContent='Activation en cours...';
-    statusEl.className='cvboost-status';
-    statusEl.textContent='';
-
-    try{
-      await fetch(window.CVBOOST_API_URL,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({cv_slug:window.CVBOOST_SLUG,email,ville,metier,rayon_km:30})
-      });
-    }catch(err){
-      // L'enregistrement backend a échoué ou n'est pas encore déployé,
-      // mais on redirige tout de même vers le paiement.
-    }finally{
-      statusEl.className='cvboost-status success';
-      statusEl.textContent='✓ Redirection vers le paiement...';
-      window.location.href = STRIPE_URL;
-    }
-  });
-})();
+// Le bouton "Activer mon CV" redirige directement vers Stripe — voir attribut href sur le lien.
 </script>
 
 </body>
