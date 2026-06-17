@@ -275,7 +275,7 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
       <span class="cvboost-tag">CV Boost</span>
       <span class="cvboost-topbar-label">Votre CV est prêt — <strong>laissez son radar trouver votre prochaine alternance</strong> pendant que vous dormez</span>
     </div>
-    <button class="cvboost-topbar-cta" id="cvboost-open-btn">Activer mon radar</button>
+    <button class="cvboost-topbar-cta" id="cvboost-open-btn">Activer mon CV</button>
   </div>
 </div>
 
@@ -493,7 +493,7 @@ function toggleAcc(head){
 <div class="cvboost-overlay" id="cvboost-overlay">
   <div class="cvboost-modal">
     <button class="cvboost-modal-close" id="cvboost-close-btn">✕</button>
-    <h3>🎯 Activer mon radar à alternance</h3>
+    <h3>🎯 Activer mon CV</h3>
     <p class="sub">Recevez automatiquement les nouvelles offres correspondant à votre recherche, directement par email.</p>
     <form id="cvboost-form">
       <div class="cvboost-field">
@@ -508,7 +508,7 @@ function toggleAcc(head){
         <label for="cvboost-metier">Métier recherché</label>
         <input type="text" id="cvboost-metier" required placeholder="Ex: design graphique, webdesign...">
       </div>
-      <button type="submit" class="cvboost-submit" id="cvboost-submit-btn">Activer mon radar</button>
+      <button type="submit" class="cvboost-submit" id="cvboost-submit-btn">Activer mon CV</button>
       <div class="cvboost-status" id="cvboost-status"></div>
     </form>
   </div>
@@ -530,6 +530,8 @@ window.CVBOOST_API_URL = 'https://tondomaine.fr/php/api/inscription.php'; // À 
   closeBtn.addEventListener('click',()=>overlay.classList.remove('open'));
   overlay.addEventListener('click',(e)=>{if(e.target===overlay)overlay.classList.remove('open');});
 
+  const STRIPE_URL = 'https://buy.stripe.com/bJebJ11p2cDE0pPaAF93y0y';
+
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     const email=document.getElementById('cvboost-email').value.trim();
@@ -543,27 +545,18 @@ window.CVBOOST_API_URL = 'https://tondomaine.fr/php/api/inscription.php'; // À 
     statusEl.textContent='';
 
     try{
-      const response=await fetch(window.CVBOOST_API_URL,{
+      await fetch(window.CVBOOST_API_URL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({cv_slug:window.CVBOOST_SLUG,email,ville,metier,rayon_km:30})
       });
-      const data=await response.json();
-      if(data.success){
-        statusEl.className='cvboost-status success';
-        statusEl.textContent='✓ '+data.message;
-        form.reset();
-        setTimeout(()=>overlay.classList.remove('open'),2500);
-      }else{
-        statusEl.className='cvboost-status error';
-        statusEl.textContent='✗ '+(data.message||'Une erreur est survenue.');
-      }
     }catch(err){
-      statusEl.className='cvboost-status error';
-      statusEl.textContent='✗ Backend pas encore déployé (test visuel uniquement).';
+      // L'enregistrement backend a échoué ou n'est pas encore déployé,
+      // mais on redirige tout de même vers le paiement.
     }finally{
-      submitBtn.disabled=false;
-      submitBtn.textContent='Activer mon radar';
+      statusEl.className='cvboost-status success';
+      statusEl.textContent='✓ Redirection vers le paiement...';
+      window.location.href = STRIPE_URL;
     }
   });
 })();
