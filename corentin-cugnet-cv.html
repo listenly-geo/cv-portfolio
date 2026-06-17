@@ -30,7 +30,7 @@ h1,h2,h3{font-family:'Arial Black',Helvetica,sans-serif;letter-spacing:-0.02em;t
 
 /* nav */
 nav{
-  position:fixed;top:128px;left:0;right:0;z-index:900;
+  position:fixed;top:60px;left:0;right:0;z-index:900;
   background:var(--cream);
   border-bottom:4px solid var(--ink);
   display:flex;justify-content:center;gap:clamp(8px,2vw,28px);
@@ -55,7 +55,7 @@ section{max-width:1240px;margin:0 auto;padding:120px 24px 60px;}
 /* HERO */
 #hero{
   display:grid;grid-template-columns:55% 45%;align-items:center;gap:32px;
-  padding-top:264px;min-height:90vh;
+  padding-top:195px;min-height:90vh;
 }
 .hero-text h1{font-size:clamp(48px,8vw,96px);line-height:0.95;margin-bottom:8px;}
 .hero-role{
@@ -200,10 +200,7 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
 @keyframes radar-blip{0%,100%{opacity:0.2;}50%{opacity:1;}}
 
 .cvboost-topbar-main{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;}
-.cvboost-topbar-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8fae93;}
-.cvboost-benefits{display:flex;flex-direction:column;gap:4px;}
-.cvboost-benefits span{font-size:12.5px;font-weight:600;color:#dde4e9;white-space:normal;display:flex;align-items:flex-start;gap:6px;text-align:left;}
-.cvboost-benefits span::before{content:'✅';font-size:11px;flex-shrink:0;margin-top:1px;}
+.cvboost-topbar-label{font-size:clamp(13px,1.6vw,15px);font-weight:700;color:#ffffff;letter-spacing:.01em;}
 
 .cvboost-topbar-cta{
   background:#8fae93;color:#1c2b3a;font-weight:800;font-size:13px;
@@ -214,8 +211,7 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
 .cvboost-topbar-cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(143,174,147,0.4);}
 
 @media(max-width:900px){
-  .cvboost-benefits{display:none;}
-  .cvboost-topbar-label{font-size:12px;}
+  .cvboost-topbar-label{font-size:13px;}
 }
 @media(max-width:600px){
   .cvboost-topbar{padding:10px 14px;}
@@ -272,12 +268,7 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
       <div class="cvboost-radar-ring r2"></div>
     </div>
     <div class="cvboost-topbar-main">
-      <span class="cvboost-topbar-label">🎯 Propulsé par CV Boost</span>
-      <div class="cvboost-benefits">
-        <span>Ne soyez plus invisible : démarquez-vous instantanément face aux centaines de CV classiques</span>
-        <span>Candidatez sereinement avec un CV adapté à chaque recruteur</span>
-        <span>Concentrez-vous sur vos études pendant que l'IA cherche des offres pour vous</span>
-      </div>
+      <span class="cvboost-topbar-label">🚀 Votre CV est prêt. Laissez son radar trouver votre prochaine alternance</span>
     </div>
     <button class="cvboost-topbar-cta" id="cvboost-open-btn">Activer mon radar</button>
   </div>
