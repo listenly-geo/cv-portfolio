@@ -30,7 +30,7 @@ h1,h2,h3{font-family:'Arial Black',Helvetica,sans-serif;letter-spacing:-0.02em;t
 
 /* nav */
 nav{
-  position:fixed;top:6px;left:0;right:0;z-index:900;
+  position:fixed;top:56px;left:0;right:0;z-index:900;
   background:var(--cream);
   border-bottom:4px solid var(--ink);
   display:flex;justify-content:center;gap:clamp(8px,2vw,28px);
@@ -44,7 +44,7 @@ nav a{
   min-height:48px;display:flex;align-items:center;
 }
 nav a.active{border-color:var(--ink);background:var(--yellow);box-shadow:3px 3px 0 var(--ink);}
-#hamburger{display:none;position:fixed;top:14px;right:14px;z-index:950;width:48px;height:48px;border:3px solid var(--ink);background:var(--yellow);box-shadow:3px 3px 0 var(--ink);cursor:pointer;align-items:center;justify-content:center;}
+#hamburger{display:none;position:fixed;top:64px;right:14px;z-index:950;width:48px;height:48px;border:3px solid var(--ink);background:var(--yellow);box-shadow:3px 3px 0 var(--ink);cursor:pointer;align-items:center;justify-content:center;}
 #hamburger span{display:block;width:24px;height:3px;background:var(--ink);position:relative;}
 #hamburger span::before,#hamburger span::after{content:'';position:absolute;left:0;width:24px;height:3px;background:var(--ink);}
 #hamburger span::before{top:-8px;}
@@ -55,7 +55,7 @@ section{max-width:1240px;margin:0 auto;padding:120px 24px 60px;}
 /* HERO */
 #hero{
   display:grid;grid-template-columns:55% 45%;align-items:center;gap:32px;
-  padding-top:140px;min-height:90vh;
+  padding-top:190px;min-height:90vh;
 }
 .hero-text h1{font-size:clamp(48px,8vw,96px);line-height:0.95;margin-bottom:8px;}
 .hero-role{
@@ -162,16 +162,28 @@ section{max-width:1240px;margin:0 auto;padding:120px 24px 60px;}
 footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--ink);}
 
 /* ============================================
-   CV BOOST — Widget "Propulsé par CV Boost"
+   CV BOOST — Bannière top (au-dessus du header)
    ============================================ */
-.cvboost-section{max-width:680px;margin:60px auto;padding:36px 28px;background:linear-gradient(135deg,#1c2b3a 0%,#2e4356 100%);border-radius:18px;text-align:center;color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;box-shadow:0 12px 40px rgba(28,43,58,0.25);}
-.cvboost-eyebrow{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8fae93;margin-bottom:10px;}
-.cvboost-title{font-size:clamp(18px,3vw,22px);font-weight:700;line-height:1.5;margin:0 0 22px;color:#fff;}
-.cvboost-features{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:inline-block;}
-.cvboost-features li{font-size:14.5px;margin-bottom:10px;color:#dde4e9;display:flex;align-items:flex-start;gap:10px;}
-.cvboost-features li::before{content:'✓';color:#8fae93;font-weight:900;flex-shrink:0;}
-.cvboost-cta{display:inline-block;background:#8fae93;color:#1c2b3a;font-weight:800;font-size:15px;padding:16px 36px;border-radius:30px;border:none;cursor:pointer;min-height:48px;letter-spacing:.02em;transition:transform .2s,box-shadow .2s;}
-.cvboost-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(143,174,147,0.4);}
+.cvboost-topbar{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  background:linear-gradient(135deg,#1c2b3a 0%,#2e4356 100%);
+  color:#fff;padding:10px 20px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:14px;font-family:'Helvetica Neue',Arial,sans-serif;
+  border-bottom:3px solid #8fae93;
+}
+.cvboost-topbar-text{font-size:clamp(12px,1.6vw,14px);font-weight:700;text-align:center;}
+.cvboost-topbar-text span{color:#8fae93;}
+.cvboost-topbar-cta{
+  background:#8fae93;color:#1c2b3a;font-weight:800;font-size:13px;
+  padding:9px 20px;border-radius:20px;border:none;cursor:pointer;
+  min-height:40px;white-space:nowrap;transition:transform .2s;
+}
+.cvboost-topbar-cta:hover{transform:translateY(-1px);}
+@media(max-width:700px){
+  .cvboost-topbar{padding:10px 14px;gap:8px;}
+  .cvboost-topbar-text{display:none;}
+}
 .cvboost-overlay{position:fixed;inset:0;background:rgba(28,43,58,0.7);z-index:9990;display:none;align-items:center;justify-content:center;padding:20px;}
 .cvboost-overlay.open{display:flex;}
 .cvboost-modal{background:#fff;border-radius:16px;padding:32px 28px;max-width:420px;width:100%;position:relative;font-family:'Helvetica Neue',Arial,sans-serif;color:#1c2b3a;}
@@ -196,7 +208,7 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
 
 /* video popup */
 @media(max-width:900px){
-  #hero{grid-template-columns:1fr;text-align:center;padding-top:120px;}
+  #hero{grid-template-columns:1fr;text-align:center;padding-top:170px;}
   .hero-img-wrap{max-width:300px;margin:0 auto;}
   .hero-meta,.contact-bar{justify-content:center;}
   .real-grid{grid-template-columns:1fr;}
@@ -209,6 +221,12 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
 </style>
 </head>
 <body>
+
+<div class="cvboost-topbar">
+  <span class="cvboost-topbar-text">🎯 <span>CV Boost</span> — Ce CV recherche les alternances à votre place</span>
+  <button class="cvboost-topbar-cta" id="cvboost-open-btn">Activer mon radar</button>
+</div>
+
 
 <div id="progress"></div>
 <div id="hamburger" onclick="document.getElementById('mainnav').classList.toggle('open')"><span></span></div>
@@ -419,19 +437,6 @@ function toggleAcc(head){
 
 </script>
 
-<section class="cvboost-section fade">
-  <div class="cvboost-eyebrow">🎯 Propulsé par CV Boost</div>
-  <h3 class="cvboost-title">Votre CV interactif vous démarque de la concurrence<br>et recherche les nouvelles alternances à votre place.</h3>
-  <ul class="cvboost-features">
-    <li>CV interactif moderne et professionnel</li>
-    <li>Accessible 24h/24 depuis un simple lien</li>
-    <li>Partage instantané aux recruteurs</li>
-    <li>Mise en avant de votre profil et de vos projets</li>
-    <li>Radar à alternance avec alertes automatiques</li>
-  </ul>
-  <br>
-  <button class="cvboost-cta" id="cvboost-open-btn">Activer mon radar</button>
-</section>
 
 <div class="cvboost-overlay" id="cvboost-overlay">
   <div class="cvboost-modal">
