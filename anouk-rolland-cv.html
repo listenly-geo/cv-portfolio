@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anouk Rolland — Communication & Marketing</title>
+<style>
+:root{
+  --cream:#fdf6e3;
+  --ink:#1f2937;
+  --sage:#8fc1ad;
+  --royal:#2e3a8c;
+  --mustard:#f0c33c;
+  --line:rgba(31,41,55,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Helvetica Neue',Arial,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.7;
+  font-size:16px;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif;letter-spacing:-0.01em;}
+
+#progress{position:fixed;top:0;left:0;height:4px;background:var(--royal);z-index:1000;width:0%;transition:width .1s;}
+
+nav{
+  position:fixed;top:4px;left:0;right:0;z-index:900;
+  background:rgba(253,246,227,0.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  display:flex;justify-content:center;gap:clamp(10px,2vw,30px);
+  padding:16px 16px;flex-wrap:wrap;
+}
+nav a{
+  font-weight:700;font-size:clamp(12px,1.3vw,14px);
+  color:var(--ink);text-decoration:none;letter-spacing:.02em;
+  padding:8px 14px;border-radius:20px;min-height:48px;display:flex;align-items:center;
+  transition:.25s;
+}
+nav a.active{background:var(--royal);color:#fff;}
+#hamburger{display:none;position:fixed;top:14px;right:14px;z-index:950;width:48px;height:48px;border:none;border-radius:50%;background:var(--royal);cursor:pointer;align-items:center;justify-content:center;}
+#hamburger span{display:block;width:20px;height:2px;background:#fff;position:relative;}
+#hamburger span::before,#hamburger span::after{content:'';position:absolute;left:0;width:20px;height:2px;background:#fff;}
+#hamburger span::before{top:-7px;}
+#hamburger span::after{top:7px;}
+
+section{max-width:1240px;margin:0 auto;padding:110px 24px 60px;position:relative;}
+
+/* HERO */
+#hero{
+  display:grid;grid-template-columns:38% 62%;align-items:center;gap:40px;
+  padding-top:130px;min-height:88vh;position:relative;overflow:visible;
+}
+.float-icon{
+  position:absolute;font-size:28px;opacity:0.5;animation:drift 14s ease-in-out infinite;pointer-events:none;
+}
+.float-icon.i1{top:8%;left:2%;animation-delay:0s;}
+.float-icon.i2{top:18%;right:6%;animation-delay:2s;font-size:24px;}
+.float-icon.i3{bottom:14%;left:8%;animation-delay:4s;font-size:22px;}
+.float-icon.i4{bottom:6%;right:14%;animation-delay:6s;}
+.float-icon.i5{top:50%;right:1%;animation-delay:3s;font-size:20px;}
+@keyframes drift{
+  0%,100%{transform:translate(0,0) rotate(0deg);}
+  50%{transform:translate(14px,-18px) rotate(8deg);}
+}
+
+.hero-photo-wrap{position:relative;width:100%;max-width:280px;aspect-ratio:1/1;margin:0 auto;}
+.blob{
+  position:absolute;inset:-16px;border-radius:42% 58% 65% 35% / 45% 40% 60% 55%;
+  background:var(--sage);z-index:0;
+}
+.hero-photo{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:#ccc;border:6px solid var(--cream);box-shadow:0 10px 30px rgba(31,41,55,0.15);}
+.dot-badge{
+  position:absolute;z-index:2;bottom:6px;right:6px;width:40px;height:40px;border-radius:50%;
+  background:var(--royal);border:4px solid var(--cream);
+}
+
+.hero-text h1{font-size:clamp(32px,5vw,52px);margin-bottom:10px;color:var(--sage);}
+.hero-text h1 span{color:var(--royal);display:block;}
+.hero-eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--royal);font-weight:700;margin-bottom:6px;}
+.hero-role{
+  display:inline-block;background:var(--mustard);color:var(--ink);
+  padding:8px 18px;border-radius:20px;font-weight:700;font-size:clamp(14px,1.6vw,16px);
+  margin:14px 0 18px;
+}
+.quote-bubble{
+  background:var(--royal);color:#fff;border-radius:20px;padding:20px 24px;font-size:14.5px;
+  max-width:480px;position:relative;margin-top:18px;
+}
+.quote-bubble::before{content:'"';font-size:40px;color:var(--mustard);position:absolute;top:-6px;left:14px;font-family:Georgia,serif;}
+.hero-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;}
+.hero-meta span{
+  border:1px solid var(--line);background:#fff;border-radius:20px;
+  padding:7px 14px;font-weight:600;font-size:13px;
+}
+.contact-bar{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px;}
+.contact-bar a{color:var(--ink);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:8px;min-height:48px;font-size:14px;background:#fff;padding:8px 16px;border-radius:20px;border:1px solid var(--line);}
+
+.sec-eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--royal);font-weight:700;margin-bottom:6px;}
+.sec-title{font-size:clamp(28px,4vw,42px);margin-bottom:36px;}
+
+/* FEED - experiences as social posts */
+.feed{max-width:640px;margin:0 auto;position:relative;}
+.feed::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;background:var(--line);}
+.post-card{
+  background:#fff;border-radius:16px;padding:22px;margin-bottom:22px;margin-left:50px;position:relative;
+  box-shadow:0 6px 20px rgba(31,41,55,0.06);border:1px solid var(--line);
+  opacity:0;transform:translateY(40px);transition:opacity .6s,transform .6s;
+}
+.post-card.visible{opacity:1;transform:translateY(0);}
+.post-avatar{
+  position:absolute;left:-50px;top:18px;width:36px;height:36px;border-radius:50%;
+  background:var(--sage);display:flex;align-items:center;justify-content:center;font-size:16px;
+  border:3px solid var(--cream);
+}
+.post-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;flex-wrap:wrap;gap:6px;}
+.post-header h3{font-size:16px;font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;}
+.post-date{font-size:12px;color:var(--royal);font-weight:700;background:var(--mustard);padding:3px 10px;border-radius:10px;}
+.post-place{font-size:13px;color:#7a8a82;margin-bottom:10px;display:block;}
+.post-card ul{padding-left:18px;font-size:13.5px;color:#3a4750;}
+.post-card li{margin-bottom:5px;}
+.post-reactions{margin-top:12px;display:flex;gap:14px;font-size:13px;color:#9aa5ab;}
+
+/* formation */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.form-card{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:0 6px 16px rgba(31,41,55,0.05);}
+.form-card .yr{font-size:13px;font-weight:700;color:var(--royal);}
+.form-card h3{font-size:16px;margin:6px 0;}
+.skill-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.skill-chip{background:var(--sage);color:#fff;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:10px;}
+
+/* skills */
+.skill-section{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:30px;}
+.skill-block h3{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--royal);margin-bottom:16px;font-weight:700;}
+.soft-row{display:flex;flex-wrap:wrap;gap:10px;}
+.soft-pill{background:var(--mustard);color:var(--ink);padding:8px 16px;border-radius:18px;font-size:13.5px;font-weight:700;}
+.tool-row{display:flex;flex-wrap:wrap;gap:10px;}
+.tool-pill{background:#fff;border:1px solid var(--line);padding:8px 16px;border-radius:18px;font-size:13px;font-weight:600;}
+.lang-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:600;}
+
+.interest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px;}
+.interest-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;transition:transform .25s;}
+.interest-card:hover{transform:translateY(-4px) rotate(-2deg);}
+.interest-card .emoji{font-size:24px;margin-bottom:4px;display:block;}
+.interest-card .label{font-size:11.5px;font-weight:600;}
+
+#contact{text-align:center;}
+.contact-cta{
+  display:inline-block;margin-top:20px;background:var(--royal);
+  color:#fff;padding:16px 36px;font-weight:700;font-size:16px;border-radius:24px;
+  text-decoration:none;min-height:48px;box-shadow:0 8px 24px rgba(46,58,140,0.3);
+}
+
+footer{text-align:center;padding:30px;font-size:13px;color:#9aa5ab;}
+
+.fade{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
+.fade.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;text-align:center;padding-top:110px;}
+  .hero-meta,.contact-bar{justify-content:center;}
+  .skill-section{grid-template-columns:1fr;}
+  nav{display:none;}
+  nav.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;height:100vh;justify-content:center;background:var(--cream);}
+  #hamburger{display:flex;}
+  .feed::before{left:18px;}
+  .post-card{margin-left:38px;}
+  .post-avatar{left:-38px;width:28px;height:28px;font-size:13px;}
+  .float-icon{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="hamburger" onclick="document.getElementById('mainnav').classList.toggle('open')"><span></span></div>
+
+<nav id="mainnav">
+  <a href="#hero" class="nav-link">Accueil</a>
+  <a href="#experiences" class="nav-link">Expériences</a>
+  <a href="#formation" class="nav-link">Formation</a>
+  <a href="#competences" class="nav-link">Compétences</a>
+  <a href="#contact" class="nav-link">Contact</a>
+</nav>
+
+<section id="hero">
+  <span class="float-icon i1">🛹</span>
+  <span class="float-icon i2">⛵</span>
+  <span class="float-icon i3">📷</span>
+  <span class="float-icon i4">🏄</span>
+  <span class="float-icon i5">🎵</span>
+
+  <div class="hero-photo-wrap fade">
+    <div class="blob"></div>
+    <img class="hero-photo" src="data:image/jpeg;base64,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" alt="Anouk Rolland">
+    <div class="dot-badge"></div>
+  </div>
+  <div class="hero-text fade">
+    <div class="hero-eyebrow">Recherche alternance</div>
+    <h1>Anouk<span>Rolland</span></h1>
+    <div class="hero-role">Communication & Marketing</div>
+    <div class="quote-bubble">Organisée, joyeuse et volontaire je m'épanouis dans le développement de projets et le passage à l'action. Attentionnée et à l'écoute des autres, j'aime travailler en équipe.</div>
+    <div class="hero-meta">
+      <span>📍 Rennes (35000)</span>
+      <span>🎓 ISCOM Communication & Marketing</span>
+    </div>
+    <div class="contact-bar">
+      <a href="tel:0768812402">📞 07.68.81.24.02</a>
+      <a href="mailto:rollandanouk@gmail.com">✉️ Email</a>
+    </div>
+  </div>
+</section>
+
+<section id="experiences">
+  <div class="sec-eyebrow fade">Mon fil d'actualité</div>
+  <h2 class="sec-title fade">Expériences Professionnelles</h2>
+  <div class="feed">
+
+    <div class="post-card">
+      <div class="post-avatar">📣</div>
+      <div class="post-header"><h3>Responsable communication / marketing</h3><span class="post-date">Janv–Avril 2026</span></div>
+      <span class="post-place">FOILINPARIS · Paris</span>
+      <ul>
+        <li>Prospection digitale</li>
+        <li>Mise en avant d'un lieu premium & marketing d'expérience</li>
+        <li>Gestion des réservations & coordination des activités</li>
+        <li>Construction d'offres commerciales</li>
+      </ul>
+      <div class="post-reactions">💬 Prospection &nbsp; 🎯 Stratégie &nbsp; 📈 Croissance</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-avatar">📱</div>
+      <div class="post-header"><h3>Assistante communication / marketing</h3><span class="post-date">Janv–Mars 2025</span></div>
+      <span class="post-place">Club Pilates · Rennes</span>
+      <ul>
+        <li>Gestion & animation des réseaux sociaux / newsletters (design graphique & stratégie digitale)</li>
+        <li>Organisation & conception d'événements (gestion de projet, autonomie & adaptabilité)</li>
+        <li>Vente & démarchage de nouveaux clients/partenaires (relation client & professionnalisme)</li>
+      </ul>
+      <div class="post-reactions">💬 Réseaux sociaux &nbsp; 🎯 Événementiel</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-avatar">🎤</div>
+      <div class="post-header"><h3>Hôtesse d'accueil bénévole</h3><span class="post-date">Oct–Nov 2024</span></div>
+      <span class="post-place">"Learning Show" · Rennes</span>
+      <ul><li>Accueil et accompagnement des participants à l'événement</li></ul>
+    </div>
+
+    <div class="post-card">
+      <div class="post-avatar">🏖️</div>
+      <div class="post-header"><h3>Animatrice BAFA</h3><span class="post-date">Juin–Août 2025</span></div>
+      <span class="post-place">"Les Glénans" (15-17 ans) & "Écoulandre" (4-12 ans) · Archipel des Glénans & Luçon</span>
+      <ul><li>Conception, organisation & conduite de jeux et activités</li></ul>
+    </div>
+
+    <div class="post-card">
+      <div class="post-avatar">🍽️</div>
+      <div class="post-header"><h3>Agent polyvalent — restauration / hôtellerie</h3><span class="post-date">Juillet–Août 2025</span></div>
+      <span class="post-place">"Café du port" (Mesquer) & "Moulins des Ducs" (Quimperlé)</span>
+      <ul><li>Plonge, accueil, service polyvalent en restauration</li></ul>
+    </div>
+
+    <div class="post-card">
+      <div class="post-avatar">⛵</div>
+      <div class="post-header"><h3>Stages de voile</h3><span class="post-date">Étés 2021 – 2023</span></div>
+      <span class="post-place">"Les Glénans" · Archipel des Glénans</span>
+      <ul><li>Pratique et apprentissage de la voile en milieu collectif</li></ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="formation">
+  <div class="sec-eyebrow fade">Formation</div>
+  <h2 class="sec-title fade">Mon cursus</h2>
+  <div class="form-grid">
+    <div class="form-card fade">
+      <span class="yr">2024 – 2025</span>
+      <h3>ISCOM — Communication & Marketing</h3>
+      <div class="skill-chip-row">
+        <span class="skill-chip">Marketing & stratégie de marque</span>
+        <span class="skill-chip">Publicité & création de contenus</span>
+        <span class="skill-chip">Relation presse & publiques</span>
+        <span class="skill-chip">Digital, social media & data</span>
+        <span class="skill-chip">Stratégie de com'</span>
+        <span class="skill-chip">Com' corporate & institutionnelle</span>
+      </div>
+    </div>
+    <div class="form-card fade">
+      <span class="yr">2025</span>
+      <h3>BAFA — CEMÉA</h3>
+    </div>
+    <div class="form-card fade">
+      <span class="yr">2024</span>
+      <h3>Baccalauréat</h3>
+    </div>
+    <div class="form-card fade">
+      <span class="yr">2024</span>
+      <h3>Certification PIX</h3>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="sec-eyebrow fade">Compétences</div>
+  <h2 class="sec-title fade">Ce que j'apporte</h2>
+  <div class="skill-section">
+    <div class="skill-block fade">
+      <h3>Soft skills</h3>
+      <div class="soft-row">
+        <span class="soft-pill">Entreprenante</span>
+        <span class="soft-pill">Rigoureuse</span>
+        <span class="soft-pill">Fiable</span>
+        <span class="soft-pill">Créative</span>
+        <span class="soft-pill">Autonome</span>
+        <span class="soft-pill">Relationnelle</span>
+      </div>
+      <h3 style="margin-top:24px;">Logiciels</h3>
+      <div class="tool-row">
+        <span class="tool-pill">Canva</span>
+        <span class="tool-pill">CapCut</span>
+        <span class="tool-pill">WordPress</span>
+        <span class="tool-pill">InDesign</span>
+        <span class="tool-pill">Photoshop</span>
+        <span class="tool-pill">Illustrator</span>
+        <span class="tool-pill">Microsoft Office</span>
+      </div>
+    </div>
+    <div class="skill-block fade">
+      <h3>Langues</h3>
+      <div class="lang-row">🇬🇧 Anglais — A2+</div>
+      <div class="lang-row">🇪🇸 Espagnol — A2</div>
+
+      <h3 style="margin-top:24px;">Centres d'intérêt</h3>
+      <div class="interest-grid">
+        <div class="interest-card"><span class="emoji">🛹</span><span class="label">Skate</span></div>
+        <div class="interest-card"><span class="emoji">📷</span><span class="label">Photo</span></div>
+        <div class="interest-card"><span class="emoji">🎵</span><span class="label">Musique</span></div>
+        <div class="interest-card"><span class="emoji">🏃</span><span class="label">Course</span></div>
+        <div class="interest-card"><span class="emoji">⛵</span><span class="label">Voile</span></div>
+        <div class="interest-card"><span class="emoji">🏄</span><span class="label">Surf</span></div>
+        <div class="interest-card"><span class="emoji">✍️</span><span class="label">Écriture</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-eyebrow fade">Contact</div>
+  <h2 class="sec-title fade">Travaillons ensemble</h2>
+  <p class="fade">Disponible pour une alternance en communication & marketing, sur Rennes et ses environs.</p>
+  <a class="contact-cta fade" href="mailto:rollandanouk@gmail.com">Me contacter</a>
+</section>
+
+<footer>Anouk Rolland — CV interactif propulsé par CV Booster</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('progress').style.width=pct+'%';
+});
+
+const sections=document.querySelectorAll('section');
+const navLinks=document.querySelectorAll('.nav-link');
+const navObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const link=document.querySelector('.nav-link[href="#'+e.target.id+'"]');
+      if(link)link.classList.add('active');
+    }
+  });
+},{rootMargin:'-40% 0px -50% 0px'});
+sections.forEach(s=>navObserver.observe(s));
+
+navLinks.forEach(l=>l.addEventListener('click',()=>document.getElementById('mainnav').classList.remove('open')));
+
+const fadeObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.15});
+document.querySelectorAll('.fade').forEach(el=>fadeObserver.observe(el));
+
+const postObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.2});
+document.querySelectorAll('.post-card').forEach(el=>postObserver.observe(el));
+</script>
+
+</body>
+</html>
