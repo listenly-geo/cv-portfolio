@@ -200,7 +200,10 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
 @keyframes radar-blip{0%,100%{opacity:0.2;}50%{opacity:1;}}
 
 .cvboost-topbar-main{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;}
-.cvboost-topbar-label{font-size:clamp(13px,1.6vw,15px);font-weight:700;color:#ffffff;letter-spacing:.01em;}
+.cvboost-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8fae93;margin-bottom:3px;}
+.cvboost-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#8fae93;display:inline-block;}
+.cvboost-topbar-label{font-size:clamp(13.5px,1.6vw,15.5px);font-weight:600;color:#f4f6f5;letter-spacing:.005em;line-height:1.4;}
+.cvboost-topbar-label strong{font-weight:700;color:#ffffff;}
 
 .cvboost-topbar-cta{
   background:#8fae93;color:#1c2b3a;font-weight:800;font-size:13px;
@@ -218,6 +221,7 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
   .cvboost-topbar-inner{gap:12px;}
   .cvboost-radar{width:32px;height:32px;}
   .cvboost-topbar-label{display:none;}
+  .cvboost-tag{display:none;}
 }
 .cvboost-overlay{position:fixed;inset:0;background:rgba(28,43,58,0.7);z-index:9990;display:none;align-items:center;justify-content:center;padding:20px;}
 .cvboost-overlay.open{display:flex;}
@@ -268,7 +272,8 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
       <div class="cvboost-radar-ring r2"></div>
     </div>
     <div class="cvboost-topbar-main">
-      <span class="cvboost-topbar-label">🚀 Votre CV est prêt. Laissez son radar trouver votre prochaine alternance</span>
+      <span class="cvboost-tag">CV Boost</span>
+      <span class="cvboost-topbar-label">Votre CV est prêt — <strong>laissez son radar trouver votre prochaine alternance</strong></span>
     </div>
     <button class="cvboost-topbar-cta" id="cvboost-open-btn">Activer mon radar</button>
   </div>
