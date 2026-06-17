@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathis Bayart — Business Management</title>
+<style>
+:root{
+  --cream:#f5f1e8;
+  --ink:#1c2b3a;
+  --sage:#8fae93;
+  --navy:#1c2b3a;
+  --navy-light:#2e4356;
+  --line:rgba(28,43,58,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Helvetica Neue',Arial,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.7;
+  font-size:16px;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Arial Black',Helvetica,sans-serif;letter-spacing:-0.01em;}
+
+#progress{position:fixed;top:0;left:0;height:4px;background:var(--sage);z-index:1000;width:0%;transition:width .1s;}
+
+nav{
+  position:fixed;top:4px;left:0;right:0;z-index:900;
+  background:rgba(245,241,232,0.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  display:flex;justify-content:center;gap:clamp(10px,2vw,30px);
+  padding:16px 16px;flex-wrap:wrap;
+}
+nav a{
+  font-weight:700;font-size:clamp(12px,1.3vw,14px);
+  color:var(--ink);text-decoration:none;letter-spacing:.02em;
+  padding:8px 14px;border-radius:4px;min-height:48px;display:flex;align-items:center;
+  transition:.25s;
+}
+nav a.active{background:var(--navy);color:#fff;}
+#hamburger{display:none;position:fixed;top:14px;right:14px;z-index:950;width:48px;height:48px;border:none;border-radius:4px;background:var(--navy);cursor:pointer;align-items:center;justify-content:center;}
+#hamburger span{display:block;width:20px;height:2px;background:#fff;position:relative;}
+#hamburger span::before,#hamburger span::after{content:'';position:absolute;left:0;width:20px;height:2px;background:#fff;}
+#hamburger span::before{top:-7px;}
+#hamburger span::after{top:7px;}
+
+section{max-width:1240px;margin:0 auto;padding:110px 24px 60px;}
+
+/* HERO */
+#hero{
+  display:grid;grid-template-columns:38% 62%;align-items:center;gap:40px;
+  padding-top:130px;min-height:88vh;
+}
+.hero-photo-wrap{position:relative;width:100%;max-width:280px;aspect-ratio:1/1;margin:0 auto;}
+.pitch-ring{
+  position:absolute;inset:-12px;border-radius:50%;border:4px solid var(--sage);
+}
+.pitch-ring::before{
+  content:'';position:absolute;inset:8px;border-radius:50%;border:1px dashed var(--navy-light);
+}
+.hero-photo{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:#ccc;border:6px solid var(--cream);box-shadow:0 10px 30px rgba(28,43,58,0.18);}
+.captain-badge{
+  position:absolute;top:-6px;right:-6px;width:48px;height:48px;border-radius:50%;
+  background:var(--navy);color:var(--sage);display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:18px;border:4px solid var(--cream);box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  animation:whistle-pulse 2.4s ease-in-out infinite;
+}
+@keyframes whistle-pulse{0%,100%{box-shadow:0 0 0 0 rgba(143,174,147,0.5);}50%{box-shadow:0 0 0 10px rgba(143,174,147,0);}}
+
+.hero-text h1{font-size:clamp(32px,5vw,52px);margin-bottom:10px;}
+.hero-eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:6px;}
+.hero-role{
+  display:inline-block;background:var(--navy);color:#fff;
+  padding:8px 18px;border-radius:4px;font-weight:700;font-size:clamp(14px,1.6vw,16px);
+  margin:14px 0 18px;
+}
+.hero-desc{font-size:clamp(15px,1.5vw,17px);max-width:520px;color:#3a4a58;}
+.hero-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;}
+.hero-meta span{
+  border:1px solid var(--line);background:#fff;border-radius:4px;
+  padding:7px 14px;font-weight:600;font-size:13px;
+}
+.contact-bar{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px;}
+.contact-bar a{color:var(--ink);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:8px;min-height:48px;font-size:14px;background:#fff;padding:8px 16px;border-radius:4px;border:1px solid var(--line);}
+
+.sec-eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:6px;}
+.sec-title{font-size:clamp(28px,4vw,42px);margin-bottom:36px;}
+
+/* SCOREBOARD - experiences */
+.scoreboard{display:flex;flex-direction:column;gap:22px;}
+.match-card{
+  background:var(--navy);color:#fff;border-radius:10px;overflow:hidden;
+  opacity:0;transform:translateX(-30px);transition:opacity .6s,transform .6s;
+  box-shadow:0 8px 24px rgba(28,43,58,0.15);
+}
+.match-card.visible{opacity:1;transform:translateX(0);}
+.match-header{
+  display:flex;justify-content:space-between;align-items:center;padding:16px 22px;
+  background:var(--navy-light);flex-wrap:wrap;gap:8px;
+}
+.match-header h3{font-family:'Helvetica Neue',Arial,sans-serif;font-size:16px;font-weight:700;}
+.match-period{font-size:12px;color:var(--sage);font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+.match-place{font-size:12.5px;color:#c8d3da;display:block;margin-top:2px;}
+.match-body{padding:20px 22px;}
+.match-body ul{padding-left:18px;font-size:13.5px;color:#dde4e9;margin-bottom:16px;}
+.match-body li{margin-bottom:5px;}
+.stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12.5px;}
+.stat-track{height:6px;background:rgba(255,255,255,0.15);border-radius:4px;flex:1;margin:0 10px;overflow:hidden;}
+.stat-fill{height:100%;background:var(--sage);width:0;border-radius:4px;transition:width 1.2s ease;}
+
+/* formation */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+.form-card{background:#fff;border-radius:10px;padding:20px;border:1px solid var(--line);box-shadow:0 6px 16px rgba(28,43,58,0.05);}
+.form-card .yr{font-size:12.5px;font-weight:700;color:var(--sage);text-transform:uppercase;}
+.form-card h3{font-size:16px;margin:6px 0;font-family:'Helvetica Neue',Arial,sans-serif;}
+.form-card p{font-size:13.5px;color:#3a4a58;}
+
+/* skills */
+.skill-section{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.skill-block h3{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--sage);margin-bottom:16px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:10px;}
+.tag-pill{background:#fff;border:1px solid var(--line);padding:8px 16px;border-radius:4px;font-size:13.5px;font-weight:600;}
+.bar-row{margin-bottom:14px;}
+.bar-row .label{font-size:14px;font-weight:600;margin-bottom:6px;display:block;}
+.bar-track{height:8px;background:var(--line);border-radius:6px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--navy);width:0;border-radius:6px;transition:width 1.2s ease;}
+
+.interest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:16px;}
+.interest-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center;transition:transform .25s;}
+.interest-card:hover{transform:translateY(-4px);}
+.interest-card .emoji{font-size:28px;margin-bottom:8px;display:block;}
+.interest-card .label{font-size:13px;font-weight:600;}
+.interest-card .sub{font-size:11.5px;color:#7a8a92;margin-top:3px;}
+
+#contact{text-align:center;}
+.contact-cta{
+  display:inline-block;margin-top:20px;background:var(--navy);
+  color:#fff;padding:16px 36px;font-weight:700;font-size:16px;border-radius:4px;
+  text-decoration:none;min-height:48px;box-shadow:0 8px 24px rgba(28,43,58,0.25);
+}
+
+footer{text-align:center;padding:30px;font-size:13px;color:#9aa5ab;}
+
+.fade{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
+.fade.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;text-align:center;padding-top:110px;}
+  .hero-meta,.contact-bar{justify-content:center;}
+  .skill-section{grid-template-columns:1fr;}
+  nav{display:none;}
+  nav.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;height:100vh;justify-content:center;background:var(--cream);}
+  #hamburger{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="hamburger" onclick="document.getElementById('mainnav').classList.toggle('open')"><span></span></div>
+
+<nav id="mainnav">
+  <a href="#hero" class="nav-link">Accueil</a>
+  <a href="#experiences" class="nav-link">Expériences</a>
+  <a href="#formation" class="nav-link">Formation</a>
+  <a href="#competences" class="nav-link">Compétences</a>
+  <a href="#contact" class="nav-link">Contact</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-photo-wrap fade">
+    <div class="pitch-ring"></div>
+    <img class="hero-photo" src="data:image/jpeg;base64,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" alt="Mathis Bayart">
+    <div class="captain-badge">C</div>
+  </div>
+  <div class="hero-text fade">
+    <div class="hero-eyebrow">Recherche alternance</div>
+    <h1>Mathis<br>Bayart</h1>
+    <div class="hero-role">Master Business Management</div>
+    <p class="hero-desc">Actuellement étudiant à l'ISG Sport de Lille en première année de Master. Je suis à la recherche d'une alternance dans le domaine du marketing, de la communication et de la gestion.</p>
+    <div class="hero-meta">
+      <span>📍 Nieppe (59850)</span>
+      <span>🎓 ISG Sport Business Management</span>
+      <span>🚗 Permis B véhiculé</span>
+    </div>
+    <div class="contact-bar">
+      <a href="tel:0768352213">📞 07 68 35 22 13</a>
+      <a href="mailto:bayartmathis21@gmail.com">✉️ Email</a>
+      <a href="https://www.linkedin.com/in/mathis-bayart-ba54a6256" target="_blank">🔗 LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<section id="experiences">
+  <div class="sec-eyebrow fade">Feuille de match</div>
+  <h2 class="sec-title fade">Expériences Professionnelles</h2>
+  <div class="scoreboard">
+
+    <div class="match-card">
+      <div class="match-header">
+        <div>
+          <h3>Responsable adjoint de magasin</h3>
+          <span class="match-place">La Vie Claire — Villeneuve-d'Ascq</span>
+        </div>
+        <span class="match-period">Alternance · Sept–Déc 2024</span>
+      </div>
+      <div class="match-body">
+        <ul>
+          <li>Accueil et conseil client</li>
+          <li>Attractivité des rayons du magasin</li>
+          <li>Communication Facebook / Instagram</li>
+        </ul>
+        <div class="stat-row"><span>Relation client</span><div class="stat-track"><div class="stat-fill" data-pct="90"></div></div><span>90%</span></div>
+        <div class="stat-row"><span>Communication</span><div class="stat-track"><div class="stat-fill" data-pct="80"></div></div><span>80%</span></div>
+      </div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-header">
+        <div>
+          <h3>Stage Gestion de stocks</h3>
+          <span class="match-place">Carambar & Co (Lamy Lutti) — Bondues</span>
+        </div>
+        <span class="match-period">Stage · Janv–Mars 2024</span>
+      </div>
+      <div class="match-body">
+        <ul>
+          <li>Contrôle des états de stock</li>
+          <li>Inventaire des pièces machines à recycler</li>
+          <li>Vérification de l'état de stock des installations, prévision des sorties comptables</li>
+        </ul>
+        <div class="stat-row"><span>Gestion / organisation</span><div class="stat-track"><div class="stat-fill" data-pct="88"></div></div><span>88%</span></div>
+        <div class="stat-row"><span>Rigueur</span><div class="stat-track"><div class="stat-fill" data-pct="92"></div></div><span>92%</span></div>
+      </div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-header">
+        <div>
+          <h3>Stage Assistant RH</h3>
+          <span class="match-place">MSA Nord-Pas-de-Calais — Arras</span>
+        </div>
+        <span class="match-period">Stage · Mars–Avril 2023</span>
+      </div>
+      <div class="match-body">
+        <ul>
+          <li>Enquête auprès des salariés sur le parcours d'intégration</li>
+          <li>Création d'outils pour l'intégration des nouveaux embauchés</li>
+          <li>Participation à un forum emploi</li>
+          <li>Participation à un projet de digitalisation des dossiers du personnel</li>
+        </ul>
+        <div class="stat-row"><span>RH / Intégration</span><div class="stat-track"><div class="stat-fill" data-pct="85"></div></div><span>85%</span></div>
+        <div class="stat-row"><span>Digitalisation</span><div class="stat-track"><div class="stat-fill" data-pct="75"></div></div><span>75%</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="formation">
+  <div class="sec-eyebrow fade">Formation</div>
+  <h2 class="sec-title fade">Mon cursus</h2>
+  <div class="form-grid">
+    <div class="form-card fade">
+      <span class="yr">En cours</span>
+      <h3>Master Business Management</h3>
+      <p>ISG Sport Business Management — Lille</p>
+    </div>
+    <div class="form-card fade">
+      <span class="yr">2022 – 2025</span>
+      <h3>BUT Gestion Entreprise Administration</h3>
+      <p>Spécialité GEMA · IUT de Lille · Délégué 3 ans</p>
+    </div>
+    <div class="form-card fade">
+      <span class="yr">Diplômé 2022</span>
+      <h3>Bac Sciences Technologie du Management et de la Gestion</h3>
+      <p>Lycée Paul Hazard · Délégué 2 ans</p>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="sec-eyebrow fade">Compétences</div>
+  <h2 class="sec-title fade">Ce que j'apporte</h2>
+  <div class="skill-section">
+    <div class="skill-block fade">
+      <h3>Savoir-être</h3>
+      <div class="tag-cloud">
+        <span class="tag-pill">Aisance relationnelle</span>
+        <span class="tag-pill">Organisé</span>
+        <span class="tag-pill">Travail d'équipe</span>
+        <span class="tag-pill">Rigoureux</span>
+        <span class="tag-pill">Ponctuel</span>
+        <span class="tag-pill">Excellente capacité d'écoute</span>
+        <span class="tag-pill">Facilité d'intégration</span>
+        <span class="tag-pill">Réactif et dynamique</span>
+      </div>
+      <h3 style="margin-top:24px;">Outils</h3>
+      <div class="tag-cloud">
+        <span class="tag-pill">Pack Office (Excel, Word...)</span>
+        <span class="tag-pill">Permis B (véhiculé)</span>
+      </div>
+    </div>
+
+    <div class="skill-block fade">
+      <h3>Langues</h3>
+      <div class="bar-row"><span class="label">Anglais</span><div class="bar-track"><div class="bar-fill" data-pct="80"></div></div></div>
+      <div class="bar-row"><span class="label">Espagnol</span><div class="bar-track"><div class="bar-fill" data-pct="35"></div></div></div>
+
+      <h3 style="margin-top:24px;">Centres d'intérêt</h3>
+      <div class="interest-grid">
+        <div class="interest-card"><span class="emoji">⚽</span><span class="label">Football</span><span class="sub">Depuis 4 ans · Capitaine 2 ans</span></div>
+        <div class="interest-card"><span class="emoji">🏃</span><span class="label">Course à pieds</span><span class="sub">2 fois/semaine</span></div>
+        <div class="interest-card"><span class="emoji">📚</span><span class="label">Lecture</span><span class="sub">Guillaume Musso...</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-eyebrow fade">Contact</div>
+  <h2 class="sec-title fade">Travaillons ensemble</h2>
+  <p class="fade">Disponible pour une alternance en marketing, communication et gestion.</p>
+  <a class="contact-cta fade" href="mailto:bayartmathis21@gmail.com">Me contacter</a>
+</section>
+
+<footer>Mathis Bayart — CV interactif propulsé par CV Booster</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('progress').style.width=pct+'%';
+});
+
+const sections=document.querySelectorAll('section');
+const navLinks=document.querySelectorAll('.nav-link');
+const navObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const link=document.querySelector('.nav-link[href="#'+e.target.id+'"]');
+      if(link)link.classList.add('active');
+    }
+  });
+},{rootMargin:'-40% 0px -50% 0px'});
+sections.forEach(s=>navObserver.observe(s));
+
+navLinks.forEach(l=>l.addEventListener('click',()=>document.getElementById('mainnav').classList.remove('open')));
+
+const fadeObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.15});
+document.querySelectorAll('.fade').forEach(el=>fadeObserver.observe(el));
+
+const matchObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.2});
+document.querySelectorAll('.match-card').forEach(el=>matchObserver.observe(el));
+
+const barObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const fill=e.target;
+      fill.style.width=fill.dataset.pct+'%';
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.bar-fill,.stat-fill').forEach(el=>barObserver.observe(el));
+</script>
+
+</body>
+</html>
