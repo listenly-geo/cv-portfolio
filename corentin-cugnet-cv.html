@@ -36,6 +36,7 @@ nav{
   display:flex;justify-content:center;gap:clamp(8px,2vw,28px);
   padding:14px 16px;
   flex-wrap:wrap;
+  transition:transform .4s ease;
 }
 nav a{
   font-weight:800;text-transform:uppercase;font-size:clamp(11px,1.4vw,14px);
@@ -202,8 +203,49 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
 .cvboost-topbar-main{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;}
 .cvboost-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8fae93;margin-bottom:3px;}
 .cvboost-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#8fae93;display:inline-block;}
-.cvboost-topbar-label{font-size:clamp(13.5px,1.6vw,15.5px);font-weight:600;color:#f4f6f5;letter-spacing:.005em;line-height:1.4;}
-.cvboost-topbar-label strong{font-weight:700;color:#ffffff;}
+.cvboost-discover-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:none;cursor:pointer;padding:0;
+  font-size:clamp(13.5px,1.6vw,15.5px);font-weight:700;color:#ffffff;
+  font-family:'Helvetica Neue',Arial,sans-serif;
+}
+.cvboost-chevron{transition:transform .3s ease;flex-shrink:0;color:#8fae93;}
+.cvboost-discover-btn.open .cvboost-chevron{transform:rotate(180deg);}
+
+.cvboost-dropdown{
+  position:fixed;left:0;right:0;top:68px;z-index:998;
+  max-height:0;overflow:hidden;transition:max-height .4s ease;
+  background:linear-gradient(135deg,#1c2b3a 0%,#22344a 50%,#2e4356 100%);
+  border-bottom:2px solid #8fae93;
+}
+.cvboost-dropdown.open{max-height:200px;}
+.cvboost-dropdown-inner{
+  max-width:1100px;margin:0 auto;padding:18px 24px 22px;
+  display:flex;flex-wrap:wrap;gap:24px;justify-content:center;
+}
+.cvboost-benefit{
+  display:flex;align-items:center;gap:10px;
+  opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s;
+}
+.cvboost-dropdown.open .cvboost-benefit{opacity:1;transform:translateY(0);}
+.cvboost-dropdown.open .cvboost-benefit:nth-child(1){transition-delay:.05s;}
+.cvboost-dropdown.open .cvboost-benefit:nth-child(2){transition-delay:.15s;}
+.cvboost-dropdown.open .cvboost-benefit:nth-child(3){transition-delay:.25s;}
+.cvboost-benefit-icon{font-size:18px;flex-shrink:0;width:26px;text-align:center;}
+.cvboost-benefit-text{font-size:13.5px;color:#dde4e9;font-weight:500;}
+.cvboost-benefit-text strong{color:#ffffff;font-weight:700;}
+
+.cvboost-radar-mini{
+  position:relative;width:20px;height:20px;border-radius:50%;
+  background:radial-gradient(circle,#16222e 0%,#0f1620 100%);
+  border:1px solid rgba(143,174,147,0.5);overflow:hidden;
+  display:inline-block;
+}
+.cvboost-radar-mini-sweep{
+  position:absolute;inset:0;
+  background:conic-gradient(from 0deg,rgba(143,174,147,0.9) 0deg,rgba(143,174,147,0) 50deg,rgba(143,174,147,0) 360deg);
+  animation:radar-sweep 1.8s linear infinite;
+}
 
 .cvboost-topbar-cta{
   background:#8fae93;color:#1c2b3a;font-weight:800;font-size:13px;
@@ -215,15 +257,17 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
 .cvboost-topbar-cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(143,174,147,0.4);}
 
 @media(max-width:900px){
-  .cvboost-topbar-label{font-size:13px;}
+  .cvboost-discover-btn{font-size:13px;}
 }
 @media(max-width:600px){
   .cvboost-topbar{padding:12px 16px;}
   .cvboost-topbar-inner{gap:10px;flex-direction:column;text-align:center;}
   .cvboost-topbar-main{align-items:center;text-align:center;}
   .cvboost-radar{width:32px;height:32px;}
-  .cvboost-topbar-label{font-size:12.5px;line-height:1.45;}
+  .cvboost-discover-btn{font-size:12.5px;}
   .cvboost-topbar-cta{width:100%;max-width:280px;}
+  .cvboost-dropdown-inner{flex-direction:column;align-items:flex-start;gap:14px;padding:16px 20px 20px;}
+  .cvboost-dropdown.open{max-height:260px;}
 }
 .cvboost-overlay{position:fixed;inset:0;background:rgba(28,43,58,0.7);z-index:9990;display:none;align-items:center;justify-content:center;padding:20px;}
 .cvboost-overlay.open{display:flex;}
@@ -275,9 +319,33 @@ footer{text-align:center;padding:30px;font-size:13px;border-top:4px solid var(--
     </div>
     <div class="cvboost-topbar-main">
       <span class="cvboost-tag">CV Boost</span>
-      <span class="cvboost-topbar-label">Votre CV est prêt — <strong>laissez son radar trouver votre prochaine alternance</strong> pendant que vous dormez</span>
+      <button class="cvboost-discover-btn" id="cvboost-discover-btn">
+        Découvrir la puissance du CV
+        <svg class="cvboost-chevron" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L5.5 5.5L10 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
     <a class="cvboost-topbar-cta" href="https://buy.stripe.com/bJebJ11p2cDE0pPaAF93y0y" target="_blank" rel="noopener">Activer mon CV</a>
+  </div>
+
+  <div class="cvboost-dropdown" id="cvboost-dropdown">
+    <div class="cvboost-dropdown-inner">
+      <div class="cvboost-benefit">
+        <span class="cvboost-benefit-icon">📈</span>
+        <span class="cvboost-benefit-text"><strong>+60% d'impact recruteur</strong></span>
+      </div>
+      <div class="cvboost-benefit">
+        <span class="cvboost-benefit-icon">🎯</span>
+        <span class="cvboost-benefit-text"><strong>CV personnalisé</strong> pour chaque offre</span>
+      </div>
+      <div class="cvboost-benefit">
+        <span class="cvboost-benefit-icon cvboost-radar-mini">
+          <span class="cvboost-radar-mini-sweep"></span>
+        </span>
+        <span class="cvboost-benefit-text"><strong>Radar IA</strong> qui cherche à votre place</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -491,6 +559,56 @@ function toggleAcc(head){
 
 </script>
 
+
+<script>
+(function(){
+  const discoverBtn = document.getElementById('cvboost-discover-btn');
+  const dropdown = document.getElementById('cvboost-dropdown');
+  const nav = document.getElementById('mainnav');
+  const topbar = document.querySelector('.cvboost-topbar');
+
+  if (!discoverBtn || !dropdown) return;
+
+  function positionDropdown(){
+    if (topbar) dropdown.style.top = topbar.offsetHeight + 'px';
+  }
+  positionDropdown();
+  window.addEventListener('resize', positionDropdown);
+
+  function closeDropdown(){
+    dropdown.classList.remove('open');
+    discoverBtn.classList.remove('open');
+    if (nav) nav.style.transform = '';
+  }
+
+  discoverBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    positionDropdown();
+    const isOpen = dropdown.classList.contains('open');
+    if (isOpen){
+      closeDropdown();
+    } else {
+      dropdown.classList.add('open');
+      discoverBtn.classList.add('open');
+      // Pousse temporairement la nav vers le bas pendant que le panneau est ouvert
+      if (nav) {
+        const dropdownHeight = dropdown.scrollHeight;
+        nav.style.transform = 'translateY(' + dropdownHeight + 'px)';
+      }
+    }
+  });
+
+  document.addEventListener('click', function(e){
+    if (!dropdown.contains(e.target) && !discoverBtn.contains(e.target)){
+      closeDropdown();
+    }
+  });
+
+  window.addEventListener('scroll', function(){
+    if (dropdown.classList.contains('open')) closeDropdown();
+  });
+})();
+</script>
 
 <script>
 // Le bouton "Activer mon CV" redirige directement vers Stripe — voir attribut href sur le lien.
